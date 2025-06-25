@@ -30,7 +30,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Sending contact form email for:", name, email);
 
     const emailResponse = await resend.emails.send({
-      from: "KURDO Car Website <onboarding@resend.dev>",
+      from: "KURDO Car <noreply@empriadental.de>",
       to: ["kurdocar@bluewin.ch"],
       replyTo: email,
       subject: subject ? `Kontaktanfrage: ${subject}` : "Neue Kontaktanfrage von Website",
