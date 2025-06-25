@@ -42,15 +42,16 @@ const Hero = () => {
               {t('hero.brands')}
             </h3>
             <div className="flex flex-wrap gap-4 text-lg">
-              <span className="text-lime-400">#porsche</span>
-              <span className="text-lime-400">#maserati</span>
-              <span className="text-lime-400">#mclaren</span>
-              <span className="text-lime-400">#lamborghini</span>
-              <span className="text-lime-400">#astonmartin</span>
-              <span className="text-lime-400">#mercedes</span>
+              <span className="text-lime-400">#ford</span>
               <span className="text-lime-400">#bmw</span>
-              <span className="text-lime-400">#audi</span>
-              <span className="text-lime-400">#ferrari</span>
+              <span className="text-lime-400">#citroen</span>
+              <span className="text-lime-400">#nissan</span>
+              <span className="text-lime-400">#mercedes</span>
+              <span className="text-lime-400">#landrover</span>
+              <span className="text-lime-400">#bentley</span>
+              <span className="text-lime-400">#porsche</span>
+              <span className="text-lime-400">#jaguar</span>
+              <span className="text-lime-400">#vw</span>
             </div>
           </div>
         </div>
