@@ -150,19 +150,9 @@ const Services = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-300 text-center mb-4">
+                    <p className="text-gray-300 text-center">
                       {translatedService.description}
                     </p>
-                    <div className="flex justify-between items-center text-sm text-gray-400">
-                      {service.estimated_duration && (
-                        <span>⏱️ {Math.floor(service.estimated_duration / 60)}h {service.estimated_duration % 60}min</span>
-                      )}
-                      {service.base_price && (
-                        <span className="font-semibold text-lime-400">
-                          ab €{Number(service.base_price).toFixed(2)}
-                        </span>
-                      )}
-                    </div>
                   </CardContent>
                 </Card>
               );
