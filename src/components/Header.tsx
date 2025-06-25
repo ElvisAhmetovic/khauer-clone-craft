@@ -76,9 +76,9 @@ const Header = () => {
                 <a href="#contact" className="text-white hover:text-lime-400 font-medium transition-colors">
                   {t('nav.contact')}
                 </a>
-                <a href="#vehicles" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium transition-colors">
                   {t('nav.vehicles')}
-                </a>
+                </Link>
                 <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
                   {t('nav.gallery')}
                 </Link>
@@ -97,7 +97,7 @@ const Header = () => {
                 <Link to="/#contact" className="text-white hover:text-lime-400 font-medium transition-colors">
                   {t('nav.contact')}
                 </Link>
-                <Link to="/#vehicles" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium transition-colors">
                   {t('nav.vehicles')}
                 </Link>
                 <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
@@ -134,9 +134,9 @@ const Header = () => {
                   <a href="#contact" className="text-white hover:text-lime-400 font-medium">
                     {t('nav.contact')}
                   </a>
-                  <a href="#vehicles" className="text-white hover:text-lime-400 font-medium">
+                  <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium">
                     {t('nav.vehicles')}
-                  </a>
+                  </Link>
                   <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium">
                     {t('nav.gallery')}
                   </Link>
@@ -155,7 +155,7 @@ const Header = () => {
                   <Link to="/#contact" className="text-white hover:text-lime-400 font-medium">
                     {t('nav.contact')}
                   </Link>
-                  <Link to="/#vehicles" className="text-white hover:text-lime-400 font-medium">
+                  <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium">
                     {t('nav.vehicles')}
                   </Link>
                   <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium">
