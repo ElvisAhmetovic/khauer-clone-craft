@@ -6,77 +6,127 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const Gallery = () => {
   const { t } = useLanguage();
 
-  // Real car data with your uploaded images
+  // Real car data with your uploaded images and correct information
   const cars = [
     {
       id: 1,
       image: "/lovable-uploads/f711acdc-e2c6-4308-907c-e1717c0f920e.png",
-      title: "Mercedes-Benz A-Klasse",
-      year: "2018",
-      price: "CHF 28,900",
+      title: "MERCEDES-BENZ A 250 AMG Line 4Matic 7G-DCT",
+      year: "06.2015",
+      price: "CHF 11'900.−",
+      mileage: "219000 km",
+      fuel: "Benzin",
+      power: "211 PS (155 kW)",
+      consumption: "6.7 l/100 km",
+      transmission: "Halbautomatisches Getriebe"
     },
     {
       id: 2,
       image: "/lovable-uploads/a4cf46d1-059e-4dab-8125-398074358fb9.png",
-      title: "Jaguar E-PACE",
-      year: "2019",
-      price: "CHF 38,500",
+      title: "JAGUAR E-Pace 2.0 P200 AWD Automatik",
+      year: "09.2020",
+      price: "CHF 19'900.−",
+      mileage: "106000 km",
+      fuel: "Benzin",
+      power: "200 PS (147 kW)",
+      consumption: "10.7 l/100 km",
+      transmission: "Automat"
     },
     {
       id: 3,
       image: "/lovable-uploads/3f89fdf5-9e11-4a18-843b-af0d4843dc31.png",
-      title: "Volkswagen ID.4",
-      year: "2022",
-      price: "CHF 42,000",
+      title: "VW ID4 Pro Performance 77 kWh",
+      year: "03.2022",
+      price: "CHF 26'900.−",
+      mileage: "22000 km",
+      fuel: "Elektro",
+      power: "204 PS (150 kW)",
+      consumption: "513 km",
+      transmission: "Automatikgetriebe"
     },
     {
       id: 4,
       image: "/lovable-uploads/d796ec6c-8eb6-4d57-ad22-9ae215e07150.png",
-      title: "Porsche Macan",
-      year: "2020",
-      price: "CHF 68,900",
+      title: "PORSCHE Macan S Diesel PDK",
+      year: "02.2016",
+      price: "CHF 26'900.−",
+      mileage: "165000 km",
+      fuel: "Diesel",
+      power: "258 PS (190 kW)",
+      consumption: "6.3 l/100 km",
+      transmission: "Halbautomatisches Getriebe"
     },
     {
       id: 5,
       image: "/lovable-uploads/6c3ea015-f7e2-46a2-a192-1d1e2f16f9d2.png",
-      title: "Bentley Continental GT",
-      year: "2017",
-      price: "CHF 158,000",
+      title: "BENTLEY Continental GT 4.0 V8",
+      year: "01.2013",
+      price: "CHF 48'900.−",
+      mileage: "122000 km",
+      fuel: "Benzin",
+      power: "507 PS (373 kW)",
+      consumption: "10.6 l/100 km",
+      transmission: "Automat"
     },
     {
       id: 6,
       image: "/lovable-uploads/a4d0ca44-e6e3-48bc-a8d5-67851ec2def0.png",
-      title: "Mercedes-Benz S-Klasse",
-      year: "2019",
-      price: "CHF 89,500",
+      title: "MERCEDES-BENZ S 350 d L 9G-Tronic",
+      year: "03.2019",
+      price: "CHF 47'900.−",
+      mileage: "112000 km",
+      fuel: "Diesel",
+      power: "286 PS (210 kW)",
+      consumption: "6.2 l/100 km",
+      transmission: "Automat"
     },
     {
       id: 7,
       image: "/lovable-uploads/462c6e86-b35c-4560-97a8-995ff976719a.png",
-      title: "Mercedes-Benz C-Klasse T-Modell",
-      year: "2020",
-      price: "CHF 48,900",
+      title: "MERCEDES-BENZ C 220 d AMG Line 4Matic 9G-Tronic",
+      year: "05.2019",
+      price: "CHF 25'900.−",
+      mileage: "90800 km",
+      fuel: "Diesel",
+      power: "194 PS (143 kW)",
+      consumption: "7 l/100 km",
+      transmission: "Automat"
     },
     {
       id: 8,
       image: "/lovable-uploads/16875711-9699-4aa0-b983-fd00a0a8790c.png",
-      title: "Citroën C4 SpaceTourer",
-      year: "2019",
-      price: "CHF 32,500",
+      title: "CITROEN Grand C4 Spacetourer 2.0 BlueHDi Shine EAT8",
+      year: "10.2018",
+      price: "CHF 11'900.−",
+      mileage: "179000 km",
+      fuel: "Diesel",
+      power: "163 PS (120 kW)",
+      consumption: "4.7 l/100 km",
+      transmission: "Automat"
     },
     {
       id: 9,
       image: "/lovable-uploads/40ebd35d-806b-420c-81a8-197115021660.png",
-      title: "BMW 1er Cabrio",
-      year: "2012",
-      price: "CHF 19,900",
+      title: "BMW 120i Cabrio Steptronic",
+      year: "02.2012",
+      price: "CHF 11'900.−",
+      mileage: "105000 km",
+      fuel: "Benzin",
+      power: "170 PS (125 kW)",
+      consumption: "7 l/100 km",
+      transmission: "Automat"
     },
     {
       id: 10,
       image: "/lovable-uploads/90b87d7a-907f-4406-93aa-b7ef2ff09866.png",
-      title: "Ford Mondeo Turnier",
-      year: "2018",
-      price: "CHF 24,500",
+      title: "FORD Mondeo 2.0 TDCi Titanium Automatik",
+      year: "05.2020",
+      price: "CHF 13'900.−",
+      mileage: "120000 km",
+      fuel: "Diesel",
+      power: "150 PS (110 kW)",
+      consumption: "6.3 l/100 km",
+      transmission: "Automat"
     },
   ];
 
@@ -120,14 +170,31 @@ const Gallery = () => {
                   <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300"></div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
                     {car.title}
                   </h3>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">{car.year}</span>
-                    <span className="text-lime-600 font-bold text-lg">
+                  <div className="space-y-2 text-sm text-gray-600 mb-4">
+                    <div className="flex justify-between">
+                      <span>Jahr:</span>
+                      <span className="font-medium">{car.year}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Kilometerstand:</span>
+                      <span className="font-medium">{car.mileage}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Kraftstoff:</span>
+                      <span className="font-medium">{car.fuel}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Leistung:</span>
+                      <span className="font-medium">{car.power}</span>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t border-gray-200">
+                    <div className="text-2xl font-bold text-lime-600 text-center">
                       {car.price}
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
