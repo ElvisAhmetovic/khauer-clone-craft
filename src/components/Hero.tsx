@@ -16,6 +16,16 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <section id="home" className="relative bg-black text-white min-h-screen flex items-center">
       <div className="absolute inset-0">
@@ -52,6 +62,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               className="bg-lime-400 hover:bg-lime-500 text-black font-bold text-lg px-8 py-4 uppercase tracking-wider"
+              onClick={scrollToContact}
             >
               {t('hero.button')}
               <ArrowRight className="ml-2" size={20} />
