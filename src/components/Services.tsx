@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Services = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const { data: services, isLoading, error } = useQuery({
     queryKey: ['services'],
@@ -22,6 +22,46 @@ const Services = () => {
       return data;
     },
   });
+
+  // Translation mapping for database services
+  const serviceTranslations = {
+    'Motordiagnose': {
+      en: { name: 'Engine Diagnostics', description: 'Computer-assisted vehicle diagnostics' }
+    },
+    'TÜV/AU': {
+      en: { name: 'TÜV/AU', description: 'Main inspection and emissions testing' }
+    },
+    'Bremsenservice': {
+      en: { name: 'Brake Service', description: 'Inspection and maintenance of brake system' }
+    },
+    'Klimaservice': {
+      en: { name: 'Climate Service', description: 'Maintenance and refilling of air conditioning' }
+    },
+    'Ölwechsel': {
+      en: { name: 'Oil Change', description: 'Complete oil change with filter replacement' }
+    },
+    'Inspektion': {
+      en: { name: 'Inspection', description: 'Large inspection according to manufacturer specifications' }
+    },
+    'Zahnriemenwechsel': {
+      en: { name: 'Timing Belt Change', description: 'Replacement of timing belt' }
+    },
+    'Reifenwechsel': {
+      en: { name: 'Tire Change', description: 'Seasonal tire change with storage' }
+    }
+  };
+
+  const getTranslatedService = (service: any) => {
+    if (language === 'en' && serviceTranslations[service.name as keyof typeof serviceTranslations]) {
+      const translation = serviceTranslations[service.name as keyof typeof serviceTranslations].en;
+      return {
+        ...service,
+        name: translation.name,
+        description: translation.description
+      };
+    }
+    return service;
+  };
 
   const customServices = [
     {
@@ -97,33 +137,36 @@ const Services = () => {
               </Card>
             ))
           ) : services && services.length > 0 ? (
-            services.map((service) => (
-              <Card key={service.id} className="hover:shadow-lg transition-shadow duration-300 bg-gray-900 border-gray-700">
-                <CardHeader className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <Shield className="w-12 h-12 text-lime-400" />
-                  </div>
-                  <CardTitle className="text-xl text-white">
-                    {service.name}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-300 text-center mb-4">
-                    {service.description}
-                  </p>
-                  <div className="flex justify-between items-center text-sm text-gray-400">
-                    {service.estimated_duration && (
-                      <span>⏱️ {Math.floor(service.estimated_duration / 60)}h {service.estimated_duration % 60}min</span>
-                    )}
-                    {service.base_price && (
-                      <span className="font-semibold text-lime-400">
-                        ab €{Number(service.base_price).toFixed(2)}
-                      </span>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            ))
+            services.map((service) => {
+              const translatedService = getTranslatedService(service);
+              return (
+                <Card key={service.id} className="hover:shadow-lg transition-shadow duration-300 bg-gray-900 border-gray-700">
+                  <CardHeader className="text-center">
+                    <div className="flex justify-center mb-4">
+                      <Shield className="w-12 h-12 text-lime-400" />
+                    </div>
+                    <CardTitle className="text-xl text-white">
+                      {translatedService.name}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-300 text-center mb-4">
+                      {translatedService.description}
+                    </p>
+                    <div className="flex justify-between items-center text-sm text-gray-400">
+                      {service.estimated_duration && (
+                        <span>⏱️ {Math.floor(service.estimated_duration / 60)}h {service.estimated_duration % 60}min</span>
+                      )}
+                      {service.base_price && (
+                        <span className="font-semibold text-lime-400">
+                          ab €{Number(service.base_price).toFixed(2)}
+                        </span>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })
           ) : (
             <div className="col-span-full text-center text-gray-400">
               <p>{t('services.noServices')}</p>
