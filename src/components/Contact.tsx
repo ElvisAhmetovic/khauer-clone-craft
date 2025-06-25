@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -37,7 +36,6 @@ const Contact = () => {
         description: "Wir werden uns in Kürze bei Ihnen melden.",
       });
 
-      // Reset form
       (e.target as HTMLFormElement).reset();
     } catch (error) {
       console.error('Error submitting contact form:', error);
@@ -53,25 +51,25 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: <Phone className="w-6 h-6 text-blue-600" />,
+      icon: <Phone className="w-6 h-6 text-lime-400" />,
       title: "Telefon",
-      content: "+49 123 456 789",
+      content: "01 51 / 12 89 24 33",
       subtitle: "Mo-Fr: 7:00-18:00 Uhr"
     },
     {
-      icon: <Mail className="w-6 h-6 text-blue-600" />,
+      icon: <Mail className="w-6 h-6 text-lime-400" />,
       title: "E-Mail",
       content: "info@khauer-kfz.de",
       subtitle: "Wir antworten binnen 24h"
     },
     {
-      icon: <MapPin className="w-6 h-6 text-blue-600" />,
+      icon: <MapPin className="w-6 h-6 text-lime-400" />,
       title: "Adresse",
-      content: "Musterstraße 123",
-      subtitle: "12345 Musterstadt"
+      content: "Auerbergstr. 16a",
+      subtitle: "85283 Wolnzach"
     },
     {
-      icon: <Clock className="w-6 h-6 text-blue-600" />,
+      icon: <Clock className="w-6 h-6 text-lime-400" />,
       title: "Öffnungszeiten",
       content: "Mo-Fr: 7:00-18:00",
       subtitle: "Sa: 8:00-12:00"
@@ -79,103 +77,99 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-20 bg-black text-white relative">
+      <div className="absolute inset-0">
+        <img 
+          src="/lovable-uploads/69067ce9-0dc8-4ff6-9188-73c41a37ba1c.png" 
+          alt="Contact Background" 
+          className="w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Kontakt & Anfahrt
+          <h2 className="text-5xl font-bold text-lime-400 mb-4 uppercase tracking-wide">
+            Kontakt
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Haben Sie Fragen oder möchten einen Termin vereinbaren? 
-            Wir sind gerne für Sie da!
-          </p>
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-white mb-2">Markus Khauer KFZ Handel</h3>
+            <p className="text-xl text-gray-300">Auerbergstr. 16a</p>
+            <p className="text-xl text-gray-300 mb-6">85283 Wolnzach</p>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
           <div>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               {contactInfo.map((info, index) => (
-                <Card key={index} className="border-0 shadow-md">
+                <Card key={index} className="bg-gray-900 border-gray-700">
                   <CardHeader className="pb-3">
                     <div className="flex items-center space-x-3">
                       {info.icon}
-                      <CardTitle className="text-lg">{info.title}</CardTitle>
+                      <CardTitle className="text-lg text-white">{info.title}</CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="font-semibold text-gray-900">{info.content}</p>
-                    <p className="text-sm text-gray-600">{info.subtitle}</p>
+                    <p className="font-semibold text-white">{info.content}</p>
+                    <p className="text-sm text-gray-400">{info.subtitle}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
-
-            {/* Map placeholder */}
-            <Card className="border-0 shadow-md">
-              <CardContent className="p-0">
-                <div className="bg-gray-300 h-64 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-gray-600">
-                    <MapPin className="w-12 h-12 mx-auto mb-2" />
-                    <p>Google Maps Integration</p>
-                    <p className="text-sm">Interaktive Karte</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
 
-          {/* Contact Form */}
-          <Card className="border-0 shadow-md">
+          <Card className="bg-gray-900 border-gray-700">
             <CardHeader>
-              <CardTitle className="text-2xl">Nachricht senden</CardTitle>
+              <CardTitle className="text-2xl text-white">Nachricht senden</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
+                
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Vorname *
                     </label>
-                    <Input name="firstName" placeholder="Ihr Vorname" required />
+                    <Input name="firstName" placeholder="Ihr Vorname" required className="bg-gray-800 border-gray-600 text-white" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Nachname *
                     </label>
-                    <Input name="lastName" placeholder="Ihr Nachname" required />
+                    <Input name="lastName" placeholder="Ihr Nachname" required className="bg-gray-800 border-gray-600 text-white" />
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     E-Mail-Adresse *
                   </label>
-                  <Input name="email" type="email" placeholder="ihre.email@beispiel.de" required />
+                  <Input name="email" type="email" placeholder="ihre.email@beispiel.de" required className="bg-gray-800 border-gray-600 text-white" />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Telefonnummer
                   </label>
-                  <Input name="phone" placeholder="Ihre Telefonnummer" />
+                  <Input name="phone" placeholder="Ihre Telefonnummer" className="bg-gray-800 border-gray-600 text-white" />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Betreff
                   </label>
-                  <Input name="subject" placeholder="Betreff Ihrer Nachricht" />
+                  <Input name="subject" placeholder="Betreff Ihrer Nachricht" className="bg-gray-800 border-gray-600 text-white" />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Nachricht *
                   </label>
                   <Textarea 
                     name="message"
                     placeholder="Beschreiben Sie Ihr Anliegen..."
-                    className="min-h-[120px]"
+                    className="min-h-[120px] bg-gray-800 border-gray-600 text-white"
                     required
                   />
                 </div>
@@ -183,7 +177,7 @@ const Contact = () => {
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700"
+                  className="w-full bg-lime-400 hover:bg-lime-500 text-black font-bold"
                 >
                   {isSubmitting ? "Wird gesendet..." : "Nachricht senden"}
                 </Button>
