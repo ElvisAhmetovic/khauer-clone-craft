@@ -6,6 +6,13 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const { t } = useLanguage();
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-black text-white border-t-4 border-lime-400">
       <div className="container mx-auto px-4 py-12">
@@ -25,11 +32,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-lime-400">{t('footer.services')}</h4>
             <ul className="space-y-2 text-gray-300">
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('services.repairs')}</li>
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('services.maintenance')}</li>
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('services.tuv')}</li>
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('services.bodywork')}</li>
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('services.electronics')}</li>
+              <li>{t('services.repairs')}</li>
+              <li>{t('services.maintenance')}</li>
+              <li>{t('services.tuv')}</li>
+              <li>{t('services.bodywork')}</li>
+              <li>{t('services.electronics')}</li>
             </ul>
           </div>
 
@@ -38,8 +45,7 @@ const Footer = () => {
             <ul className="space-y-2 text-gray-300">
               <li><Link to="/" className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.home')}</Link></li>
               <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.about')}</li>
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.contact')}</li>
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('footer.legal.imprint')}</li>
+              <li><button onClick={scrollToContact} className="hover:text-lime-400 cursor-pointer transition-colors text-left">{t('nav.contact')}</button></li>
               <li><Link to="/privacy" className="hover:text-lime-400 cursor-pointer transition-colors">{t('footer.legal.privacy')}</Link></li>
             </ul>
           </div>
@@ -71,7 +77,6 @@ const Footer = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center text-black">
             <div className="flex space-x-6 mb-2 md:mb-0">
-              <a href="#impressum" className="hover:underline font-medium">{t('footer.legal.imprint')}</a>
               <Link to="/privacy" className="hover:underline font-medium">{t('footer.legal.privacy')}</Link>
             </div>
             <p className="text-sm">
