@@ -1,4 +1,3 @@
-
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -10,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-2xl font-bold mb-4 text-lime-400">KHAUER KFZ</h3>
+            <h3 className="text-2xl font-bold mb-4 text-lime-400">KURDO Car GmbH</h3>
             <p className="text-gray-300 mb-4">
               {t('footer.company.description')}
             </p>
@@ -48,17 +47,17 @@ const Footer = () => {
             <div className="space-y-3 text-gray-300">
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-lime-400" />
-                <span>076 336 77 99</span>
+                <span>+41 76 336 77 99</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-lime-400" />
-                <span>info@khauer-kfz.de</span>
+                <span>info@kurdo-car.ch</span>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 mt-1 text-lime-400" />
                 <div>
-                  <div>Grünaustrasse 21</div>
-                  <div>Wolnzach</div>
+                  <div>Grünaustrasse 15</div>
+                  <div>8953 Dietikon, Switzerland</div>
                 </div>
               </div>
             </div>

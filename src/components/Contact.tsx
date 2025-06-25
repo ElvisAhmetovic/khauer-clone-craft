@@ -56,20 +56,20 @@ const Contact = () => {
     {
       icon: <Phone className="w-6 h-6 text-lime-400" />,
       title: t('contact.phone'),
-      content: "076 336 77 99",
+      content: "+41 76 336 77 99",
       subtitle: t('contact.phone.hours')
     },
     {
       icon: <Mail className="w-6 h-6 text-lime-400" />,
       title: t('contact.email'),
-      content: "info@khauer-kfz.de",
+      content: "info@kurdo-car.ch",
       subtitle: t('contact.email.response')
     },
     {
       icon: <MapPin className="w-6 h-6 text-lime-400" />,
       title: t('contact.address'),
-      content: "Grünaustrasse 21",
-      subtitle: "Wolnzach"
+      content: "Grünaustrasse 15",
+      subtitle: "8953 Dietikon, Switzerland"
     },
     {
       icon: <Clock className="w-6 h-6 text-lime-400" />,
@@ -96,9 +96,9 @@ const Contact = () => {
             {t('contact.title')}
           </h2>
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-white mb-2">{t('contact.company')}</h3>
-            <p className="text-xl text-gray-300">Grünaustrasse 21</p>
-            <p className="text-xl text-gray-300 mb-6">Wolnzach</p>
+            <h3 className="text-2xl font-bold text-white mb-2">KURDO Car GmbH</h3>
+            <p className="text-xl text-gray-300">Grünaustrasse 15</p>
+            <p className="text-xl text-gray-300 mb-6">8953 Dietikon, Switzerland</p>
           </div>
         </div>
 

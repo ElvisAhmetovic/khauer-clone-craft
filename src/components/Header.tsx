@@ -17,17 +17,17 @@ const Header = () => {
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <Phone size={16} />
-                <span>076 336 77 99</span>
+                <span>+41 76 336 77 99</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail size={16} />
-                <span>info@khauer-kfz.de</span>
+                <span>info@kurdo-car.ch</span>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <MapPin size={16} />
-                <span>Grünaustrasse 21, Wolnzach</span>
+                <span>Grünaustrasse 15, 8953 Dietikon, Switzerland</span>
               </div>
               <LanguageToggle />
             </div>
@@ -40,7 +40,7 @@ const Header = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <div className="text-2xl font-bold text-lime-400 mr-2">
-              Khauer-KFZ
+              KURDO Car GmbH
             </div>
             <div className="w-12 h-8 relative">
               <svg viewBox="0 0 100 40" className="w-full h-full text-lime-400" fill="currentColor">
