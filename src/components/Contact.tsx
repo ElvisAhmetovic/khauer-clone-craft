@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -80,7 +81,7 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-black text-white relative">
       <div className="absolute inset-0">
         <img 
-          src="/lovable-uploads/69067ce9-0dc8-4ff6-9188-73c41a37ba1c.png" 
+          src="/lovable-uploads/0bbc7a22-0503-4efb-b78d-6c9f66d2fae2.png" 
           alt="Contact Background" 
           className="w-full h-full object-cover opacity-30"
         />

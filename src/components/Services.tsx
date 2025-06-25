@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Zap, Car, ShoppingCart } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -24,13 +25,13 @@ const Services = () => {
       icon: <ShoppingCart className="w-16 h-16 text-lime-400" />,
       title: "Ankauf & Inzahlungnahme",
       description: "Wir sind unabhängig und spezialisiert auf den An- & Verkauf, sowie die Vermittlung von hochwertigen Fahrzeugen. Gerne nehmen wir Ihr Fahrzeug in Zahlung.",
-      image: "/lovable-uploads/3ada1520-2fff-43eb-8892-d6a18ebbd85f.png"
+      image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png"
     },
     {
       icon: <Car className="w-16 h-16 text-lime-400" />,
       title: "Verkauf & Vermittlung",
       description: "Wir bieten Ihnen eine umfangreiche Auswahl an exklusiven Luxus- und Sportwagen an. Ihr Wunschfahrzeug ist nicht in unserem Bestand? Wir helfen Ihnen bei der Vermittlung Ihres Traumautos.",
-      image: "/lovable-uploads/e713e9e2-fb57-462f-893a-e749af8ce1ae.png"
+      image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png"
     }
   ];
 

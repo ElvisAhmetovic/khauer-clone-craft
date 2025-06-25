@@ -7,7 +7,7 @@ const Hero = () => {
     <section id="home" className="relative bg-black text-white min-h-screen flex items-center">
       <div className="absolute inset-0">
         <img 
-          src="/lovable-uploads/a3143357-a611-4263-9cf6-24f14e2c6a1b.png" 
+          src="/lovable-uploads/5e9b35be-db38-4ad9-adb5-d4344ad92db8.png" 
           alt="Luxury Sports Car" 
           className="w-full h-full object-cover opacity-70"
         />
