@@ -1,6 +1,7 @@
 
 import { Phone, Mail, MapPin, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "./LanguageToggle";
 import LogoProcessor from "./LogoProcessor";
@@ -9,6 +10,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const { t } = useLanguage();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   return (
     <header className="bg-black shadow-lg">
@@ -59,24 +62,49 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <a href="#home" className="text-white hover:text-lime-400 font-medium transition-colors">
-              {t('nav.home')}
-            </a>
-            <a href="#services" className="text-white hover:text-lime-400 font-medium transition-colors">
-              {t('nav.services')}
-            </a>
-            <a href="#about" className="text-white hover:text-lime-400 font-medium transition-colors">
-              {t('nav.about')}
-            </a>
-            <a href="#contact" className="text-white hover:text-lime-400 font-medium transition-colors">
-              {t('nav.contact')}
-            </a>
-            <a href="#vehicles" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
-              {t('nav.vehicles')}
-            </a>
-            <a href="#gallery" className="text-white hover:text-lime-400 font-medium transition-colors">
-              {t('nav.gallery')}
-            </a>
+            {isHomePage ? (
+              <>
+                <a href="#home" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.home')}
+                </a>
+                <a href="#services" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.services')}
+                </a>
+                <a href="#about" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.about')}
+                </a>
+                <a href="#contact" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.contact')}
+                </a>
+                <a href="#vehicles" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
+                  {t('nav.vehicles')}
+                </a>
+                <a href="#gallery" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.gallery')}
+                </a>
+              </>
+            ) : (
+              <>
+                <Link to="/" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.home')}
+                </Link>
+                <Link to="/#services" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.services')}
+                </Link>
+                <Link to="/#about" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.about')}
+                </Link>
+                <Link to="/#contact" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.contact')}
+                </Link>
+                <Link to="/#vehicles" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
+                  {t('nav.vehicles')}
+                </Link>
+                <Link to="/#gallery" className="text-white hover:text-lime-400 font-medium transition-colors">
+                  {t('nav.gallery')}
+                </Link>
+              </>
+            )}
           </nav>
 
           {/* Mobile menu button */}
@@ -92,24 +120,49 @@ const Header = () => {
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 border-t border-gray-700 pt-4">
             <div className="flex flex-col space-y-3">
-              <a href="#home" className="text-white hover:text-lime-400 font-medium">
-                {t('nav.home')}
-              </a>
-              <a href="#services" className="text-white hover:text-lime-400 font-medium">
-                {t('nav.services')}
-              </a>
-              <a href="#about" className="text-white hover:text-lime-400 font-medium">
-                {t('nav.about')}
-              </a>
-              <a href="#contact" className="text-white hover:text-lime-400 font-medium">
-                {t('nav.contact')}
-              </a>
-              <a href="#vehicles" className="text-lime-400 hover:text-lime-300 font-medium">
-                {t('nav.vehicles')}
-              </a>
-              <a href="#gallery" className="text-white hover:text-lime-400 font-medium">
-                {t('nav.gallery')}
-              </a>
+              {isHomePage ? (
+                <>
+                  <a href="#home" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.home')}
+                  </a>
+                  <a href="#services" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.services')}
+                  </a>
+                  <a href="#about" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.about')}
+                  </a>
+                  <a href="#contact" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.contact')}
+                  </a>
+                  <a href="#vehicles" className="text-lime-400 hover:text-lime-300 font-medium">
+                    {t('nav.vehicles')}
+                  </a>
+                  <a href="#gallery" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.gallery')}
+                  </a>
+                </>
+              ) : (
+                <>
+                  <Link to="/" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.home')}
+                  </Link>
+                  <Link to="/#services" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.services')}
+                  </Link>
+                  <Link to="/#about" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.about')}
+                  </Link>
+                  <Link to="/#contact" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.contact')}
+                  </Link>
+                  <Link to="/#vehicles" className="text-lime-400 hover:text-lime-300 font-medium">
+                    {t('nav.vehicles')}
+                  </Link>
+                  <Link to="/#gallery" className="text-white hover:text-lime-400 font-medium">
+                    {t('nav.gallery')}
+                  </Link>
+                </>
+              )}
             </div>
           </nav>
         )}
