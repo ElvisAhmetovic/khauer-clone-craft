@@ -14,7 +14,7 @@ const Header = () => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <header className="bg-black shadow-lg">
+    <header className="bg-black shadow-lg sticky top-0 z-50">
       {/* Top contact bar */}
       <div className="bg-gray-900 text-white py-2">
         <div className="container mx-auto px-4">
