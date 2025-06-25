@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'de' | 'en';
@@ -20,6 +19,28 @@ const translations = {
     'nav.contact': 'Kontakt',
     'nav.vehicles': 'Fahrzeuge',
     'nav.gallery': 'Galerie',
+
+    // Vehicles
+    'vehicles.title': 'Unsere Fahrzeuge',
+    'vehicles.subtitle': 'Durchsuchen Sie unser komplettes Fahrzeuginventar auf AutoScout24',
+    'vehicles.inventory.title': 'KURDO Car GmbH - Fahrzeuginventar',
+    'vehicles.inventory.subtitle': 'Sehen Sie alle unsere verfügbaren Fahrzeuge direkt auf AutoScout24',
+    'vehicles.inventory.button': 'Unsere Fahrzeuge auf AutoScout24 ansehen',
+    'vehicles.features.quality.title': 'Qualitätsfahrzeuge',
+    'vehicles.features.quality.desc': 'Sorgfältig ausgewählte und geprüfte Fahrzeuge',
+    'vehicles.features.service.title': 'Persönlicher Service',
+    'vehicles.features.service.desc': 'Direkter Kontakt und professionelle Beratung',
+    'vehicles.features.contact.title': 'Einfacher Kontakt',
+    'vehicles.features.contact.desc': 'Verschiedene Möglichkeiten, uns zu erreichen',
+    'vehicles.instructions.title': 'So durchsuchen Sie unsere Fahrzeuge',
+    'vehicles.instructions.visit.title': '1. AutoScout24 besuchen',
+    'vehicles.instructions.visit.desc': 'Klicken Sie auf die Schaltfläche oben, um unser komplettes Inventar auf AutoScout24, der führenden Automarktplatz der Schweiz, anzuzeigen.',
+    'vehicles.instructions.contact.title': '2. Kontaktieren Sie uns',
+    'vehicles.instructions.contact.desc': 'Ein Fahrzeug gefunden, das Ihnen gefällt? Kontaktieren Sie uns direkt für Probefahrten, weitere Informationen oder Finanzierungsoptionen.',
+    'vehicles.cta.title': 'Interessiert an einem Fahrzeug?',
+    'vehicles.cta.subtitle': 'Kontaktieren Sie uns direkt für weitere Informationen, Probefahrten oder um Finanzierungsoptionen zu besprechen.',
+    'vehicles.cta.call': 'Anrufen: +41 76 336 77 99',
+    'vehicles.cta.email': 'E-Mail senden',
 
     // Gallery
     'gallery.title': 'Unsere Fahrzeuggalerie',
@@ -173,6 +194,28 @@ const translations = {
     'nav.contact': 'Contact',
     'nav.vehicles': 'Vehicles',
     'nav.gallery': 'Gallery',
+
+    // Vehicles
+    'vehicles.title': 'Our Vehicles',
+    'vehicles.subtitle': 'Browse our complete vehicle inventory on AutoScout24',
+    'vehicles.inventory.title': 'KURDO Car GmbH - Vehicle Inventory',
+    'vehicles.inventory.subtitle': 'View all our available vehicles directly on AutoScout24',
+    'vehicles.inventory.button': 'View Our Vehicles on AutoScout24',
+    'vehicles.features.quality.title': 'Quality Vehicles',
+    'vehicles.features.quality.desc': 'Carefully selected and inspected vehicles',
+    'vehicles.features.service.title': 'Personal Service',
+    'vehicles.features.service.desc': 'Direct contact and professional advice',
+    'vehicles.features.contact.title': 'Easy Contact',
+    'vehicles.features.contact.desc': 'Multiple ways to get in touch with us',
+    'vehicles.instructions.title': 'How to Browse Our Vehicles',
+    'vehicles.instructions.visit.title': '1. Visit AutoScout24',
+    'vehicles.instructions.visit.desc': 'Click the button above to view our complete inventory on AutoScout24, Switzerland\'s leading car marketplace.',
+    'vehicles.instructions.contact.title': '2. Contact Us',
+    'vehicles.instructions.contact.desc': 'Found a vehicle you like? Contact us directly for test drives, more information, or financing options.',
+    'vehicles.cta.title': 'Interested in a Vehicle?',
+    'vehicles.cta.subtitle': 'Contact us directly for more information, test drives, or to discuss financing options.',
+    'vehicles.cta.call': 'Call: +41 76 336 77 99',
+    'vehicles.cta.email': 'Email Us',
 
     // Gallery
     'gallery.title': 'Our Vehicle Gallery',
