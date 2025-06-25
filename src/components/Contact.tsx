@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -28,15 +27,22 @@ const Contact = () => {
     };
 
     try {
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([contactData]);
+      console.log("Sending contact email with data:", contactData);
+      
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: contactData
+      });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Supabase function error:", error);
+        throw error;
+      }
+
+      console.log("Email sent successfully:", data);
 
       toast({
         title: "Nachricht erfolgreich gesendet!",
-        description: "Wir werden uns in Kürze bei Ihnen melden.",
+        description: "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden.",
       });
 
       (e.target as HTMLFormElement).reset();
@@ -44,7 +50,7 @@ const Contact = () => {
       console.error('Error submitting contact form:', error);
       toast({
         title: "Fehler beim Senden",
-        description: "Bitte versuchen Sie es später erneut oder rufen Sie uns an.",
+        description: "Bitte versuchen Sie es später erneut oder rufen Sie uns direkt an.",
         variant: "destructive",
       });
     } finally {
