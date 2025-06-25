@@ -14,7 +14,7 @@ const Header = () => {
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <Phone size={16} />
-                <span>01 51 / 12 89 24 33</span>
+                <span>076 336 77 99</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail size={16} />
@@ -23,7 +23,7 @@ const Header = () => {
             </div>
             <div className="flex items-center space-x-2">
               <MapPin size={16} />
-              <span>Auerbergstr. 16a, 85283 Wolnzach</span>
+              <span>Grünaustrasse 21, Wolnzach</span>
             </div>
           </div>
         </div>

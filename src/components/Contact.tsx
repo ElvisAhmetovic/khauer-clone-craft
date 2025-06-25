@@ -1,4 +1,5 @@
 
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -54,7 +55,7 @@ const Contact = () => {
     {
       icon: <Phone className="w-6 h-6 text-lime-400" />,
       title: "Telefon",
-      content: "01 51 / 12 89 24 33",
+      content: "076 336 77 99",
       subtitle: "Mo-Fr: 7:00-18:00 Uhr"
     },
     {
@@ -66,8 +67,8 @@ const Contact = () => {
     {
       icon: <MapPin className="w-6 h-6 text-lime-400" />,
       title: "Adresse",
-      content: "Auerbergstr. 16a",
-      subtitle: "85283 Wolnzach"
+      content: "Grünaustrasse 21",
+      subtitle: "Wolnzach"
     },
     {
       icon: <Clock className="w-6 h-6 text-lime-400" />,
@@ -95,8 +96,8 @@ const Contact = () => {
           </h2>
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-white mb-2">Markus Khauer KFZ Handel</h3>
-            <p className="text-xl text-gray-300">Auerbergstr. 16a</p>
-            <p className="text-xl text-gray-300 mb-6">85283 Wolnzach</p>
+            <p className="text-xl text-gray-300">Grünaustrasse 21</p>
+            <p className="text-xl text-gray-300 mb-6">Wolnzach</p>
           </div>
         </div>
 
