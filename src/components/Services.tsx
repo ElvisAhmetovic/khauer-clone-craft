@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Services = () => {
   const { t, language } = useLanguage();
@@ -67,16 +69,27 @@ const Services = () => {
     {
       icon: <ShoppingCart className="w-16 h-16 text-lime-400" />,
       title: t('services.purchase.title'),
-      description: t('services.purchase.description'),
-      image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png"
+      description: language === 'en' ? 'Professional vehicle evaluation and quick processing.' : 'Professionelle Fahrzeugbewertung und schnelle Abwicklung.',
+      image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png",
+      buttonText: language === 'en' ? 'Get Quote' : 'Angebot erhalten',
+      buttonAction: 'contact'
     },
     {
       icon: <Car className="w-16 h-16 text-lime-400" />,
       title: t('services.sales.title'),
-      description: t('services.sales.description'),
-      image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png"
+      description: language === 'en' ? 'Quality vehicles in excellent condition. All brands, fair prices.' : 'Hochwertige Fahrzeuge in ausgezeichnetem Zustand. Alle Marken, faire Preise.',
+      image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png",
+      buttonText: language === 'en' ? 'View Inventory' : 'Fahrzeuge ansehen',
+      buttonAction: 'vehicles'
     }
   ];
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   if (error) {
     console.error('Error loading services:', error);
@@ -104,9 +117,23 @@ const Services = () => {
                 <h3 className="text-3xl font-bold mb-6 text-lime-400 uppercase tracking-wide">
                   {service.title}
                 </h3>
-                <p className="text-lg leading-relaxed">
+                <p className="text-lg leading-relaxed mb-6">
                   {service.description}
                 </p>
+                {service.buttonAction === 'contact' ? (
+                  <Button 
+                    onClick={scrollToContact}
+                    className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit"
+                  >
+                    {service.buttonText}
+                  </Button>
+                ) : (
+                  <Link to="/vehicles">
+                    <Button className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit">
+                      {service.buttonText}
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           ))}
