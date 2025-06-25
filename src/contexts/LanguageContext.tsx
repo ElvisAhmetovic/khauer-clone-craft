@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'de' | 'en';
@@ -82,7 +81,7 @@ const translations = {
     'contact.form.sending': 'Wird gesendet...',
     'contact.form.placeholder.firstName': 'Ihr Vorname',
     'contact.form.placeholder.lastName': 'Ihr Nachname',
-    'contact.form.placeholder.email': 'ihre.email@beispiel.com',
+    'contact.form.placeholder.email': 'kurdocar@bluewin.ch',
     'contact.form.placeholder.phone': 'Ihre Telefonnummer',
     'contact.form.placeholder.subject': 'Worum geht es?',
     'contact.form.placeholder.message': 'Beschreiben Sie Ihr Anliegen...',
@@ -166,7 +165,7 @@ const translations = {
     'contact.form.sending': 'Sending...',
     'contact.form.placeholder.firstName': 'Your first name',
     'contact.form.placeholder.lastName': 'Your last name',
-    'contact.form.placeholder.email': 'your.email@example.com',
+    'contact.form.placeholder.email': 'kurdocar@bluewin.ch',
     'contact.form.placeholder.phone': 'Your phone number',
     'contact.form.placeholder.subject': 'What is this about?',
     'contact.form.placeholder.message': 'Describe your request...',
