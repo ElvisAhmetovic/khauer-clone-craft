@@ -1,5 +1,7 @@
+
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -34,11 +36,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-lime-400">{t('footer.links')}</h4>
             <ul className="space-y-2 text-gray-300">
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.home')}</li>
+              <li><Link to="/" className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.home')}</Link></li>
               <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.about')}</li>
               <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.contact')}</li>
               <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('footer.legal.imprint')}</li>
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('footer.legal.privacy')}</li>
+              <li><Link to="/privacy" className="hover:text-lime-400 cursor-pointer transition-colors">{t('footer.legal.privacy')}</Link></li>
             </ul>
           </div>
 
@@ -70,7 +72,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center text-black">
             <div className="flex space-x-6 mb-2 md:mb-0">
               <a href="#impressum" className="hover:underline font-medium">{t('footer.legal.imprint')}</a>
-              <a href="#datenschutz" className="hover:underline font-medium">{t('footer.legal.privacy')}</a>
+              <Link to="/privacy" className="hover:underline font-medium">{t('footer.legal.privacy')}</Link>
             </div>
             <p className="text-sm">
               {t('footer.designed')}
