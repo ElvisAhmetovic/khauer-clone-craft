@@ -62,7 +62,7 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6 text-lime-400" />,
       title: t('contact.email'),
-      content: "info@kurdo-car.ch",
+      content: "kurdocar@bluewin.ch",
       subtitle: t('contact.email.response')
     },
     {
