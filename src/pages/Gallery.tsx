@@ -3,13 +3,13 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Gallery = () => {
   const { t } = useLanguage();
   const [selectedCar, setSelectedCar] = useState<any>(null);
+  const navigate = useNavigate();
 
-  // Real car data with your uploaded images and correct information
   const cars = [
     {
       id: 1,
@@ -138,6 +138,20 @@ const Gallery = () => {
     // You can add navigation to individual car detail pages here later
   };
 
+  const handleContactClick = () => {
+    navigate('/', { replace: true });
+    // Small delay to ensure navigation completes before scrolling
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -236,12 +250,12 @@ const Gallery = () => {
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             {t('gallery.interested.subtitle')}
           </p>
-          <a
-            href="#contact"
+          <button
+            onClick={handleContactClick}
             className="inline-block bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-8 rounded-lg transition-colors duration-300"
           >
             {t('gallery.contact.button')}
-          </a>
+          </button>
         </div>
       </div>
 
