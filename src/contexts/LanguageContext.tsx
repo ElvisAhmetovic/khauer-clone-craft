@@ -25,7 +25,7 @@ const translations = {
     'hero.title2': 'Autowerkstatt',
     'hero.button': 'Termin vereinbaren',
     'hero.subtitle': 'Spezialisiert auf',
-    'hero.brands': 'Luxus- & Sportwagen',
+    'hero.brands': 'Alle Marken',
 
     // Services
     'services.title': 'Unsere Dienstleistungen',
@@ -109,7 +109,7 @@ const translations = {
     'hero.title2': 'Auto Service',
     'hero.button': 'Book Appointment',
     'hero.subtitle': 'Specialized in',
-    'hero.brands': 'Luxury & Sports Cars',
+    'hero.brands': 'All Brands',
 
     // Services
     'services.title': 'Our Services',
