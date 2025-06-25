@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'de' | 'en';
@@ -71,6 +72,11 @@ const translations = {
     'services.electronics.desc': 'Moderne Fahrzeugelektronik',
     'services.diagnostics': 'Diagnose',
     'services.diagnostics.desc': 'Computerdiagnose und Fehlerbehebung',
+    'services.purchase.title': 'Fahrzeugankauf',
+    'services.purchase.description': 'Wir kaufen Ihr Fahrzeug zu fairen Preisen an. Professionelle Bewertung und schnelle Abwicklung.',
+    'services.sales.title': 'Fahrzeugverkauf',
+    'services.sales.description': 'Hochwertige gebrauchte Fahrzeuge in erstklassigem Zustand. Alle Marken, faire Preise.',
+    'services.noServices': 'Keine Dienstleistungen verfügbar',
 
     // About
     'about.badge': 'Über KURDO Car GmbH',
@@ -246,6 +252,11 @@ const translations = {
     'services.electronics.desc': 'Modern vehicle electronics',
     'services.diagnostics': 'Diagnostics',
     'services.diagnostics.desc': 'Computer diagnostics and troubleshooting',
+    'services.purchase.title': 'Vehicle Purchase',
+    'services.purchase.description': 'We buy your vehicle at fair prices. Professional valuation and quick processing.',
+    'services.sales.title': 'Vehicle Sales',
+    'services.sales.description': 'High-quality used vehicles in excellent condition. All brands, fair prices.',
+    'services.noServices': 'No services available',
 
     // About
     'about.badge': 'About KURDO Car GmbH',
