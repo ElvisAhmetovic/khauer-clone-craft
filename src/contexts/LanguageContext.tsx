@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'de' | 'en';
@@ -19,6 +20,13 @@ const translations = {
     'nav.contact': 'Kontakt',
     'nav.vehicles': 'Fahrzeuge',
     'nav.gallery': 'Galerie',
+
+    // Gallery
+    'gallery.title': 'Unsere Fahrzeuggalerie',
+    'gallery.subtitle': 'Entdecken Sie unsere Premium-Sammlung hochwertiger Fahrzeuge',
+    'gallery.interested.title': 'Interessiert an einem unserer Fahrzeuge?',
+    'gallery.interested.subtitle': 'Kontaktieren Sie uns noch heute für weitere Informationen, Probefahrten oder um Finanzierungsoptionen zu besprechen.',
+    'gallery.contact.button': 'Kontakt aufnehmen',
 
     // Hero
     'hero.title1': 'Premium',
@@ -165,6 +173,13 @@ const translations = {
     'nav.contact': 'Contact',
     'nav.vehicles': 'Vehicles',
     'nav.gallery': 'Gallery',
+
+    // Gallery
+    'gallery.title': 'Our Vehicle Gallery',
+    'gallery.subtitle': 'Explore our premium collection of quality vehicles',
+    'gallery.interested.title': 'Interested in any of our vehicles?',
+    'gallery.interested.subtitle': 'Contact us today for more information, test drives, or to discuss financing options.',
+    'gallery.contact.button': 'Contact Us',
 
     // Hero
     'hero.title1': 'Premium',

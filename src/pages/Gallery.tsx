@@ -65,10 +65,10 @@ const Gallery = () => {
       <div className="bg-gradient-to-r from-black to-gray-900 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Our <span className="text-lime-400">Vehicle Gallery</span>
+            {t('gallery.title').split(' ').slice(0, -1).join(' ')} <span className="text-lime-400">{t('gallery.title').split(' ').slice(-1)[0]}</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-            Explore our premium collection of quality vehicles
+            {t('gallery.subtitle')}
           </p>
         </div>
       </div>
@@ -112,16 +112,16 @@ const Gallery = () => {
       <div className="bg-black text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Interested in any of our vehicles?
+            {t('gallery.interested.title')}
           </h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Contact us today for more information, test drives, or to discuss financing options.
+            {t('gallery.interested.subtitle')}
           </p>
           <a
             href="#contact"
             className="inline-block bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-8 rounded-lg transition-colors duration-300"
           >
-            Contact Us
+            {t('gallery.contact.button')}
           </a>
         </div>
       </div>
