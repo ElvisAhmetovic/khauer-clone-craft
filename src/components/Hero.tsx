@@ -1,8 +1,11 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="home" className="relative bg-black text-white min-h-screen flex items-center">
       <div className="absolute inset-0">
@@ -17,8 +20,8 @@ const Hero = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl">
           <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight uppercase tracking-wider">
-            Sportwagen &
-            <span className="block text-lime-400">exklusive Automobile</span>
+            {t('hero.title1')}
+            <span className="block text-lime-400">{t('hero.title2')}</span>
           </h1>
           
           <div className="mb-12">
@@ -26,17 +29,17 @@ const Hero = () => {
               size="lg" 
               className="bg-lime-400 hover:bg-lime-500 text-black font-bold text-lg px-8 py-4 uppercase tracking-wider"
             >
-              Aktuelle Fahrzeuge
+              {t('hero.button')}
               <ArrowRight className="ml-2" size={20} />
             </Button>
           </div>
 
           <div className="mt-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide">
-              Wir erfüllen Ihren Autotraum!
+              {t('hero.subtitle')}
             </h2>
             <h3 className="text-2xl md:text-3xl font-bold text-lime-400 mb-8 uppercase tracking-wide">
-              Unsere Marken
+              {t('hero.brands')}
             </h3>
             <div className="flex flex-wrap gap-4 text-lg">
               <span className="text-lime-400">#porsche</span>

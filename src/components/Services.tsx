@@ -4,8 +4,11 @@ import { Shield, Zap, Car, ShoppingCart } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Services = () => {
+  const { t } = useLanguage();
+  
   const { data: services, isLoading, error } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
@@ -23,14 +26,14 @@ const Services = () => {
   const customServices = [
     {
       icon: <ShoppingCart className="w-16 h-16 text-lime-400" />,
-      title: "Ankauf & Inzahlungnahme",
-      description: "Wir sind unabhängig und spezialisiert auf den An- & Verkauf, sowie die Vermittlung von hochwertigen Fahrzeugen. Gerne nehmen wir Ihr Fahrzeug in Zahlung.",
+      title: t('services.purchase.title'),
+      description: t('services.purchase.description'),
       image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png"
     },
     {
       icon: <Car className="w-16 h-16 text-lime-400" />,
-      title: "Verkauf & Vermittlung",
-      description: "Wir bieten Ihnen eine umfangreiche Auswahl an exklusiven Luxus- und Sportwagen an. Ihr Wunschfahrzeug ist nicht in unserem Bestand? Wir helfen Ihnen bei der Vermittlung Ihres Traumautos.",
+      title: t('services.sales.title'),
+      description: t('services.sales.description'),
       image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png"
     }
   ];
@@ -72,11 +75,10 @@ const Services = () => {
         {/* Traditional Services */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-lime-400 mb-4 uppercase tracking-wide">
-            Unsere Leistungen
+            {t('services.title')}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Von der Routinewartung bis zur komplexen Reparatur - wir bieten Ihnen 
-            den kompletten Service rund um Ihr Fahrzeug.
+            {t('services.subtitle')}
           </p>
         </div>
 
@@ -95,7 +97,6 @@ const Services = () => {
               </Card>
             ))
           ) : services && services.length > 0 ? (
-            
             services.map((service) => (
               <Card key={service.id} className="hover:shadow-lg transition-shadow duration-300 bg-gray-900 border-gray-700">
                 <CardHeader className="text-center">
@@ -124,9 +125,8 @@ const Services = () => {
               </Card>
             ))
           ) : (
-            
             <div className="col-span-full text-center text-gray-400">
-              <p>Keine Dienste verfügbar.</p>
+              <p>{t('services.noServices')}</p>
             </div>
           )}
         </div>

@@ -1,9 +1,12 @@
 
 import { Phone, Mail, MapPin, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <header className="bg-black shadow-lg">
@@ -21,9 +24,12 @@ const Header = () => {
                 <span>info@khauer-kfz.de</span>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <MapPin size={16} />
-              <span>Grünaustrasse 21, Wolnzach</span>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <MapPin size={16} />
+                <span>Grünaustrasse 21, Wolnzach</span>
+              </div>
+              <LanguageToggle />
             </div>
           </div>
         </div>
@@ -47,22 +53,22 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <a href="#home" className="text-white hover:text-lime-400 font-medium transition-colors">
-              Startseite
+              {t('nav.home')}
             </a>
             <a href="#services" className="text-white hover:text-lime-400 font-medium transition-colors">
-              Leistungen
+              {t('nav.services')}
             </a>
             <a href="#about" className="text-white hover:text-lime-400 font-medium transition-colors">
-              Über uns
+              {t('nav.about')}
             </a>
             <a href="#contact" className="text-white hover:text-lime-400 font-medium transition-colors">
-              Kontakt
+              {t('nav.contact')}
             </a>
             <a href="#vehicles" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
-              Unsere Fahrzeuge
+              {t('nav.vehicles')}
             </a>
             <a href="#gallery" className="text-white hover:text-lime-400 font-medium transition-colors">
-              Galerie
+              {t('nav.gallery')}
             </a>
           </nav>
 
@@ -80,22 +86,22 @@ const Header = () => {
           <nav className="md:hidden mt-4 pb-4 border-t border-gray-700 pt-4">
             <div className="flex flex-col space-y-3">
               <a href="#home" className="text-white hover:text-lime-400 font-medium">
-                Startseite
+                {t('nav.home')}
               </a>
               <a href="#services" className="text-white hover:text-lime-400 font-medium">
-                Leistungen
+                {t('nav.services')}
               </a>
               <a href="#about" className="text-white hover:text-lime-400 font-medium">
-                Über uns
+                {t('nav.about')}
               </a>
               <a href="#contact" className="text-white hover:text-lime-400 font-medium">
-                Kontakt
+                {t('nav.contact')}
               </a>
               <a href="#vehicles" className="text-lime-400 hover:text-lime-300 font-medium">
-                Unsere Fahrzeuge
+                {t('nav.vehicles')}
               </a>
               <a href="#gallery" className="text-white hover:text-lime-400 font-medium">
-                Galerie
+                {t('nav.gallery')}
               </a>
             </div>
           </nav>

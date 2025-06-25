@@ -1,5 +1,4 @@
 
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,10 +7,12 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,27 +55,27 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: <Phone className="w-6 h-6 text-lime-400" />,
-      title: "Telefon",
+      title: t('contact.phone'),
       content: "076 336 77 99",
-      subtitle: "Mo-Fr: 7:00-18:00 Uhr"
+      subtitle: t('contact.phone.hours')
     },
     {
       icon: <Mail className="w-6 h-6 text-lime-400" />,
-      title: "E-Mail",
+      title: t('contact.email'),
       content: "info@khauer-kfz.de",
-      subtitle: "Wir antworten binnen 24h"
+      subtitle: t('contact.email.response')
     },
     {
       icon: <MapPin className="w-6 h-6 text-lime-400" />,
-      title: "Adresse",
+      title: t('contact.address'),
       content: "Grünaustrasse 21",
       subtitle: "Wolnzach"
     },
     {
       icon: <Clock className="w-6 h-6 text-lime-400" />,
-      title: "Öffnungszeiten",
-      content: "Mo-Fr: 7:00-18:00",
-      subtitle: "Sa: 8:00-12:00"
+      title: t('contact.hours'),
+      content: t('contact.hours.weekday'),
+      subtitle: t('contact.hours.saturday')
     }
   ];
 
@@ -92,10 +93,10 @@ const Contact = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-lime-400 mb-4 uppercase tracking-wide">
-            Kontakt
+            {t('contact.title')}
           </h2>
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-white mb-2">Markus Khauer KFZ Handel</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">{t('contact.company')}</h3>
             <p className="text-xl text-gray-300">Grünaustrasse 21</p>
             <p className="text-xl text-gray-300 mb-6">Wolnzach</p>
           </div>
@@ -123,54 +124,53 @@ const Contact = () => {
 
           <Card className="bg-gray-900 border-gray-700">
             <CardHeader>
-              <CardTitle className="text-2xl text-white">Nachricht senden</CardTitle>
+              <CardTitle className="text-2xl text-white">{t('contact.form.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Vorname *
+                      {t('contact.form.firstName')} *
                     </label>
-                    <Input name="firstName" placeholder="Ihr Vorname" required className="bg-gray-800 border-gray-600 text-white" />
+                    <Input name="firstName" placeholder={t('contact.form.placeholder.firstName')} required className="bg-gray-800 border-gray-600 text-white" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Nachname *
+                      {t('contact.form.lastName')} *
                     </label>
-                    <Input name="lastName" placeholder="Ihr Nachname" required className="bg-gray-800 border-gray-600 text-white" />
+                    <Input name="lastName" placeholder={t('contact.form.placeholder.lastName')} required className="bg-gray-800 border-gray-600 text-white" />
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    E-Mail-Adresse *
+                    {t('contact.form.email')} *
                   </label>
-                  <Input name="email" type="email" placeholder="ihre.email@beispiel.de" required className="bg-gray-800 border-gray-600 text-white" />
+                  <Input name="email" type="email" placeholder={t('contact.form.placeholder.email')} required className="bg-gray-800 border-gray-600 text-white" />
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Telefonnummer
+                    {t('contact.form.phone')}
                   </label>
-                  <Input name="phone" placeholder="Ihre Telefonnummer" className="bg-gray-800 border-gray-600 text-white" />
+                  <Input name="phone" placeholder={t('contact.form.placeholder.phone')} className="bg-gray-800 border-gray-600 text-white" />
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Betreff
+                    {t('contact.form.subject')}
                   </label>
-                  <Input name="subject" placeholder="Betreff Ihrer Nachricht" className="bg-gray-800 border-gray-600 text-white" />
+                  <Input name="subject" placeholder={t('contact.form.placeholder.subject')} className="bg-gray-800 border-gray-600 text-white" />
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Nachricht *
+                    {t('contact.form.message')} *
                   </label>
                   <Textarea 
                     name="message"
-                    placeholder="Beschreiben Sie Ihr Anliegen..."
+                    placeholder={t('contact.form.placeholder.message')}
                     className="min-h-[120px] bg-gray-800 border-gray-600 text-white"
                     required
                   />
@@ -181,7 +181,7 @@ const Contact = () => {
                   disabled={isSubmitting}
                   className="w-full bg-lime-400 hover:bg-lime-500 text-black font-bold"
                 >
-                  {isSubmitting ? "Wird gesendet..." : "Nachricht senden"}
+                  {isSubmitting ? t('contact.form.sending') : t('contact.form.submit')}
                 </Button>
               </form>
             </CardContent>
