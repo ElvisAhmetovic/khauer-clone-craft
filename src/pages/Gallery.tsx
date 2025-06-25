@@ -1,10 +1,13 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { X } from "lucide-react";
 
 const Gallery = () => {
   const { t } = useLanguage();
+  const [selectedCar, setSelectedCar] = useState<any>(null);
 
   // Real car data with your uploaded images and correct information
   const cars = [
@@ -161,14 +164,35 @@ const Gallery = () => {
                 onClick={() => handleCarClick(car.id)}
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
               >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={car.image}
-                    alt={car.title}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300"></div>
-                </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="relative overflow-hidden cursor-pointer">
+                      <img
+                        src={car.image}
+                        alt={car.title}
+                        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300"></div>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl w-full p-0 bg-black border-0">
+                    <div className="relative">
+                      <img
+                        src={car.image}
+                        alt={car.title}
+                        className="w-full h-auto max-h-[80vh] object-contain"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
+                        <h3 className="text-white text-xl font-bold mb-2">
+                          {car.title}
+                        </h3>
+                        <div className="text-lime-400 text-2xl font-bold">
+                          {car.price}
+                        </div>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
                     {car.title}
