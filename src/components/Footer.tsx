@@ -6,17 +6,10 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const { t } = useLanguage();
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer className="bg-black text-white border-t-4 border-lime-400">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div>
             <h3 className="text-2xl font-bold mb-4 text-lime-400">KURDO Car GmbH</h3>
             <p className="text-gray-300 mb-4">
@@ -37,16 +30,6 @@ const Footer = () => {
               <li>{t('services.tuv')}</li>
               <li>{t('services.bodywork')}</li>
               <li>{t('services.electronics')}</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-lime-400">{t('footer.links')}</h4>
-            <ul className="space-y-2 text-gray-300">
-              <li><Link to="/" className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.home')}</Link></li>
-              <li className="hover:text-lime-400 cursor-pointer transition-colors">{t('nav.about')}</li>
-              <li><button onClick={scrollToContact} className="hover:text-lime-400 cursor-pointer transition-colors text-left">{t('nav.contact')}</button></li>
-              <li><Link to="/privacy" className="hover:text-lime-400 cursor-pointer transition-colors">{t('footer.legal.privacy')}</Link></li>
             </ul>
           </div>
 
