@@ -4,8 +4,53 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const contactData = {
+      name: `${formData.get('firstName')} ${formData.get('lastName')}`,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      subject: formData.get('subject') as string,
+      message: formData.get('message') as string,
+    };
+
+    try {
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([contactData]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Nachricht erfolgreich gesendet!",
+        description: "Wir werden uns in Kürze bei Ihnen melden.",
+      });
+
+      // Reset form
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      toast({
+        title: "Fehler beim Senden",
+        description: "Bitte versuchen Sie es später erneut oder rufen Sie uns an.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactInfo = [
     {
       icon: <Phone className="w-6 h-6 text-blue-600" />,
@@ -86,19 +131,19 @@ const Contact = () => {
               <CardTitle className="text-2xl">Nachricht senden</CardTitle>
             </CardHeader>
             <CardContent>
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Vorname *
                     </label>
-                    <Input placeholder="Ihr Vorname" />
+                    <Input name="firstName" placeholder="Ihr Vorname" required />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Nachname *
                     </label>
-                    <Input placeholder="Ihr Nachname" />
+                    <Input name="lastName" placeholder="Ihr Nachname" required />
                   </div>
                 </div>
                 
@@ -106,21 +151,21 @@ const Contact = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     E-Mail-Adresse *
                   </label>
-                  <Input type="email" placeholder="ihre.email@beispiel.de" />
+                  <Input name="email" type="email" placeholder="ihre.email@beispiel.de" required />
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Telefonnummer
                   </label>
-                  <Input placeholder="Ihre Telefonnummer" />
+                  <Input name="phone" placeholder="Ihre Telefonnummer" />
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Betreff
                   </label>
-                  <Input placeholder="Betreff Ihrer Nachricht" />
+                  <Input name="subject" placeholder="Betreff Ihrer Nachricht" />
                 </div>
                 
                 <div>
@@ -128,13 +173,19 @@ const Contact = () => {
                     Nachricht *
                   </label>
                   <Textarea 
+                    name="message"
                     placeholder="Beschreiben Sie Ihr Anliegen..."
                     className="min-h-[120px]"
+                    required
                   />
                 </div>
 
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Nachricht senden
+                <Button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full bg-blue-600 hover:bg-blue-700"
+                >
+                  {isSubmitting ? "Wird gesendet..." : "Nachricht senden"}
                 </Button>
               </form>
             </CardContent>
