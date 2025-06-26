@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const Hero = () => {
   const { t } = useLanguage();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isShaking, setIsShaking] = useState(false);
 
   useEffect(() => {
     // Trigger the animation after component mounts
@@ -14,6 +15,32 @@ const Hero = () => {
       setIsLoaded(true);
     }, 100);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // Random shake animation function
+    const startRandomShake = () => {
+      // Generate random delay between 6-10 seconds
+      const randomDelay = Math.random() * 4000 + 6000; // 6000-10000ms
+      
+      setTimeout(() => {
+        setIsShaking(true);
+        
+        // Remove shake after animation duration (700ms)
+        setTimeout(() => {
+          setIsShaking(false);
+          // Recursively call for next shake
+          startRandomShake();
+        }, 700);
+      }, randomDelay);
+    };
+
+    // Start the random shake cycle after initial load
+    const initialTimer = setTimeout(() => {
+      startRandomShake();
+    }, 3000); // Wait 3 seconds before first shake
+
+    return () => clearTimeout(initialTimer);
   }, []);
 
   const openAutoScout24 = () => {
@@ -62,7 +89,9 @@ const Hero = () => {
           }`}>
             <Button 
               size="lg" 
-              className="bg-lime-400 hover:bg-lime-500 text-black font-bold text-lg px-8 py-4 uppercase tracking-wider animate-shake-button"
+              className={`bg-lime-400 hover:bg-lime-500 text-black font-bold text-lg px-8 py-4 uppercase tracking-wider transition-all duration-300 ${
+                isShaking ? 'animate-random-shake' : ''
+              }`}
               onClick={scrollToContact}
             >
               {t('hero.button')}
