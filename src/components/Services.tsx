@@ -49,8 +49,8 @@ const Services = () => {
       description: language === 'en' ? 'International vehicle trading services' : 'Internationaler Fahrzeughandel'
     },
     {
-      title: language === 'en' ? 'Transparent Pricing' : 'Transparente Preise',
-      description: language === 'en' ? 'Fair and honest pricing for all transactions' : 'Faire und ehrliche Preise für alle Transaktionen'
+      title: language === 'en' ? 'Vehicle Financing' : 'Fahrzeugfinanzierung',
+      description: language === 'en' ? 'Flexible financing options for your vehicle purchase' : 'Flexible Finanzierungsoptionen für Ihren Fahrzeugkauf'
     }
   ];
 
@@ -122,7 +122,7 @@ const Services = () => {
             {language === 'en' ? 'Our Auto House Services' : 'Unsere Auto House Services'}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            {language === 'en' ? 'Comprehensive vehicle trading services for all your automotive needs' : 'Umfassende Fahrzeughandelsdienstleistungen für alle Ihre Automobilbedürfnisse'}
+            {language === 'en' ? 'Professional car dealership services for buying and selling quality vehicles' : 'Professionelle Autohaus-Dienstleistungen für den Kauf und Verkauf hochwertiger Fahrzeuge'}
           </p>
         </div>
 
