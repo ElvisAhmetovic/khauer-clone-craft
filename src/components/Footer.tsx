@@ -21,10 +21,10 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 text-lime-400">Our Services</h4>
             <ul className="space-y-2 text-gray-300">
               <li>Vehicle Sales & Purchase</li>
-              <li>Vehicle Diagnostics</li>
-              <li>Inspection Services</li>
-              <li>Vehicle Maintenance</li>
-              <li>Professional Consultation</li>
+              <li>Professional Vehicle Evaluation</li>
+              <li>Market Price Assessment</li>
+              <li>Quality Pre-owned Vehicles</li>
+              <li>Vehicle Import & Export</li>
             </ul>
           </div>
 
