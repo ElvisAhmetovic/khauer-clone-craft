@@ -23,10 +23,10 @@ const Vehicles = () => {
         </div>
       </div>
 
-      {/* AutoScout24 Widget Section */}
+      {/* Vehicle Inventory Section */}
       <div className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-6xl mx-auto">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl mx-auto">
             <div className="p-8 bg-black text-white text-center">
               <Car className="w-16 h-16 mx-auto mb-4 text-lime-400" />
               <h2 className="text-3xl font-bold mb-4">
@@ -37,35 +37,30 @@ const Vehicles = () => {
               </p>
             </div>
             
-            {/* AutoScout24 iFrame and External Link */}
-            <div className="p-4 bg-white">
-              {/* Try iframe first */}
-              <div className="w-full min-h-[800px] border border-gray-200 rounded-lg overflow-hidden mb-4">
-                <iframe 
-                  src="https://www.autoscout24.ch/de/s/seller-68160"
-                  width="100%" 
-                  height="800"
-                  style={{ border: 'none' }}
-                  title="AutoScout24 Vehicle Inventory"
-                  className="w-full"
-                />
+            {/* Main CTA for AutoScout24 */}
+            <div className="p-12 text-center bg-gradient-to-br from-gray-50 to-white">
+              <div className="bg-lime-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Car className="w-10 h-10 text-lime-600" />
               </div>
-              
-              {/* Fallback external link */}
-              <div className="text-center p-6 bg-gray-50 rounded-lg">
-                <p className="text-gray-600 mb-4">
-                  {t('vehicles.inventory.subtitle')} - Falls das Widget nicht angezeigt wird:
-                </p>
-                <a
-                  href="https://www.autoscout24.ch/de/s/seller-68160"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 rounded-lg transition-colors duration-300"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                  Fahrzeuge auf AutoScout24 anzeigen
-                </a>
-              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-800">
+                Unser komplettes Fahrzeugangebot
+              </h3>
+              <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+                Durchstöbern Sie unsere aktuellen Fahrzeuge direkt auf AutoScout24. 
+                Dort finden Sie detaillierte Informationen, Bilder und Preise aller verfügbaren Autos.
+              </p>
+              <a
+                href="https://www.autoscout24.ch/de/s/seller-68160"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-lime-400 hover:bg-lime-500 text-black font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg"
+              >
+                <ExternalLink className="w-6 h-6" />
+                Fahrzeuge auf AutoScout24 ansehen
+              </a>
+              <p className="text-sm text-gray-500 mt-4">
+                Öffnet in einem neuen Fenster
+              </p>
             </div>
             
             {/* Features Section */}
