@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, ShoppingCart } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -21,7 +22,7 @@ const Services = () => {
       title: t('services.sales.title'),
       description: language === 'en' ? 'Quality vehicles in excellent condition. All brands, fair prices.' : 'Hochwertige Fahrzeuge in ausgezeichnetem Zustand. Alle Marken, faire Preise.',
       image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png",
-      buttonText: language === 'en' ? 'View Inventory' : 'Fahrzeuge ansehen',
+      buttonText: language === 'en' ? 'View Our Cars' : 'Unsere Autos ansehen',
       buttonAction: 'autoscout24'
     }
   ];
@@ -92,7 +93,7 @@ const Services = () => {
                 {service.buttonAction === 'autoscout24' ? (
                   <Button 
                     onClick={openAutoScout24}
-                    className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit"
+                    className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit animate-shake-button"
                   >
                     {service.buttonText}
                   </Button>
