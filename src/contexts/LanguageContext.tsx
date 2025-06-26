@@ -1,194 +1,489 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-interface LanguageContextProps {
-  language: string;
-  setLanguage: (language: string) => void;
+type Language = 'de' | 'en';
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
   t: (key: string) => string;
 }
 
-const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
-
-interface LanguageProviderProps {
-  children: React.ReactNode;
-}
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const translations = {
   de: {
-    vehicles: {
-      title: 'Unsere Fahrzeuge',
-      subtitle: 'Entdecken Sie unsere vielfältige Auswahl an hochwertigen Gebrauchtwagen',
-      inventory: {
-        tabs: {
-          passenger: 'Personenwagen',
-          commercial: 'Nutzfahrzeuge',
-          liked: 'Gemerkte Fahrzeuge'
-        },
-        count: {
-          passenger: 'Personenwagen gefunden',
-          commercial: 'Nutzfahrzeuge gefunden',
-          liked: 'gemerkte Fahrzeuge'
-        },
-        empty: {
-          passenger: 'Keine Fahrzeuge entsprechen Ihren Filterkriterien.',
-          commercial: 'Derzeit keine Nutzfahrzeuge verfügbar.',
-          liked: 'Sie haben noch keine Fahrzeuge gemerkt.'
-        }
-      },
-      filters: {
-        brand: 'Marke',
-        model: 'Modell',
-        bodyType: 'Karosserietyp',
-        fuelType: 'Kraftstoff',
-        transmission: 'Getriebe',
-        priceRange: 'Preisbereich',
-        yearRange: 'Baujahr',
-        mileageRange: 'Kilometerstand',
-        reset: 'Filter zurücksetzen',
-        all: 'Alle',
-        limousine: 'Limousine',
-        cabrio: 'Cabrio',
-        suv: 'SUV',
-        combi: 'Kombi',
-        diesel: 'Diesel',
-        benzin: 'Benzin',
-        electric: 'Elektro',
-        hybrid: 'Hybrid',
-        manual: 'Manuell',
-        automatic: 'Automatik'
-      },
-      card: {
-        calculateCredit: 'Kredit berechnen',
-        compareInsurance: 'Versicherung vergleichen'
-      },
-      credit: {
-        downPayment: 'Anzahlung',
-        monthlyPayment: 'Monatliche Rate',
-        duration: 'Laufzeit'
-      },
-      insurance: {
-        bestOffer: 'Bestes Angebot',
-        savings: 'Ersparnis'
-      },
-      features: {
-        quality: {
-          title: 'Geprüfte Qualität',
-          desc: 'Alle unsere Fahrzeuge werden sorgfältig geprüft und sind in einwandfreiem Zustand.'
-        },
-        service: {
-          title: 'Persönlicher Service',
-          desc: 'Unser erfahrenes Team berät Sie gerne bei der Auswahl Ihres neuen Fahrzeugs.'
-        },
-        contact: {
-          title: 'Einfacher Kontakt',
-          desc: 'Erreichen Sie uns jederzeit per Telefon oder E-Mail für Fragen und Terminvereinbarungen.'
-        }
-      },
-      cta: {
-        title: 'Bereit für Ihr neues Fahrzeug?',
-        subtitle: 'Kontaktieren Sie uns noch heute für eine persönliche Beratung oder Probefahrt.',
-        call: 'Jetzt anrufen',
-        email: 'E-Mail senden'
-      }
-    }
+    // Navigation
+    'nav.home': 'Startseite',
+    'nav.services': 'Dienstleistungen',
+    'nav.about': 'Über uns',
+    'nav.contact': 'Kontakt',
+    'nav.vehicles': 'Fahrzeuge',
+    'nav.gallery': 'Galerie',
+
+    // Vehicles
+    'vehicles.title': 'Unsere Fahrzeuge',
+    'vehicles.subtitle': 'Durchsuchen Sie unser komplettes Fahrzeuginventar auf AutoScout24',
+    'vehicles.inventory.title': 'KURDO Car GmbH - Fahrzeuginventar',
+    'vehicles.inventory.subtitle': 'Sehen Sie alle unsere verfügbaren Fahrzeuge direkt auf AutoScout24',
+    'vehicles.inventory.button': 'Unsere Fahrzeuge auf AutoScout24 ansehen',
+    
+    // Vehicle Inventory Tabs
+    'vehicles.inventory.tabs.passenger': 'Personenwagen',
+    'vehicles.inventory.tabs.commercial': 'Nutzfahrzeug',
+    'vehicles.inventory.tabs.liked': 'Gemerkte Fahrzeuge',
+    
+    // Vehicle Counts
+    'vehicles.inventory.count.passenger': 'Personenwagen',
+    'vehicles.inventory.count.commercial': 'Nutzfahrzeuge',
+    'vehicles.inventory.count.liked': 'Gemerkte Fahrzeuge',
+    
+    // Empty States
+    'vehicles.inventory.empty.passenger': 'Keine Fahrzeuge gefunden. Versuchen Sie, die Filter anzupassen.',
+    'vehicles.inventory.empty.commercial': 'Keine Nutzfahrzeuge verfügbar',
+    'vehicles.inventory.empty.liked': 'Noch keine Fahrzeuge gemerkt',
+    
+    // Filters
+    'vehicles.filters.brand.placeholder': 'Marke & Modell',
+    'vehicles.filters.brand.all': 'Alle Marken',
+    'vehicles.filters.year.placeholder': 'Jahr',
+    'vehicles.filters.year.all': 'Alle Jahre',
+    'vehicles.filters.mileage.placeholder': 'Kilometerstand',
+    'vehicles.filters.mileage.all': 'Alle Kilometerstände',
+    'vehicles.filters.price.placeholder': 'Preis',
+    'vehicles.filters.price.all': 'Alle Preise',
+    'vehicles.filters.bodyType.placeholder': 'Aufbauart',
+    'vehicles.filters.bodyType.all': 'Alle Aufbauarten',
+    'vehicles.filters.bodyType.sedan': 'Limousine',
+    'vehicles.filters.bodyType.wagon': 'Kombi',
+    'vehicles.filters.bodyType.convertible': 'Cabrio',
+    'vehicles.filters.fuel.placeholder': 'Treibstoff',
+    'vehicles.filters.fuel.all': 'Alle Treibstoffe',
+    'vehicles.filters.fuel.gasoline': 'Benzin',
+    'vehicles.filters.fuel.diesel': 'Diesel',
+    'vehicles.filters.fuel.hybrid': 'Hybrid',
+    'vehicles.filters.fuel.electric': 'Elektro',
+    'vehicles.filters.transmission.placeholder': 'Getriebe',
+    'vehicles.filters.transmission.all': 'Alle Getriebe',
+    'vehicles.filters.transmission.automatic': 'Automat',
+    'vehicles.filters.transmission.manual': 'Manuell',
+    'vehicles.filters.moreFilters': 'Mehr Filter',
+    'vehicles.filters.sortRecommended': 'Sortierung Empfohlen',
+    'vehicles.filters.resetFilters': 'Filter zurücksetzen',
+    
+    // Vehicle Card
+    'vehicles.card.calculateCredit': 'Kreditrate berechnen',
+    'vehicles.card.compareInsurance': 'Versicherungen vergleichen',
+    
+    'vehicles.features.quality.title': 'Qualitätsfahrzeuge',
+    'vehicles.features.quality.desc': 'Sorgfältig ausgewählt und geprüft',
+    'vehicles.features.service.title': 'Persönlicher Service',
+    'vehicles.features.service.desc': 'Direkter Kontakt und professionelle Beratung',
+    'vehicles.features.contact.title': 'Einfacher Kontakt',
+    'vehicles.features.contact.desc': 'Verschiedene Möglichkeiten, uns zu erreichen',
+    'vehicles.instructions.title': 'So durchsuchen Sie unsere Fahrzeuge',
+    'vehicles.instructions.visit.title': '1. AutoScout24 besuchen',
+    'vehicles.instructions.visit.desc': 'Klicken Sie auf die Schaltfläche oben, um unser komplettes Inventar auf AutoScout24, der führenden Automarktplatz der Schweiz, anzuzeigen.',
+    'vehicles.instructions.contact.title': '2. Kontaktieren Sie uns',
+    'vehicles.instructions.contact.desc': 'Ein Fahrzeug gefunden, das Ihnen gefällt? Kontaktieren Sie uns direkt für Probefahrten, weitere Informationen oder Finanzierungsoptionen.',
+    'vehicles.cta.title': 'Interessiert an einem Fahrzeug?',
+    'vehicles.cta.subtitle': 'Kontaktieren Sie uns direkt für weitere Informationen, Probefahrten oder um Finanzierungsoptionen zu besprechen.',
+    'vehicles.cta.call': 'Anrufen: +41 76 336 77 99',
+    'vehicles.cta.email': 'E-Mail senden',
+
+    // Gallery
+    'gallery.title': 'Unsere Fahrzeuggalerie',
+    'gallery.subtitle': 'Entdecken Sie unsere Premium-Sammlung hochwertiger Fahrzeuge',
+    'gallery.interested.title': 'Interessiert an einem unserer Fahrzeuge?',
+    'gallery.interested.subtitle': 'Kontaktieren Sie uns noch heute für weitere Informationen, Probefahrten oder um Finanzierungsoptionen zu besprechen.',
+    'gallery.contact.button': 'Kontakt aufnehmen',
+
+    // Hero
+    'hero.title1': 'Premium',
+    'hero.title2': 'Auto House',
+    'hero.button': 'Termin vereinbaren',
+    'hero.subtitle': 'Spezialisiert auf',
+    'hero.brands': 'Alle Marken',
+
+    // Services
+    'services.title': 'Unsere Dienstleistungen',
+    'services.subtitle': 'Professionelle Automotive-Services für alle Marken',
+    'services.repairs': 'Reparaturen',
+    'services.repairs.desc': 'Professionelle Reparaturen aller Art',
+    'services.maintenance': 'Wartung',
+    'services.maintenance.desc': 'Regelmäßige Wartung für optimale Leistung',
+    'services.tuv': 'TÜV/MFK',
+    'services.tuv.desc': 'Technische Prüfungen und Abnahmen',
+    'services.bodywork': 'Karosserie',
+    'services.bodywork.desc': 'Karosserie- und Lackierarbeiten',
+    'services.electronics': 'Elektronik',
+    'services.electronics.desc': 'Moderne Fahrzeugelektronik',
+    'services.diagnostics': 'Diagnose',
+    'services.diagnostics.desc': 'Computerdiagnose und Fehlerbehebung',
+    'services.purchase.title': 'Fahrzeugankauf',
+    'services.purchase.description': 'Wir kaufen Ihr Fahrzeug zu fairen Preisen an. Professionelle Bewertung und schnelle Abwicklung.',
+    'services.sales.title': 'Fahrzeugverkauf',
+    'services.sales.description': 'Hochwertige gebrauchte Fahrzeuge in erstklassigem Zustand. Alle Marken, faire Preise.',
+    'services.noServices': 'Keine Dienstleistungen verfügbar',
+
+    // About
+    'about.badge': 'Premium Auto House',
+    'about.title': 'Ihr vertrauensvolles Auto House',
+    'about.description1': 'KURDO Car GmbH ist Ihr erstklassiges Auto House in Dietikon, Schweiz. Wir spezialisieren uns auf den Kauf, Verkauf und die Bereitstellung umfassender Automotive-Services für alle Fahrzeugmarken.',
+    'about.description2': 'Mit über 20 Jahren Erfahrung in der Automobilbranche bieten wir professionelle Fahrzeugbewertungen, hochwertige Gebrauchtwagen und fachkundige Automotive-Services, um alle Ihre Fahrzeugbedürfnisse zu erfüllen.',
+    'about.stats.experience': 'Jahre Erfahrung',
+    'about.stats.customers': 'Zufriedene Kunden',
+    'about.stats.quality': 'Qualität gewährleistet',
+    'about.stats.response': 'Schnelle Antwort',
+    'about.why.title': 'Warum KURDO Car wählen',
+    'about.why.evaluation': 'Professionelle Fahrzeugbewertung',
+    'about.why.equipment': 'Moderne Diagnosegeräte',
+    'about.why.transparent': 'Transparente Preisgestaltung',
+    'about.why.guarantee': 'Qualitätsgarantie',
+    'about.why.fair': 'Faire Marktpreise',
+
+    // Contact
+    'contact.title': 'Kontakt',
+    'contact.company': 'KURDO Car GmbH',
+    'contact.phone': 'Telefon',
+    'contact.phone.hours': 'Mo-Fr 8:00-17:00',
+    'contact.email': 'E-Mail',
+    'contact.email.response': 'Antwort binnen 24h',
+    'contact.address': 'Adresse',
+    'contact.hours': 'Öffnungszeiten',
+    'contact.hours.weekday': 'Mo-Fr: 8:00-17:00',
+    'contact.hours.saturday': 'Sa: Nach Vereinbarung',
+    'contact.form.title': 'Nachricht senden',
+    'contact.form.firstName': 'Vorname',
+    'contact.form.lastName': 'Nachname',
+    'contact.form.email': 'E-Mail',
+    'contact.form.phone': 'Telefon',
+    'contact.form.subject': 'Betreff',
+    'contact.form.message': 'Nachricht',
+    'contact.form.submit': 'Nachricht senden',
+    'contact.form.sending': 'Wird gesendet...',
+    'contact.form.placeholder.firstName': 'Ihr Vorname',
+    'contact.form.placeholder.lastName': 'Ihr Nachname',
+    'contact.form.placeholder.email': 'kurdocar@bluewin.ch',
+    'contact.form.placeholder.phone': 'Ihre Telefonnummer',
+    'contact.form.placeholder.subject': 'Worum geht es?',
+    'contact.form.placeholder.message': 'Beschreiben Sie Ihr Anliegen...',
+
+    // Privacy Policy translations
+    'privacy.title': 'Datenschutzerklärung der KURDO Car GmbH',
+    'privacy.lastUpdated': 'Zuletzt aktualisiert: 25. Juni 2025',
+    'privacy.intro': 'Bei der KURDO Car GmbH ist Ihr Datenschutz für uns von größter Bedeutung. Diese Datenschutzerklärung erklärt, wie wir Ihre personenbezogenen Daten sammeln, verwenden, weitergeben und schützen, wenn Sie mit uns interagieren, sei es über unsere Website, unser Servicezentrum oder andere Kanäle. Wir halten uns an das Schweizer Bundesgesetz über den Datenschutz (DSG) und andere anwendbare Datenschutzgesetze.',
+    'privacy.section1.title': '1. Wer wir sind (Datenverantwortlicher)',
+    'privacy.section1.text': 'Der für die in dieser Richtlinie beschriebene Verarbeitung Ihrer personenbezogenen Daten verantwortliche Datenverantwortliche ist:',
+    'privacy.section2.title': '2. Welche personenbezogenen Daten wir sammeln',
+    'privacy.section2.text': 'Wir können verschiedene Arten von personenbezogenen Daten sammeln, je nach Ihrer Interaktion mit uns:',
+    'privacy.section2.contact': 'Kontaktinformationen: Name, Adresse, E-Mail-Adresse, Telefonnummer, bevorzugte Kontaktmethode.',
+    'privacy.section2.identification': 'Identifikationsdaten: Geburtsdatum, Staatsangehörigkeit, Führerschein-Details (für Probefahrten).',
+    'privacy.section2.vehicle': 'Fahrzeuginformationen: Fahrzeugidentifikationsnummer (VIN), Marke, Modell, Jahr, Zulassungsdaten, Servicehistorie, Kilometerstand.',
+    'privacy.section2.financial': 'Finanzinformationen: Bankdaten, Kreditkarteninformationen, Leasing- oder Finanzierungsdetails, Kreditwürdigkeitsdaten (für Finanzierungsanträge).',
+    'privacy.section2.transaction': 'Transaktionsdaten: Details zu gekauften Produkten oder Dienstleistungen, Angebote, Bestellhistorie, Zahlungsaufzeichnungen.',
+    'privacy.section2.communication': 'Kommunikationsdaten: Aufzeichnungen Ihrer Korrespondenz mit uns (z.B. E-Mails, Telefonanrufe, Chat-Nachrichten).',
+    'privacy.section2.website': 'Website-Nutzungsdaten: IP-Adresse, Browsertyp, Betriebssystem, verweisende URLs, besuchte Seiten, auf unserer Website verbrachte Zeit.',
+    'privacy.section2.marketing': 'Marketing-Präferenzen: Ihre Präferenzen für den Erhalt von Marketing-Kommunikation.',
+    'privacy.section2.other': 'Andere Daten: Informationen, die Sie uns freiwillig zur Verfügung stellen (z.B. Feedback, Umfrageantworten).',
+    'privacy.section3.title': '3. Wie wir Ihre personenbezogenen Daten sammeln',
+    'privacy.section3.text': 'Wir sammeln personenbezogene Daten auf verschiedene Weise:',
+    'privacy.section3.directly': 'Direkt von Ihnen: Wenn Sie unser Servicezentrum besuchen, ein Angebot anfordern, ein Fahrzeug oder eine Dienstleistung kaufen, eine Finanzierung beantragen, unseren Newsletter abonnieren oder uns direkt kontaktieren.',
+    'privacy.section3.thirdparty': 'Von Dritten: Wir können Daten von verbundenen Unternehmen, Finanzierungspartnern, Versicherungsanbietern oder Auskunfteien erhalten (für Kreditprüfungen, mit Ihrer Zustimmung).',
+    'privacy.section3.automatically': 'Automatisch: Über unsere Website und digitale Dienste mit Cookies und ähnlichen Tracking-Technologien.',
+    'privacy.section4.title': '4. Zwecke der Datenverarbeitung',
+    'privacy.section4.text': 'Wir verarbeiten Ihre personenbezogenen Daten für folgende Zwecke:',
+    'privacy.section4.contract': 'Vertragserfüllung: Zur Bearbeitung Ihrer Kauf-, Leasing- oder Finanzierungsvereinbarungen; Bereitstellung angeforderter Fahrzeuge und Dienstleistungen; Verwaltung von Gewährleistungsansprüchen und Durchführung notwendiger Reparaturen und Wartungen.',
+    'privacy.section4.service': 'Kundenservice: Um auf Ihre Anfragen zu antworten, Support zu bieten, Termine zu verwalten und Updates zu Ihrem Fahrzeug oder Dienstleistungen zu liefern.',
+    'privacy.section4.marketing': 'Marketing und Kommunikation: Um Ihnen Informationen über neue Fahrzeugmodelle, Sonderangebote, Veranstaltungen und andere Neuigkeiten zu senden, die für Sie von Interesse sein könnten.',
+    'privacy.section4.credit': 'Kreditwürdigkeitsbewertung: Zur Bewertung Ihrer finanziellen Situation bei Finanzierungs- oder Leasing-Anträgen.',
+    'privacy.section4.website': 'Website-Verbesserung: Um zu verstehen, wie unsere Website genutzt wird, Verbesserungsbereiche zu identifizieren und Ihre Online-Erfahrung zu personalisieren.',
+    'privacy.section4.security': 'Sicherheit und Schutz: Um die Sicherheit unserer Räumlichkeiten, Fahrzeuge und digitalen Systeme zu gewährleisten; Betrug zu verhindern und unsere Vermögenswerte zu schützen.',
+    'privacy.section4.legal': 'Rechtliche und regulatorische Compliance: Um gesetzlichen Verpflichtungen, regulatorischen Anforderungen und Anfragen von Behörden zu entsprechen.',
+    'privacy.section5.title': '5. Rechtsgrundlage für die Verarbeitung',
+    'privacy.section5.text': 'Wir verarbeiten Ihre personenbezogenen Daten auf der Grundlage einer oder mehrerer der folgenden Rechtsgrundlagen:',
+    'privacy.section5.contractual': 'Vertragliche Notwendigkeit: Wenn die Verarbeitung für die Erfüllung eines Vertrags mit Ihnen oder zur Durchführung vorvertraglicher Maßnahmen auf Ihre Anfrage erforderlich ist.',
+    'privacy.section5.consent': 'Einwilligung: Wenn Sie Ihre ausdrückliche Einwilligung für bestimmte Verarbeitungsaktivitäten gegeben haben. Sie haben das Recht, Ihre Einwilligung jederzeit zu widerrufen.',
+    'privacy.section5.legitimate': 'Berechtigte Interessen: Wenn die Verarbeitung für unsere berechtigten Interessen erforderlich ist, sofern Ihre Interessen und Grundrechte diese Interessen nicht überwiegen.',
+    'privacy.section5.legal': 'Rechtliche Verpflichtung: Wenn die Verarbeitung zur Erfüllung einer rechtlichen oder regulatorischen Verpflichtung erforderlich ist.',
+    'privacy.section6.title': '6. Weitergabe Ihrer personenbezogenen Daten',
+    'privacy.section6.text': 'Wir können Ihre personenbezogenen Daten unter folgenden Umständen an Dritte weitergeben:',
+    'privacy.section6.affiliated': 'Verbundene Unternehmen: Mit dem Fahrzeughersteller, Nationalimporteur oder anderen Unternehmen innerhalb unserer Unternehmensgruppe für Zwecke wie Gewährleistungsmanagement und Rückrufbenachrichtigungen.',
+    'privacy.section6.service': 'Dienstleister: Mit externen Dienstleistern, die Dienstleistungen in unserem Auftrag erbringen (z.B. IT-Dienstleistungen, Marketing-Agenturen, Zahlungsabwickler).',
+    'privacy.section6.financing': 'Finanzierungs- und Versicherungspartner: Wenn Sie über uns eine Finanzierung oder Versicherung beantragen, werden wir notwendige finanzielle und persönliche Daten mit unseren vertrauenswürdigen Partnern teilen.',
+    'privacy.section6.legal': 'Rechts- und Regulierungsbehörden: Wenn dies gesetzlich vorgeschrieben ist, durch Gerichtsbeschluss oder behördliche Anfrage.',
+    'privacy.section6.consent': 'Mit Ihrer Zustimmung: Wenn Sie ausdrücklich der Weitergabe Ihrer Daten an bestimmte Dritte zugestimmt haben.',
+    'privacy.section7.title': '7. Datensicherheit',
+    'privacy.section7.text': 'Wir implementieren angemessene technische und organisatorische Maßnahmen zum Schutz Ihrer personenbezogenen Daten vor unbefugtem Zugriff, Verlust, Missbrauch, Änderung oder Zerstörung. Diese Maßnahmen umfassen Verschlüsselung, Zugriffskontrollen, Firewalls und regelmäßige Sicherheitsaudits.',
+    'privacy.section8.title': '8. Datenspeicherung',
+    'privacy.section8.text': 'Wir bewahren Ihre personenbezogenen Daten nur so lange auf, wie es zur Erfüllung der Zwecke, für die sie erhoben wurden, oder wie gesetzlich vorgeschrieben erforderlich ist. Nach Ablauf der Aufbewahrungszeit werden Ihre personenbezogenen Daten sicher gelöscht oder anonymisiert.',
+    'privacy.section9.title': '9. Ihre Datenschutzrechte',
+    'privacy.section9.text': 'Nach dem schweizerischen Datenschutzrecht haben Sie folgende Rechte bezüglich Ihrer personenbezogenen Daten:',
+    'privacy.section9.access': 'Auskunftsrecht: Informationen über Ihre personenbezogenen Daten, die wir verarbeiten, anzufordern und eine Kopie dieser Daten zu erhalten.',
+    'privacy.section9.rectification': 'Recht auf Berichtigung: Die Korrektur unrichtiger oder unvollständiger personenbezogener Daten zu verlangen.',
+    'privacy.section9.erasure': 'Recht auf Löschung: Die Löschung Ihrer personenbezogenen Daten unter bestimmten Umständen zu verlangen.',
+    'privacy.section9.restriction': 'Recht auf Einschränkung der Verarbeitung: Zu verlangen, dass wir die Verarbeitung Ihrer personenbezogenen Daten unter bestimmten Umständen einschränken.',
+    'privacy.section9.portability': 'Recht auf Datenübertragbarkeit: Ihre personenbezogenen Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten.',
+    'privacy.section9.object': 'Widerspruchsrecht: Der Verarbeitung Ihrer personenbezogenen Daten zu widersprechen, insbesondere wenn sie für Direktmarketing-Zwecke verarbeitet werden.',
+    'privacy.section9.complaint': 'Beschwerderecht: Sie haben das Recht, eine Beschwerde beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) in der Schweiz einzureichen.',
+    'privacy.section10.title': '10. Änderungen dieser Datenschutzerklärung',
+    'privacy.section10.text': 'Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren, um Änderungen in unseren Datenverarbeitungspraktiken oder rechtlichen Anforderungen widerzuspiegeln. Wir werden Sie über wesentliche Änderungen informieren, indem wir die aktualisierte Richtlinie auf unserer Website mit einem neuen Datum "Zuletzt aktualisiert" veröffentlichen.',
+    'privacy.section11.title': '11. Kontakt',
+    'privacy.section11.text': 'Wenn Sie Fragen, Bedenken oder Anfragen bezüglich dieser Datenschutzerklärung oder unserer Datenverarbeitungspraktiken haben, zögern Sie bitte nicht, uns zu kontaktieren:',
+
+    // Footer
+    'footer.company.description': 'Ihr vertrauensvolles Auto House in Dietikon, Schweiz. Wir spezialisieren uns auf Fahrzeugverkauf, -ankauf und umfassende Automotive-Services.',
+    'footer.services': 'Dienstleistungen',
+    'footer.services.sales': 'Fahrzeugverkauf & -ankauf',
+    'footer.services.evaluation': 'Professionelle Fahrzeugbewertung',
+    'footer.services.assessment': 'Marktpreisbewertung',
+    'footer.services.preowned': 'Hochwertige Gebrauchtwagen',
+    'footer.services.import': 'Fahrzeugimport & -export',
+    'footer.links': 'Links',
+    'footer.contact': 'Kontakt',
+    'footer.legal.imprint': 'Impressum',
+    'footer.legal.privacy': 'Datenschutz',
+    'footer.designed': 'Mit ❤️ in der Schweiz entwickelt',
   },
   en: {
-    vehicles: {
-      title: 'Our Vehicles',
-      subtitle: 'Discover our diverse selection of high-quality used cars',
-      inventory: {
-        tabs: {
-          passenger: 'Passenger Cars',
-          commercial: 'Commercial Vehicles',
-          liked: 'Liked Vehicles'
-        },
-        count: {
-          passenger: 'passenger cars found',
-          commercial: 'commercial vehicles found',
-          liked: 'liked vehicles'
-        },
-        empty: {
-          passenger: 'No vehicles match your filter criteria.',
-          commercial: 'No commercial vehicles currently available.',
-          liked: 'You haven\'t liked any vehicles yet.'
-        }
-      },
-      filters: {
-        brand: 'Brand',
-        model: 'Model',
-        bodyType: 'Body Type',
-        fuelType: 'Fuel',
-        transmission: 'Transmission',
-        priceRange: 'Price Range',
-        yearRange: 'Year',
-        mileageRange: 'Mileage',
-        reset: 'Reset Filters',
-        all: 'All',
-        limousine: 'Sedan',
-        cabrio: 'Convertible',
-        suv: 'SUV',
-        combi: 'Estate',
-        diesel: 'Diesel',
-        benzin: 'Petrol',
-        electric: 'Electric',
-        hybrid: 'Hybrid',
-        manual: 'Manual',
-        automatic: 'Automatic'
-      },
-      card: {
-        calculateCredit: 'Calculate Credit',
-        compareInsurance: 'Compare Insurance'
-      },
-      credit: {
-        downPayment: 'Down Payment',
-        monthlyPayment: 'Monthly Payment',
-        duration: 'Duration'
-      },
-      insurance: {
-        bestOffer: 'Best Offer',
-        savings: 'Savings'
-      },
-      features: {
-        quality: {
-          title: 'Verified Quality',
-          desc: 'All our vehicles are carefully inspected and in perfect condition.'
-        },
-        service: {
-          title: 'Personal Service',
-          desc: 'Our experienced team is happy to advise you on selecting your new vehicle.'
-        },
-        contact: {
-          title: 'Easy Contact',
-          desc: 'Reach us anytime by phone or email for questions and appointments.'
-        }
-      },
-      cta: {
-        title: 'Ready for your new vehicle?',
-        subtitle: 'Contact us today for personal consultation or a test drive.',
-        call: 'Call Now',
-        email: 'Send Email'
-      }
-    }
+    // Navigation
+    'nav.home': 'Home',
+    'nav.services': 'Services',
+    'nav.about': 'About',
+    'nav.contact': 'Contact',
+    'nav.vehicles': 'Vehicles',
+    'nav.gallery': 'Gallery',
+
+    // Vehicles
+    'vehicles.title': 'Our Vehicles',
+    'vehicles.subtitle': 'Browse our complete vehicle inventory on AutoScout24',
+    'vehicles.inventory.title': 'KURDO Car GmbH - Vehicle Inventory',
+    'vehicles.inventory.subtitle': 'View all our available vehicles directly on AutoScout24',
+    'vehicles.inventory.button': 'View Our Vehicles on AutoScout24',
+    
+    // Vehicle Inventory Tabs
+    'vehicles.inventory.tabs.passenger': 'Passenger Cars',
+    'vehicles.inventory.tabs.commercial': 'Commercial Vehicles',
+    'vehicles.inventory.tabs.liked': 'Saved Vehicles',
+    
+    // Vehicle Counts
+    'vehicles.inventory.count.passenger': 'Passenger Cars',
+    'vehicles.inventory.count.commercial': 'Commercial Vehicles',
+    'vehicles.inventory.count.liked': 'Saved Vehicles',
+    
+    // Empty States
+    'vehicles.inventory.empty.passenger': 'No vehicles found. Try adjusting the filters.',
+    'vehicles.inventory.empty.commercial': 'No commercial vehicles available',
+    'vehicles.inventory.empty.liked': 'No vehicles saved yet',
+    
+    // Filters
+    'vehicles.filters.brand.placeholder': 'Brand & Model',
+    'vehicles.filters.brand.all': 'All Brands',
+    'vehicles.filters.year.placeholder': 'Year',
+    'vehicles.filters.year.all': 'All Years',
+    'vehicles.filters.mileage.placeholder': 'Mileage',
+    'vehicles.filters.mileage.all': 'All Mileages',
+    'vehicles.filters.price.placeholder': 'Price',
+    'vehicles.filters.price.all': 'All Prices',
+    'vehicles.filters.bodyType.placeholder': 'Body Type',
+    'vehicles.filters.bodyType.all': 'All Body Types',
+    'vehicles.filters.bodyType.sedan': 'Sedan',
+    'vehicles.filters.bodyType.wagon': 'Wagon',
+    'vehicles.filters.bodyType.convertible': 'Convertible',
+    'vehicles.filters.fuel.placeholder': 'Fuel',
+    'vehicles.filters.fuel.all': 'All Fuels',
+    'vehicles.filters.fuel.gasoline': 'Gasoline',
+    'vehicles.filters.fuel.diesel': 'Diesel',
+    'vehicles.filters.fuel.hybrid': 'Hybrid',
+    'vehicles.filters.fuel.electric': 'Electric',
+    'vehicles.filters.transmission.placeholder': 'Transmission',
+    'vehicles.filters.transmission.all': 'All Transmissions',
+    'vehicles.filters.transmission.automatic': 'Automatic',
+    'vehicles.filters.transmission.manual': 'Manual',
+    'vehicles.filters.moreFilters': 'More Filters',
+    'vehicles.filters.sortRecommended': 'Sort: Recommended',
+    'vehicles.filters.resetFilters': 'Reset Filters',
+    
+    // Vehicle Card
+    'vehicles.card.calculateCredit': 'Calculate Credit Rate',
+    'vehicles.card.compareInsurance': 'Compare Insurance',
+    
+    'vehicles.features.quality.title': 'Quality Vehicles',
+    'vehicles.features.quality.desc': 'Carefully selected and inspected vehicles',
+    'vehicles.features.service.title': 'Personal Service',
+    'vehicles.features.service.desc': 'Direct contact and professional advice',
+    'vehicles.features.contact.title': 'Easy Contact',
+    'vehicles.features.contact.desc': 'Multiple ways to get in touch with us',
+    'vehicles.instructions.title': 'How to Browse Our Vehicles',
+    'vehicles.instructions.visit.title': '1. Visit AutoScout24',
+    'vehicles.instructions.visit.desc': 'Click the button above to view our complete inventory on AutoScout24, Switzerland\'s leading car marketplace.',
+    'vehicles.instructions.contact.title': '2. Contact Us',
+    'vehicles.instructions.contact.desc': 'Found a vehicle you like? Contact us directly for test drives, more information, or financing options.',
+    'vehicles.cta.title': 'Interested in a Vehicle?',
+    'vehicles.cta.subtitle': 'Contact us directly for more information, test drives, or to discuss financing options.',
+    'vehicles.cta.call': 'Call: +41 76 336 77 99',
+    'vehicles.cta.email': 'Email Us',
+
+    // Gallery
+    'gallery.title': 'Our Vehicle Gallery',
+    'gallery.subtitle': 'Explore our premium collection of quality vehicles',
+    'gallery.interested.title': 'Interested in any of our vehicles?',
+    'gallery.interested.subtitle': 'Contact us today for more information, test drives, or to discuss financing options.',
+    'gallery.contact.button': 'Contact Us',
+
+    // Hero
+    'hero.title1': 'Premium',
+    'hero.title2': 'Auto House',
+    'hero.button': 'Book Appointment',
+    'hero.subtitle': 'Specialized in',
+    'hero.brands': 'All Brands',
+
+    // Services
+    'services.title': 'Our Services',
+    'services.subtitle': 'Professional automotive services for all brands',
+    'services.repairs': 'Repairs',
+    'services.repairs.desc': 'Professional repairs of all kinds',
+    'services.maintenance': 'Maintenance',
+    'services.maintenance.desc': 'Regular maintenance for optimal performance',
+    'services.tuv': 'Inspections',
+    'services.tuv.desc': 'Technical inspections and certifications',
+    'services.bodywork': 'Bodywork',
+    'services.bodywork.desc': 'Body and paint work',
+    'services.electronics': 'Electronics',
+    'services.electronics.desc': 'Modern vehicle electronics',
+    'services.diagnostics': 'Diagnostics',
+    'services.diagnostics.desc': 'Computer diagnostics and troubleshooting',
+    'services.purchase.title': 'Vehicle Purchase',
+    'services.purchase.description': 'We buy your vehicle at fair prices. Professional valuation and quick processing.',
+    'services.sales.title': 'Vehicle Sales',
+    'services.sales.description': 'High-quality used vehicles in excellent condition. All brands, fair prices.',
+    'services.noServices': 'No services available',
+
+    // About
+    'about.badge': 'Premium Auto House',
+    'about.title': 'Your Trusted Auto House',
+    'about.description1': 'KURDO Car GmbH is your premier auto house in Dietikon, Switzerland. We specialize in buying, selling, and providing comprehensive automotive services for all vehicle brands.',
+    'about.description2': 'With over 20 years of experience in the automotive industry, we offer professional vehicle evaluations, quality pre-owned cars, and expert automotive services to meet all your vehicle needs.',
+    'about.stats.experience': 'Years Experience',
+    'about.stats.customers': 'Happy Customers',
+    'about.stats.quality': 'Quality Assured',
+    'about.stats.response': 'Fast Response',
+    'about.why.title': 'Why Choose KURDO Car',
+    'about.why.evaluation': 'Professional Vehicle Evaluation',
+    'about.why.equipment': 'Advanced Diagnostic Equipment',
+    'about.why.transparent': 'Transparent Pricing',
+    'about.why.guarantee': 'Quality Guarantee',
+    'about.why.fair': 'Fair Market Prices',
+
+    // Contact
+    'contact.title': 'Contact',
+    'contact.company': 'KURDO Car GmbH',
+    'contact.phone': 'Phone',
+    'contact.phone.hours': 'Mon-Fri 8:00-17:00',
+    'contact.email': 'Email',
+    'contact.email.response': 'Response within 24h',
+    'contact.address': 'Address',
+    'contact.hours': 'Opening Hours',
+    'contact.hours.weekday': 'Mon-Fri: 8:00-17:00',
+    'contact.hours.saturday': 'Sat: By appointment',
+    'contact.form.title': 'Send Message',
+    'contact.form.firstName': 'First Name',
+    'contact.form.lastName': 'Last Name',
+    'contact.form.email': 'Email',
+    'contact.form.phone': 'Phone',
+    'contact.form.subject': 'Subject',
+    'contact.form.message': 'Message',
+    'contact.form.submit': 'Send Message',
+    'contact.form.sending': 'Sending...',
+    'contact.form.placeholder.firstName': 'Your first name',
+    'contact.form.placeholder.lastName': 'Your last name',
+    'contact.form.placeholder.email': 'kurdocar@bluewin.ch',
+    'contact.form.placeholder.phone': 'Your phone number',
+    'contact.form.placeholder.subject': 'What is this about?',
+    'contact.form.placeholder.message': 'Describe your request...',
+
+    // Privacy Policy translations
+    'privacy.title': 'Privacy Policy of KURDO Car GmbH',
+    'privacy.lastUpdated': 'Last Updated: June 25, 2025',
+    'privacy.intro': 'At KURDO Car GmbH, your privacy is of utmost importance to us. This Privacy Policy explains how we collect, use, disclose, and protect your personal data when you interact with us, whether through our website, showroom, service center, or other channels. We comply with the Swiss Federal Act on Data Protection (FADP) and other applicable data protection laws.',
+    'privacy.section1.title': '1. Who We Are (Data Controller)',
+    'privacy.section1.text': 'The data controller responsible for the processing of your personal data described in this policy is:',
+    'privacy.section2.title': '2. What Personal Data We Collect',
+    'privacy.section2.text': 'We may collect various types of personal data, depending on your interaction with us:',
+    'privacy.section2.contact': 'Contact Information: Name, address, email address, phone number, preferred contact method.',
+    'privacy.section2.identification': 'Identification Data: Date of birth, nationality, driver\'s license details (for test drives).',
+    'privacy.section2.vehicle': 'Vehicle Information: Vehicle identification number (VIN), make, model, year, registration details, service history, mileage.',
+    'privacy.section2.financial': 'Financial Information: Bank details, credit card information, leasing or financing details, creditworthiness data (for financing applications).',
+    'privacy.section2.transaction': 'Transaction Data: Details of products or services purchased, quotes, order history, payment records.',
+    'privacy.section2.communication': 'Communication Data: Records of your correspondence with us (e.g., emails, phone calls, chat messages).',
+    'privacy.section2.website': 'Website Usage Data: IP address, browser type, operating system, referring URLs, pages viewed, time spent on our website.',
+    'privacy.section2.marketing': 'Marketing Preferences: Your preferences for receiving marketing communications.',
+    'privacy.section2.other': 'Other Data: Information you voluntarily provide to us (e.g., feedback, survey responses).',
+    'privacy.section3.title': '3. How We Collect Your Personal Data',
+    'privacy.section3.text': 'We collect personal data through various means:',
+    'privacy.section3.directly': 'Directly from You: When you visit our service center, request a quote, purchase a vehicle or service, apply for financing, subscribe to our newsletter, or contact us directly.',
+    'privacy.section3.thirdparty': 'From Third Parties: We may receive data from affiliated companies, financing partners, insurance providers, or credit agencies (for credit checks, with your consent).',
+    'privacy.section3.automatically': 'Automatically: Through our website and digital services using cookies and similar tracking technologies.',
+    'privacy.section4.title': '4. Purposes of Data Processing',
+    'privacy.section4.text': 'We process your personal data for the following purposes:',
+    'privacy.section4.contract': 'Contract Fulfilment: To process your purchase, lease, or financing agreements; provide requested vehicles and services; manage warranty claims and conduct necessary repairs and maintenance.',
+    'privacy.section4.service': 'Customer Service: To respond to your inquiries, provide support, manage appointments, and deliver updates regarding your vehicle or services.',
+    'privacy.section4.marketing': 'Marketing and Communication: To send you information about new vehicle models, special offers, events, and other news that may be of interest to you.',
+    'privacy.section4.credit': 'Creditworthiness Assessment: To assess your financial standing when you apply for financing or leasing services.',
+    'privacy.section4.website': 'Website Improvement: To understand how our website is used, identify areas for improvement, and personalize your online experience.',
+    'privacy.section4.security': 'Security and Safety: To ensure the safety and security of our premises, vehicles, and digital systems; prevent fraud; and protect our assets.',
+    'privacy.section4.legal': 'Legal and Regulatory Compliance: To comply with legal obligations, regulatory requirements, and requests from public authorities.',
+    'privacy.section5.title': '5. Legal Basis for Processing',
+    'privacy.section5.text': 'We process your personal data based on one or more of the following legal bases:',
+    'privacy.section5.contractual': 'Contractual Necessity: When processing is necessary for the performance of a contract with you or to take steps at your request prior to entering into a contract.',
+    'privacy.section5.consent': 'Consent: Where you have given your explicit consent for specific processing activities. You have the right to withdraw your consent at any time.',
+    'privacy.section5.legitimate': 'Legitimate Interests: When processing is necessary for our legitimate interests, provided that your interests and fundamental rights do not override those interests.',
+    'privacy.section5.legal': 'Legal Obligation: When processing is necessary to comply with a legal or regulatory obligation.',
+    'privacy.section6.title': '6. Disclosure of Your Personal Data',
+    'privacy.section6.text': 'We may share your personal data with third parties in the following circumstances:',
+    'privacy.section6.affiliated': 'Affiliated Companies: With the vehicle manufacturer, national importer, or other companies within our corporate group for purposes such as warranty management and recall notifications.',
+    'privacy.section6.service': 'Service Providers: With external service providers who perform services on our behalf (e.g., IT services, marketing agencies, payment processors).',
+    'privacy.section6.financing': 'Financing and Insurance Partners: If you apply for financing or insurance through us, we will share necessary financial and personal data with our trusted partners.',
+    'privacy.section6.legal': 'Legal and Regulatory Authorities: When required by law, court order, or governmental request.',
+    'privacy.section6.consent': 'With Your Consent: When you have explicitly consented to the sharing of your data with specific third parties.',
+    'privacy.section7.title': '7. Data Security',
+    'privacy.section7.text': 'We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, loss, misuse, alteration, or destruction. These measures include encryption, access controls, firewalls, and regular security audits.',
+    'privacy.section8.title': '8. Data Retention',
+    'privacy.section8.text': 'We retain your personal data only for as long as necessary to fulfil the purposes for which it was collected, or as required by law. Once the retention period expires, your personal data will be securely deleted or anonymized.',
+    'privacy.section9.title': '9. Your Data Protection Rights',
+    'privacy.section9.text': 'Under Swiss data protection law, you have the following rights regarding your personal data:',
+    'privacy.section9.access': 'Right of Access: To request information about your personal data that we process and to receive a copy of that data.',
+    'privacy.section9.rectification': 'Right to Rectification: To request the correction of inaccurate or incomplete personal data.',
+    'privacy.section9.erasure': 'Right to Erasure: To request the deletion of your personal data under certain circumstances.',
+    'privacy.section9.restriction': 'Right to Restriction of Processing: To request that we limit the processing of your personal data under certain circumstances.',
+    'privacy.section9.portability': 'Right to Data Portability: To receive your personal data in a structured, commonly used, and machine-readable format.',
+    'privacy.section9.object': 'Right to Object: To object to the processing of your personal data, particularly if processed for direct marketing purposes.',
+    'privacy.section9.complaint': 'Right to Lodge a Complaint: You have the right to lodge a complaint with the Federal Data Protection and Information Commissioner (FDPIC) in Switzerland.',
+    'privacy.section10.title': '10. Changes to This Privacy Policy',
+    'privacy.section10.text': 'We may update this Privacy Policy from time to time to reflect changes in our data processing practices or legal requirements. We will notify you of any material changes by posting the updated policy on our website with a new "Last Updated" date.',
+    'privacy.section11.title': '11. Contact Us',
+    'privacy.section11.text': 'If you have any questions, concerns, or requests regarding this Privacy Policy or our data processing practices, please do not hesitate to contact us:',
+
+    // Footer
+    'footer.company.description': 'Your trusted auto house in Dietikon, Switzerland. We specialize in vehicle sales, purchases, and comprehensive automotive services.',
+    'footer.services': 'Our Services',
+    'footer.services.sales': 'Vehicle Sales & Purchase',
+    'footer.services.evaluation': 'Professional Vehicle Evaluation',
+    'footer.services.assessment': 'Market Price Assessment',
+    'footer.services.preowned': 'Quality Pre-owned Vehicles',
+    'footer.services.import': 'Vehicle Import & Export',
+    'footer.links': 'Links',
+    'footer.contact': 'Contact',
+    'footer.legal.imprint': 'Imprint',
+    'footer.legal.privacy': 'Privacy',
+    'footer.designed': 'Made with ❤️ in Switzerland',
   }
 };
 
-export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState(localStorage.getItem('language') || 'de');
-
-  useEffect(() => {
-    localStorage.setItem('language', language);
-  }, [language]);
+export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+  const [language, setLanguage] = useState<Language>('de');
 
   const t = (key: string): string => {
-    const keys = key.split('.');
-    let value: any = translations[language as keyof typeof translations];
-    for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
-        value = value[k as keyof typeof value];
-      } else {
-        return key;
-      }
-    }
-    return typeof value === 'string' ? value : key;
+    return translations[language][key as keyof typeof translations['de']] || key;
   };
 
   return (
@@ -200,7 +495,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;

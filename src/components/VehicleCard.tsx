@@ -3,10 +3,9 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Heart, LayoutGrid, Calculator, Shield } from 'lucide-react';
+import { Heart, LayoutGrid } from 'lucide-react';
 import { Vehicle, useVehicleFilter } from '@/contexts/VehicleFilterContext';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useToast } from '@/hooks/use-toast';
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -15,44 +14,7 @@ interface VehicleCardProps {
 const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
   const { toggleLike, isLiked } = useVehicleFilter();
   const { t } = useLanguage();
-  const { toast } = useToast();
   const liked = isLiked(vehicle.id);
-
-  const handleCalculateCredit = () => {
-    // Extract price number from price string (e.g., "CHF 13'900.–" -> 13900)
-    const priceMatch = vehicle.price.match(/[\d']+/);
-    const price = priceMatch ? parseInt(priceMatch[0].replace(/'/g, '')) : 0;
-    
-    // Simple credit calculation (example: 5% down, 4.5% interest, 5 years)
-    const downPayment = price * 0.05;
-    const loanAmount = price - downPayment;
-    const monthlyRate = 0.045 / 12;
-    const months = 60;
-    const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
-
-    toast({
-      title: t('vehicles.card.calculateCredit'),
-      description: `${t('vehicles.credit.downPayment')}: CHF ${downPayment.toLocaleString()}\n${t('vehicles.credit.monthlyPayment')}: CHF ${Math.round(monthlyPayment).toLocaleString()}/month\n${t('vehicles.credit.duration')}: 5 years`,
-    });
-  };
-
-  const handleCompareInsurance = () => {
-    // Mock insurance comparison data
-    const insuranceOptions = [
-      { company: 'AXA', premium: 'CHF 800/year' },
-      { company: 'Zurich', premium: 'CHF 750/year' },
-      { company: 'Generali', premium: 'CHF 820/year' }
-    ];
-
-    const bestOption = insuranceOptions.reduce((prev, current) => 
-      parseInt(prev.premium.match(/\d+/)?.[0] || '0') < parseInt(current.premium.match(/\d+/)?.[0] || '0') ? prev : current
-    );
-
-    toast({
-      title: t('vehicles.card.compareInsurance'),
-      description: `${t('vehicles.insurance.bestOffer')}: ${bestOption.company} - ${bestOption.premium}\n${t('vehicles.insurance.savings')}: CHF 70/year`,
-    });
-  };
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
@@ -127,22 +89,10 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
               {vehicle.price}
             </div>
 
-            {/* Functional Links */}
-            <div className="flex gap-4 mb-4 text-sm">
-              <button 
-                onClick={handleCalculateCredit}
-                className="flex items-center gap-1 text-blue-600 hover:text-blue-800 hover:underline transition-colors"
-              >
-                <Calculator className="w-4 h-4" />
-                {t('vehicles.card.calculateCredit')}
-              </button>
-              <button 
-                onClick={handleCompareInsurance}
-                className="flex items-center gap-1 text-blue-600 hover:text-blue-800 hover:underline transition-colors"
-              >
-                <Shield className="w-4 h-4" />
-                {t('vehicles.card.compareInsurance')}
-              </button>
+            {/* Links */}
+            <div className="flex gap-4 mb-4 text-sm text-blue-600">
+              <button className="hover:underline">{t('vehicles.card.calculateCredit')}</button>
+              <button className="hover:underline">{t('vehicles.card.compareInsurance')}</button>
             </div>
 
             {/* Vehicle Specs */}
