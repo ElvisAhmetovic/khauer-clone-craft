@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, ShoppingCart } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -49,8 +48,8 @@ const Services = () => {
       description: language === 'en' ? 'International vehicle trading services' : 'Internationaler Fahrzeughandel'
     },
     {
-      title: language === 'en' ? 'Vehicle Financing' : 'Fahrzeugfinanzierung',
-      description: language === 'en' ? 'Flexible financing options for your vehicle purchase' : 'Flexible Finanzierungsoptionen für Ihren Fahrzeugkauf'
+      title: language === 'en' ? 'Trade-In Services' : 'Inzahlungnahme',
+      description: language === 'en' ? 'Trade your current vehicle for a new one with competitive rates' : 'Tauschen Sie Ihr aktuelles Fahrzeug gegen ein neues zu konkurrenzfähigen Konditionen'
     }
   ];
 
@@ -122,7 +121,7 @@ const Services = () => {
             {language === 'en' ? 'Our Auto House Services' : 'Unsere Auto House Services'}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            {language === 'en' ? 'Professional car dealership services for buying and selling quality vehicles' : 'Professionelle Autohaus-Dienstleistungen für den Kauf und Verkauf hochwertiger Fahrzeuge'}
+            {language === 'en' ? 'Professional car dealership specializing in buying, selling and trading quality vehicles' : 'Professionelles Autohaus spezialisiert auf Kauf, Verkauf und Handel mit hochwertigen Fahrzeugen'}
           </p>
         </div>
 
