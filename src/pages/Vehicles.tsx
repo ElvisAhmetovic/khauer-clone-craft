@@ -1,15 +1,11 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import CarListings from "@/components/CarListings";
-import AutoScout24Widget from "@/components/AutoScout24Widget";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Car, Phone, Mail, ExternalLink } from "lucide-react";
-import { useState } from "react";
 
 const Vehicles = () => {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<'widget' | 'iframe' | 'scraped'>('widget');
 
   return (
     <div className="min-h-screen">
@@ -39,106 +35,21 @@ const Vehicles = () => {
               <p className="text-gray-300 mb-6">
                 Unsere aktuellen Fahrzeuge - live von AutoScout24
               </p>
-              
-              {/* Tab Navigation */}
-              <div className="flex justify-center gap-4 mt-6 flex-wrap">
-                <button
-                  onClick={() => setActiveTab('widget')}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                    activeTab === 'widget'
-                      ? 'bg-lime-400 text-black'
-                      : 'bg-gray-700 text-white hover:bg-gray-600'
-                  }`}
-                >
-                  AutoScout24 Widget
-                </button>
-                <button
-                  onClick={() => setActiveTab('iframe')}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                    activeTab === 'iframe'
-                      ? 'bg-lime-400 text-black'
-                      : 'bg-gray-700 text-white hover:bg-gray-600'
-                  }`}
-                >
-                  AutoScout24 Direkt
-                </button>
-                <button
-                  onClick={() => setActiveTab('scraped')}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                    activeTab === 'scraped'
-                      ? 'bg-lime-400 text-black'
-                      : 'bg-gray-700 text-white hover:bg-gray-600'
-                  }`}
-                >
-                  Unsere Übersicht
-                </button>
-              </div>
             </div>
             
-            {/* Content based on active tab */}
-            <div className="p-8">
-              {activeTab === 'widget' && (
-                <div>
-                  <div className="mb-6 text-center">
-                    <p className="text-gray-600 mb-4">
-                      Live-Ansicht unserer Fahrzeuge über das AutoScout24 Widget
-                    </p>
-                  </div>
-                  <AutoScout24Widget 
-                    dealerId="68160" 
-                    language="de"
-                    width="100%"
-                    height="1000px"
-                  />
-                </div>
-              )}
-              
-              {activeTab === 'iframe' && (
-                <div>
-                  <div className="mb-6 text-center">
-                    <p className="text-gray-600 mb-4">
-                      Direkte Einbettung unserer AutoScout24-Seite
-                    </p>
-                  </div>
-                  <div className="w-full" style={{ height: '1000px' }}>
-                    <iframe
-                      src="https://www.autoscout24.ch/de/s/seller-68160"
-                      width="100%"
-                      height="100%"
-                      frameBorder="0"
-                      title="AutoScout24 Fahrzeuge"
-                      className="rounded-lg"
-                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"
-                    />
-                  </div>
-                </div>
-              )}
-              
-              {activeTab === 'scraped' && (
-                <div>
-                  <div className="mb-6 text-center">
-                    <p className="text-gray-600 mb-4">
-                      Unsere Fahrzeuge-Übersicht mit detaillierten Informationen
-                    </p>
-                  </div>
-                  <CarListings />
-                </div>
-              )}
-            </div>
-            
-            {/* AutoScout24 Backup Link */}
-            <div className="p-6 text-center bg-gray-50 border-t">
-              <p className="text-gray-600 mb-4">
-                Sie können auch direkt auf unserer AutoScout24-Seite stöbern:
+            {/* Simple AutoScout24 Button */}
+            <div className="p-8 text-center">
+              <p className="text-gray-600 mb-6">
+                Besuchen Sie unsere AutoScout24-Seite für alle aktuellen Fahrzeuge
               </p>
               <a
                 href="https://www.autoscout24.ch/de/s/seller-68160"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+                className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-4 px-8 rounded-lg transition-colors duration-300 text-lg"
               >
-                <ExternalLink className="w-5 h-5" />
-                AutoScout24 besuchen
+                <ExternalLink className="w-6 h-6" />
+                Zu unseren Fahrzeugen auf AutoScout24
               </a>
             </div>
           </div>
