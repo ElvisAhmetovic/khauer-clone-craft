@@ -8,6 +8,20 @@ const Hero = () => {
   const { t } = useLanguage();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Array of car images
+  const carImages = [
+    "/lovable-uploads/5e9b35be-db38-4ad9-adb5-d4344ad92db8.png", // Original hero image
+    "/lovable-uploads/46982f8f-cda6-4917-8ac8-9d1791c715b5.png", // Black Lamborghini
+    "/lovable-uploads/2fe3bdb5-3f29-4d79-ad32-1fe8197312e5.png", // Gray Lamborghini
+    "/lovable-uploads/e135609b-0204-4463-beb6-e14330b2d378.png", // Blue Alpine
+    "/lovable-uploads/2522c56a-e0b4-4675-89c9-947d04e01ad0.png", // Red sports car
+    "/lovable-uploads/166d4052-7642-41e7-b983-c16e4183026c.png", // Car lineup
+    "/lovable-uploads/c3ee3c5a-099f-43b7-8c23-5a9a0efedb6d.png", // Gray Lamborghini top view
+    "/lovable-uploads/a1603ca7-f9f3-4d1b-9abe-2931330e0963.png", // Mercedes G-Wagon
+    "/lovable-uploads/9a40b191-2cc0-4a53-9d1c-132e79a97ed7.png"  // White Rolls Royce
+  ];
 
   useEffect(() => {
     // Trigger the animation after component mounts
@@ -16,6 +30,17 @@ const Hero = () => {
     }, 100);
     return () => clearTimeout(timer);
   }, []);
+
+  // Image rotation effect - every 15 seconds
+  useEffect(() => {
+    const imageRotationInterval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % carImages.length
+      );
+    }, 15000); // 15 seconds
+
+    return () => clearInterval(imageRotationInterval);
+  }, [carImages.length]);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -61,13 +86,18 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative bg-black text-white min-h-screen flex items-center">
+    <section id="home" className="relative bg-black text-white min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0">
-        <img 
-          src="/lovable-uploads/5e9b35be-db38-4ad9-adb5-d4344ad92db8.png" 
-          alt="Luxury Sports Car" 
-          className="w-full h-full object-cover opacity-70"
-        />
+        {carImages.map((image, index) => (
+          <img 
+            key={index}
+            src={image} 
+            alt="Luxury Sports Car" 
+            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-70' : 'opacity-0'
+            }`}
+          />
+        ))}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       </div>
       
