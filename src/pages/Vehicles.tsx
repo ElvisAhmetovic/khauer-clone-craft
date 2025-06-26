@@ -33,14 +33,14 @@ const Vehicles = () => {
                 {t('vehicles.inventory.title')}
               </h2>
               <p className="text-gray-300 mb-6">
-                Unsere aktuellen Fahrzeuge - live von AutoScout24
+                {t('vehicles.inventory.subtitle')}
               </p>
             </div>
             
             {/* Simple AutoScout24 Button */}
             <div className="p-8 text-center">
               <p className="text-gray-600 mb-6">
-                Besuchen Sie unsere AutoScout24-Seite für alle aktuellen Fahrzeuge
+                {t('vehicles.inventory.description')}
               </p>
               <a
                 href="https://www.autoscout24.ch/de/s/seller-68160"
@@ -49,7 +49,7 @@ const Vehicles = () => {
                 className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-4 px-8 rounded-lg transition-colors duration-300 text-lg"
               >
                 <ExternalLink className="w-6 h-6" />
-                Zu unseren Fahrzeugen auf AutoScout24
+                {t('vehicles.inventory.button')}
               </a>
             </div>
           </div>
