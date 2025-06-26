@@ -1,20 +1,38 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Share2, Printer, Heart, Phone, Mail, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Share2, Printer, Heart, Phone, Mail, MessageCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { useVehicleFilter } from '@/contexts/VehicleFilterContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useForm } from 'react-hook-form';
+import { toast } from '@/hooks/use-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
+interface InquiryFormData {
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+}
 
 const VehicleDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { vehicles, toggleLike, isLiked } = useVehicleFilter();
   const { t } = useLanguage();
+  const [showOpeningHours, setShowOpeningHours] = useState(false);
+  const [showPhoneNumber, setShowPhoneNumber] = useState(false);
+  const [inquiryOpen, setInquiryOpen] = useState(false);
+  
+  const form = useForm<InquiryFormData>();
   
   const vehicle = vehicles.find(v => v.id === id);
   
@@ -31,6 +49,49 @@ const VehicleDetails: React.FC = () => {
 
   const liked = isLiked(vehicle.id);
 
+  const openingHours = [
+    { day: 'Monday', hours: '08:00 - 18:00' },
+    { day: 'Tuesday', hours: '08:00 - 18:00' },
+    { day: 'Wednesday', hours: '08:00 - 18:00' },
+    { day: 'Thursday', hours: '08:00 - 18:00' },
+    { day: 'Friday', hours: '08:00 - 18:00' },
+    { day: 'Saturday', hours: '09:00 - 16:00' },
+    { day: 'Sunday', hours: 'Closed' },
+  ];
+
+  const onSubmitInquiry = async (data: InquiryFormData) => {
+    try {
+      const response = await fetch('/api/send-contact-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...data,
+          subject: `Vehicle Inquiry - ${vehicle.title}`,
+          message: `${data.message}\n\nVehicle: ${vehicle.title}\nPrice: ${vehicle.price}\nVehicle ID: ${vehicle.id}`,
+        }),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Inquiry sent successfully',
+          description: 'We will get back to you as soon as possible.',
+        });
+        setInquiryOpen(false);
+        form.reset();
+      } else {
+        throw new Error('Failed to send inquiry');
+      }
+    } catch (error) {
+      toast({
+        title: 'Error sending inquiry',
+        description: 'Please try again later or contact us directly.',
+        variant: 'destructive',
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -44,16 +105,16 @@ const VehicleDetails: React.FC = () => {
               Back
             </Button>
             <span>|</span>
-            <span>FORD</span>
+            <span>{vehicle.brand.toUpperCase()}</span>
             <span>{'>'}</span>
-            <span>MONDEO</span>
+            <span>{vehicle.bodyType.toUpperCase()}</span>
             <span>{'>'}</span>
-            <span className="font-semibold">FORD Mondeo 2.0 TDCi Titanium Automatic</span>
+            <span className="font-semibold">{vehicle.title}</span>
           </div>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm">
               <Share2 className="w-4 h-4 mr-1" />
-              Divide
+              Share
             </Button>
             <Button variant="ghost" size="sm">
               <Printer className="w-4 h-4 mr-1" />
@@ -79,6 +140,11 @@ const VehicleDetails: React.FC = () => {
                   <span className="text-white font-bold text-sm">KURDO</span>
                 </div>
               </div>
+              {vehicle.isTopOffer && (
+                <div className="absolute top-4 right-4">
+                  <Badge className="bg-orange-500 text-white font-bold">TOP OFFER</Badge>
+                </div>
+              )}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
                 <div className="bg-blue-600 text-white px-4 py-2 rounded text-sm">
                   VIEWING BY APPOINTMENT ONLY ***
@@ -86,23 +152,23 @@ const VehicleDetails: React.FC = () => {
               </div>
               
               {/* Image Gallery */}
-              <div className="grid grid-cols-4 gap-2 mt-4">
+              <div className="grid grid-cols-5 gap-2 mt-4">
                 {[1,2,3,4].map((i) => (
                   <img
                     key={i}
                     src={vehicle.image}
                     alt={`View ${i}`}
-                    className="w-full h-24 object-cover rounded cursor-pointer border-2 border-gray-200 hover:border-blue-500"
+                    className="w-full h-20 object-cover rounded cursor-pointer border-2 border-gray-200 hover:border-blue-500 transition-colors"
                   />
                 ))}
                 <div className="relative">
                   <img
                     src={vehicle.image}
                     alt="More views"
-                    className="w-full h-24 object-cover rounded cursor-pointer"
+                    className="w-full h-20 object-cover rounded cursor-pointer"
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded">
-                    <span className="text-white font-bold">+10 images</span>
+                    <span className="text-white font-bold text-xs">+10</span>
                   </div>
                 </div>
               </div>
@@ -117,113 +183,70 @@ const VehicleDetails: React.FC = () => {
                 </p>
               </div>
 
+              {/* Key Features */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                <Badge variant="secondary" className="bg-green-100 text-green-800">✓ From MFK</Badge>
+                <Badge variant="secondary" className="bg-green-100 text-green-800">✓ With warranty</Badge>
+                <Badge variant="secondary" className="bg-blue-100 text-blue-800">Automatic</Badge>
+                <Badge variant="secondary" className="bg-blue-100 text-blue-800">Keyless</Badge>
+                <Badge variant="secondary" className="bg-blue-100 text-blue-800">Camera</Badge>
+              </div>
+
               {/* Specs Grid */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">📅</span>
-                    <div>
-                      <span className="text-gray-600">Date</span>
-                      <div className="font-semibold">{vehicle.year}</div>
-                    </div>
+                  <div className="flex items-center justify-between py-2 border-b">
+                    <span className="text-gray-600">First registration</span>
+                    <span className="font-semibold">{vehicle.year}</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">🏃</span>
-                    <div>
-                      <span className="text-gray-600">Mileage</span>
-                      <div className="font-semibold">{vehicle.mileage}</div>
-                    </div>
+                  <div className="flex items-center justify-between py-2 border-b">
+                    <span className="text-gray-600">Mileage</span>
+                    <span className="font-semibold">{vehicle.mileage}</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">⚙️</span>
-                    <div>
-                      <span className="text-gray-600">Transmission</span>
-                      <div className="font-semibold">{vehicle.transmission}</div>
-                    </div>
+                  <div className="flex items-center justify-between py-2 border-b">
+                    <span className="text-gray-600">Transmission</span>
+                    <span className="font-semibold">{vehicle.transmission}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 border-b">
+                    <span className="text-gray-600">Body type</span>
+                    <span className="font-semibold">{vehicle.bodyType}</span>
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">⛽</span>
-                    <div>
-                      <span className="text-gray-600">Fuel</span>
-                      <div className="font-semibold">{vehicle.fuel}</div>
+                  <div className="flex items-center justify-between py-2 border-b">
+                    <span className="text-gray-600">Fuel</span>
+                    <span className="font-semibold">{vehicle.fuel}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 border-b">
+                    <span className="text-gray-600">Power</span>
+                    <span className="font-semibold">{vehicle.power}</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 border-b">
+                    <span className="text-gray-600">Consumption</span>
+                    <div className="font-semibold flex items-center gap-2">
+                      {vehicle.consumption}
+                      <Badge className="bg-orange-500 text-white text-xs">F</Badge>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">⚡</span>
-                    <div>
-                      <span className="text-gray-600">Power</span>
-                      <div className="font-semibold">{vehicle.power}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">⛽</span>
-                    <div>
-                      <span className="text-gray-600">Consumption</span>
-                      <div className="font-semibold flex items-center gap-2">
-                        {vehicle.consumption}
-                        <Badge className="bg-orange-500 text-white">F</Badge>
-                      </div>
-                    </div>
+                  <div className="flex items-center justify-between py-2 border-b">
+                    <span className="text-gray-600">Doors</span>
+                    <span className="font-semibold">5</span>
                   </div>
                 </div>
               </div>
 
-              {/* Additional Details */}
+              {/* Equipment */}
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-bold text-lg mb-4">Technology</h3>
-                  <div className="grid md:grid-cols-2 gap-4 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Cubic capacity</span>
-                      <span>1995 cm³</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Cylinder</span>
-                      <span>4</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Engine design</span>
-                      <span>Row</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Aisles</span>
-                      <span>8</span>
-                    </div>
+                  <h3 className="font-bold text-lg mb-4">Equipment</h3>
+                  <div className="grid md:grid-cols-2 gap-2 text-sm">
+                    {vehicle.features.map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <span className="text-green-600">✓</span>
+                        <span>{feature}</span>
+                      </div>
+                    ))}
                   </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="font-bold text-lg mb-4">Vehicle history</h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Condition</span>
-                      <span>Used</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Direct / parallel import</span>
-                      <span>No</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="font-bold text-lg mb-4">Standard equipment</h3>
-                  <ul className="text-sm space-y-2">
-                    <li>• 12 volt socket in the cargo area</li>
-                    <li>• 12 volt socket at the front</li>
-                    <li>• 3-point seat belts on all seats</li>
-                    <li>• ABS, EBD Electronic Brake Force Distribution</li>
-                    <li>• Airbag: front passenger can be deactivated</li>
-                    <li>• Airbag: driver and front passenger</li>
-                    <li>• Airbag: Knee airbag for driver</li>
-                    <li>• Airbag: Side airbag for driver and front passenger</li>
-                  </ul>
                 </CardContent>
               </Card>
             </div>
@@ -233,27 +256,118 @@ const VehicleDetails: React.FC = () => {
           <div className="space-y-6">
             <Card className="sticky top-6">
               <CardContent className="p-6">
-                <div className="text-3xl font-bold mb-6">{vehicle.price}</div>
+                <div className="text-3xl font-bold mb-2">{vehicle.price}</div>
+                <div className="text-sm text-gray-600 mb-6">VAT deductible</div>
                 
                 <div className="space-y-3 mb-6">
-                  <Button variant="outline" className="w-full justify-start text-blue-600">
+                  <Button variant="outline" className="w-full justify-start text-blue-600 border-blue-200">
                     <span className="mr-2">🏦</span>
-                    Calculate loan installment
+                    Calculate financing
                   </Button>
-                  <Button variant="outline" className="w-full justify-start text-blue-600">
+                  <Button variant="outline" className="w-full justify-start text-blue-600 border-blue-200">
                     <span className="mr-2">🛡️</span>
-                    Calculate insurance premium
+                    Calculate insurance
                   </Button>
                 </div>
 
-                <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold mb-4">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Inquiry
-                </Button>
+                <Dialog open={inquiryOpen} onOpenChange={setInquiryOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold mb-4">
+                      <Mail className="w-4 h-4 mr-2" />
+                      Inquiry
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Vehicle Inquiry</DialogTitle>
+                    </DialogHeader>
+                    <Form {...form}>
+                      <form onSubmit={form.handleSubmit(onSubmitInquiry)} className="space-y-4">
+                        <FormField
+                          control={form.control}
+                          name="name"
+                          rules={{ required: "Name is required" }}
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Name *</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Your name" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          rules={{ 
+                            required: "Email is required",
+                            pattern: {
+                              value: /^\S+@\S+$/,
+                              message: "Invalid email address"
+                            }
+                          }}
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Email *</FormLabel>
+                              <FormControl>
+                                <Input type="email" placeholder="your@email.com" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="phone"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Phone</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Your phone number" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="message"
+                          rules={{ required: "Message is required" }}
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Message *</FormLabel>
+                              <FormControl>
+                                <Textarea 
+                                  placeholder="I'm interested in this vehicle..."
+                                  className="min-h-[100px]"
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <div className="flex gap-2">
+                          <Button type="button" variant="outline" onClick={() => setInquiryOpen(false)} className="flex-1">
+                            Cancel
+                          </Button>
+                          <Button type="submit" className="flex-1">
+                            Send Inquiry
+                          </Button>
+                        </div>
+                      </form>
+                    </Form>
+                  </DialogContent>
+                </Dialog>
 
-                <Button variant="outline" className="w-full mb-4">
+                <Button 
+                  variant="outline" 
+                  className="w-full mb-4"
+                  onClick={() => setShowPhoneNumber(!showPhoneNumber)}
+                >
                   <Phone className="w-4 h-4 mr-2" />
-                  076...show
+                  {showPhoneNumber ? '+41 76 336 77 99' : '076...show'}
                 </Button>
 
                 <div className="grid grid-cols-2 gap-3 mb-4">
@@ -266,28 +380,41 @@ const VehicleDetails: React.FC = () => {
                     onClick={() => toggleLike(vehicle.id)}
                   >
                     <Heart className={`w-4 h-4 mr-1 ${liked ? 'fill-red-500 text-red-500' : ''}`} />
-                    Notice
+                    {liked ? 'Saved' : 'Save'}
                   </Button>
                 </div>
 
-                <Button variant="outline" className="w-full text-green-600">
+                <Button variant="outline" className="w-full text-green-600 border-green-200">
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Contact via WhatsApp
                 </Button>
-
-                <div className="flex items-center gap-4 mt-6 text-sm text-green-600">
-                  <span>✓ From MFK</span>
-                  <span>✓ With warranty</span>
-                </div>
 
                 <div className="mt-6 pt-6 border-t">
                   <h4 className="font-bold mb-2">KURDO Car GmbH</h4>
                   <div className="text-sm text-gray-600 mb-2">
                     📍 Grünaustrasse 21, 8953 Dietikon
                   </div>
-                  <Button variant="ghost" size="sm" className="text-blue-600">
-                    Show opening hours ⌄
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-blue-600 p-0 h-auto"
+                    onClick={() => setShowOpeningHours(!showOpeningHours)}
+                  >
+                    Show opening hours {showOpeningHours ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
                   </Button>
+                  
+                  {showOpeningHours && (
+                    <div className="mt-3 text-sm space-y-1">
+                      {openingHours.map((day, index) => (
+                        <div key={index} className="flex justify-between">
+                          <span className="text-gray-600">{day.day}:</span>
+                          <span className={day.hours === 'Closed' ? 'text-red-600' : 'text-gray-900'}>
+                            {day.hours}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
