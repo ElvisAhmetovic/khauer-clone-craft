@@ -2,35 +2,19 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Car, Phone, Mail } from "lucide-react";
-import { useEffect, useRef } from "react";
 
 const Vehicles = () => {
   const { t } = useLanguage();
-  const widgetRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Direct script injection into the widget container
-    if (widgetRef.current) {
-      const script = document.createElement('script');
-      script.src = 'https://widget.autoscout24.com/ch/haendler-angebote.js';
-      script.setAttribute('data-dealer-id', '68160');
-      script.setAttribute('data-language', 'de');
-      script.setAttribute('data-width', '100%');
-      script.setAttribute('data-height', '1000px');
-      script.async = true;
-      
-      // Clear any existing content and inject script directly
-      widgetRef.current.innerHTML = '';
-      widgetRef.current.appendChild(script);
-    }
-
-    return () => {
-      // Cleanup on unmount
-      if (widgetRef.current) {
-        widgetRef.current.innerHTML = '';
-      }
-    };
-  }, []);
+  // Direct HTML injection with the AutoScout24 script
+  const widgetHTML = `
+    <script src="https://widget.autoscout24.com/ch/haendler-angebote.js"
+            data-dealer-id="68160"
+            data-language="de"
+            data-width="100%"
+            data-height="1000px">
+    </script>
+  `;
 
   return (
     <div className="min-h-screen">
@@ -62,14 +46,12 @@ const Vehicles = () => {
               </p>
             </div>
             
-            {/* Direct Widget Injection Container */}
+            {/* Direct HTML Script Injection */}
             <div className="p-4 bg-white">
               <div 
-                ref={widgetRef}
                 className="w-full min-h-[1000px] border border-gray-200 rounded-lg p-4"
-              >
-                {/* AutoScout24 widget script will be injected here directly */}
-              </div>
+                dangerouslySetInnerHTML={{ __html: widgetHTML }}
+              />
             </div>
             
             {/* Features Section */}
