@@ -23,10 +23,16 @@ const About = () => {
               {t('about.title')}
             </h2>
             <p className="text-lg text-gray-300 mb-6">
-              {t('about.description1')}
+              {language === 'en' 
+                ? 'KURDO Car GmbH is your premier auto house in Dietikon, Switzerland. We specialize in buying, selling, and vehicle trading services for all vehicle brands.'
+                : 'KURDO Car GmbH ist Ihr erstklassiges Autohaus in Dietikon, Schweiz. Wir sind spezialisiert auf Ankauf, Verkauf und Fahrzeughandel für alle Fahrzeugmarken.'
+              }
             </p>
             <p className="text-lg text-gray-300 mb-8">
-              {t('about.description2')}
+              {language === 'en'
+                ? 'With over 20 years of experience in the automotive industry, we offer professional vehicle evaluations, quality pre-owned cars, and comprehensive dealership services to meet all your vehicle buying and selling needs.'
+                : 'Mit über 20 Jahren Erfahrung in der Automobilbranche bieten wir professionelle Fahrzeugbewertungen, hochwertige Gebrauchtwagen und umfassende Autohaus-Dienstleistungen, um alle Ihre Fahrzeugkauf- und Verkaufsbedürfnisse zu erfüllen.'
+              }
             </p>
             
             <div className="grid grid-cols-2 gap-6">
