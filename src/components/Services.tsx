@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, ShoppingCart } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -15,7 +14,7 @@ const Services = () => {
       description: language === 'en' ? 'Professional vehicle evaluation and quick processing.' : 'Professionelle Fahrzeugbewertung und schnelle Abwicklung.',
       image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png",
       buttonText: language === 'en' ? 'Get Quote' : 'Angebot erhalten',
-      buttonAction: 'autoscout24'
+      buttonAction: 'contact'
     },
     {
       icon: <Car className="w-16 h-16 text-lime-400" />,
@@ -23,7 +22,7 @@ const Services = () => {
       description: language === 'en' ? 'Quality vehicles in excellent condition. All brands, fair prices.' : 'Hochwertige Fahrzeuge in ausgezeichnetem Zustand. Alle Marken, faire Preise.',
       image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png",
       buttonText: language === 'en' ? 'View Inventory' : 'Fahrzeuge ansehen',
-      buttonAction: 'vehicles'
+      buttonAction: 'autoscout24'
     }
   ];
 
