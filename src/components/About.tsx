@@ -4,13 +4,13 @@ import { Users, Award, Calendar, Target } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const stats = [
     { icon: <Calendar className="w-8 h-8" />, number: "20+", label: t('about.stats.experience') },
     { icon: <Users className="w-8 h-8" />, number: "5000+", label: t('about.stats.customers') },
-    { icon: <Award className="w-8 h-8" />, number: "100%", label: "Quality Assured" },
-    { icon: <Target className="w-8 h-8" />, number: "24h", label: "Fast Response" }
+    { icon: <Award className="w-8 h-8" />, number: "100%", label: t('about.stats.quality') },
+    { icon: <Target className="w-8 h-8" />, number: "24h", label: t('about.stats.response') }
   ];
 
   return (
@@ -18,15 +18,15 @@ const About = () => {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <Badge className="mb-4 bg-lime-400 text-black font-bold">Premium Auto House</Badge>
+            <Badge className="mb-4 bg-lime-400 text-black font-bold">{t('about.badge')}</Badge>
             <h2 className="text-4xl font-bold text-white mb-6 uppercase tracking-wide">
-              Your Trusted Auto House
+              {t('about.title')}
             </h2>
             <p className="text-lg text-gray-300 mb-6">
-              KURDO Car GmbH is your premier auto house in Dietikon, Switzerland. We specialize in buying, selling, and providing comprehensive automotive services for all vehicle brands.
+              {t('about.description1')}
             </p>
             <p className="text-lg text-gray-300 mb-8">
-              With over 20 years of experience in the automotive industry, we offer professional vehicle evaluations, quality pre-owned cars, and expert automotive services to meet all your vehicle needs.
+              {t('about.description2')}
             </p>
             
             <div className="grid grid-cols-2 gap-6">
@@ -48,27 +48,27 @@ const About = () => {
           
           <div className="relative">
             <div className="bg-gradient-to-br from-lime-400 to-lime-600 rounded-lg p-8 text-black">
-              <h3 className="text-2xl font-bold mb-6 uppercase tracking-wide">Why Choose KURDO Car</h3>
+              <h3 className="text-2xl font-bold mb-6 uppercase tracking-wide">{t('about.why.title')}</h3>
               <ul className="space-y-4">
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
-                  <span className="font-medium">Professional Vehicle Evaluation</span>
+                  <span className="font-medium">{t('about.why.evaluation')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
-                  <span className="font-medium">Advanced Diagnostic Equipment</span>
+                  <span className="font-medium">{t('about.why.equipment')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
-                  <span className="font-medium">Transparent Pricing</span>
+                  <span className="font-medium">{t('about.why.transparent')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
-                  <span className="font-medium">Quality Guarantee</span>
+                  <span className="font-medium">{t('about.why.guarantee')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
-                  <span className="font-medium">Fair Market Prices</span>
+                  <span className="font-medium">{t('about.why.fair')}</span>
                 </li>
               </ul>
             </div>

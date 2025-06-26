@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'de' | 'en';
@@ -52,14 +51,14 @@ const translations = {
 
     // Hero
     'hero.title1': 'Premium',
-    'hero.title2': 'Autowerkstatt',
+    'hero.title2': 'Auto House',
     'hero.button': 'Termin vereinbaren',
     'hero.subtitle': 'Spezialisiert auf',
     'hero.brands': 'Alle Marken',
 
     // Services
     'services.title': 'Unsere Dienstleistungen',
-    'services.subtitle': 'Professionelle Autowartung für alle Marken',
+    'services.subtitle': 'Professionelle Automotive-Services für alle Marken',
     'services.repairs': 'Reparaturen',
     'services.repairs.desc': 'Professionelle Reparaturen aller Art',
     'services.maintenance': 'Wartung',
@@ -79,20 +78,20 @@ const translations = {
     'services.noServices': 'Keine Dienstleistungen verfügbar',
 
     // About
-    'about.badge': 'Über KURDO Car GmbH',
-    'about.title': 'Vertrauen Sie den Experten',
-    'about.description1': 'Bei KURDO Car GmbH sind wir auf die Wartung und Reparatur von Premium- und Luxusfahrzeugen spezialisiert. Unser erfahrenes Team bietet erstklassigen Service für alle Marken.',
-    'about.description2': 'Mit modernster Ausrüstung und jahrelanger Erfahrung sorgen wir dafür, dass Ihr Fahrzeug in bestem Zustand bleibt. Vertrauen Sie auf unsere Expertise.',
+    'about.badge': 'Premium Auto House',
+    'about.title': 'Ihr vertrauensvolles Auto House',
+    'about.description1': 'KURDO Car GmbH ist Ihr erstklassiges Auto House in Dietikon, Schweiz. Wir spezialisieren uns auf den Kauf, Verkauf und die Bereitstellung umfassender Automotive-Services für alle Fahrzeugmarken.',
+    'about.description2': 'Mit über 20 Jahren Erfahrung in der Automobilbranche bieten wir professionelle Fahrzeugbewertungen, hochwertige Gebrauchtwagen und fachkundige Automotive-Services, um alle Ihre Fahrzeugbedürfnisse zu erfüllen.',
     'about.stats.experience': 'Jahre Erfahrung',
     'about.stats.customers': 'Zufriedene Kunden',
-    'about.stats.master': 'Meisterbetrieb',
-    'about.stats.express': 'Express-Service',
-    'about.why.title': 'Warum KURDO Car GmbH?',
-    'about.why.certified': 'Zertifizierte Meisterwerkstatt',
-    'about.why.diagnostic': 'Modernste Diagnosegeräte',
+    'about.stats.quality': 'Qualität gewährleistet',
+    'about.stats.response': 'Schnelle Antwort',
+    'about.why.title': 'Warum KURDO Car wählen',
+    'about.why.evaluation': 'Professionelle Fahrzeugbewertung',
+    'about.why.equipment': 'Moderne Diagnosegeräte',
     'about.why.transparent': 'Transparente Preisgestaltung',
-    'about.why.guarantee': 'Garantie auf alle Arbeiten',
-    'about.why.fair': 'Faire und ehrliche Beratung',
+    'about.why.guarantee': 'Qualitätsgarantie',
+    'about.why.fair': 'Faire Marktpreise',
 
     // Contact
     'contact.title': 'Kontakt',
@@ -184,7 +183,7 @@ const translations = {
     'privacy.section11.text': 'Wenn Sie Fragen, Bedenken oder Anfragen bezüglich dieser Datenschutzerklärung oder unserer Datenverarbeitungspraktiken haben, zögern Sie bitte nicht, uns zu kontaktieren:',
 
     // Footer
-    'footer.company.description': 'Ihre Premium-Autowerkstatt in Dietikon für alle Marken - von der Wartung bis zur Reparatur.',
+    'footer.company.description': 'Ihr vertrauensvolles Auto House in Dietikon, Schweiz. Wir spezialisieren uns auf Fahrzeugverkauf, -ankauf und umfassende Automotive-Services.',
     'footer.services': 'Dienstleistungen',
     'footer.links': 'Links',
     'footer.contact': 'Kontakt',
@@ -232,14 +231,14 @@ const translations = {
 
     // Hero
     'hero.title1': 'Premium',
-    'hero.title2': 'Auto Service',
+    'hero.title2': 'Auto House',
     'hero.button': 'Book Appointment',
     'hero.subtitle': 'Specialized in',
     'hero.brands': 'All Brands',
 
     // Services
     'services.title': 'Our Services',
-    'services.subtitle': 'Professional automotive service for all brands',
+    'services.subtitle': 'Professional automotive services for all brands',
     'services.repairs': 'Repairs',
     'services.repairs.desc': 'Professional repairs of all kinds',
     'services.maintenance': 'Maintenance',
@@ -259,20 +258,20 @@ const translations = {
     'services.noServices': 'No services available',
 
     // About
-    'about.badge': 'About KURDO Car GmbH',
-    'about.title': 'Trust the Experts',
-    'about.description1': 'At KURDO Car GmbH, we specialize in the maintenance and repair of premium and luxury vehicles. Our experienced team provides first-class service for all brands.',
-    'about.description2': 'With state-of-the-art equipment and years of experience, we ensure your vehicle stays in top condition. Trust our expertise.',
+    'about.badge': 'Premium Auto House',
+    'about.title': 'Your Trusted Auto House',
+    'about.description1': 'KURDO Car GmbH is your premier auto house in Dietikon, Switzerland. We specialize in buying, selling, and providing comprehensive automotive services for all vehicle brands.',
+    'about.description2': 'With over 20 years of experience in the automotive industry, we offer professional vehicle evaluations, quality pre-owned cars, and expert automotive services to meet all your vehicle needs.',
     'about.stats.experience': 'Years Experience',
     'about.stats.customers': 'Happy Customers',
-    'about.stats.master': 'Master Workshop',
-    'about.stats.express': 'Express Service',
-    'about.why.title': 'Why KURDO Car GmbH?',
-    'about.why.certified': 'Certified master workshop',
-    'about.why.diagnostic': 'Latest diagnostic equipment',
-    'about.why.transparent': 'Transparent pricing',
-    'about.why.guarantee': 'Warranty on all work',
-    'about.why.fair': 'Fair and honest advice',
+    'about.stats.quality': 'Quality Assured',
+    'about.stats.response': 'Fast Response',
+    'about.why.title': 'Why Choose KURDO Car',
+    'about.why.evaluation': 'Professional Vehicle Evaluation',
+    'about.why.equipment': 'Advanced Diagnostic Equipment',
+    'about.why.transparent': 'Transparent Pricing',
+    'about.why.guarantee': 'Quality Guarantee',
+    'about.why.fair': 'Fair Market Prices',
 
     // Contact
     'contact.title': 'Contact',
@@ -364,7 +363,7 @@ const translations = {
     'privacy.section11.text': 'If you have any questions, concerns, or requests regarding this Privacy Policy or our data processing practices, please do not hesitate to contact us:',
 
     // Footer
-    'footer.company.description': 'Your premium auto service in Dietikon for all brands - from maintenance to repairs.',
+    'footer.company.description': 'Your trusted auto house in Dietikon, Switzerland. We specialize in vehicle sales, purchases, and comprehensive automotive services.',
     'footer.services': 'Services',
     'footer.links': 'Links',
     'footer.contact': 'Contact',
