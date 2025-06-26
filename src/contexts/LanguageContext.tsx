@@ -26,8 +26,56 @@ const translations = {
     'vehicles.inventory.title': 'KURDO Car GmbH - Fahrzeuginventar',
     'vehicles.inventory.subtitle': 'Sehen Sie alle unsere verfügbaren Fahrzeuge direkt auf AutoScout24',
     'vehicles.inventory.button': 'Unsere Fahrzeuge auf AutoScout24 ansehen',
+    
+    // Vehicle Inventory Tabs
+    'vehicles.inventory.tabs.passenger': 'Personenwagen',
+    'vehicles.inventory.tabs.commercial': 'Nutzfahrzeug',
+    'vehicles.inventory.tabs.liked': 'Gemerkte Fahrzeuge',
+    
+    // Vehicle Counts
+    'vehicles.inventory.count.passenger': 'Personenwagen',
+    'vehicles.inventory.count.commercial': 'Nutzfahrzeuge',
+    'vehicles.inventory.count.liked': 'Gemerkte Fahrzeuge',
+    
+    // Empty States
+    'vehicles.inventory.empty.passenger': 'Keine Fahrzeuge gefunden. Versuchen Sie, die Filter anzupassen.',
+    'vehicles.inventory.empty.commercial': 'Keine Nutzfahrzeuge verfügbar',
+    'vehicles.inventory.empty.liked': 'Noch keine Fahrzeuge gemerkt',
+    
+    // Filters
+    'vehicles.filters.brand.placeholder': 'Marke & Modell',
+    'vehicles.filters.brand.all': 'Alle Marken',
+    'vehicles.filters.year.placeholder': 'Jahr',
+    'vehicles.filters.year.all': 'Alle Jahre',
+    'vehicles.filters.mileage.placeholder': 'Kilometerstand',
+    'vehicles.filters.mileage.all': 'Alle Kilometerstände',
+    'vehicles.filters.price.placeholder': 'Preis',
+    'vehicles.filters.price.all': 'Alle Preise',
+    'vehicles.filters.bodyType.placeholder': 'Aufbauart',
+    'vehicles.filters.bodyType.all': 'Alle Aufbauarten',
+    'vehicles.filters.bodyType.sedan': 'Limousine',
+    'vehicles.filters.bodyType.wagon': 'Kombi',
+    'vehicles.filters.bodyType.convertible': 'Cabrio',
+    'vehicles.filters.fuel.placeholder': 'Treibstoff',
+    'vehicles.filters.fuel.all': 'Alle Treibstoffe',
+    'vehicles.filters.fuel.gasoline': 'Benzin',
+    'vehicles.filters.fuel.diesel': 'Diesel',
+    'vehicles.filters.fuel.hybrid': 'Hybrid',
+    'vehicles.filters.fuel.electric': 'Elektro',
+    'vehicles.filters.transmission.placeholder': 'Getriebe',
+    'vehicles.filters.transmission.all': 'Alle Getriebe',
+    'vehicles.filters.transmission.automatic': 'Automat',
+    'vehicles.filters.transmission.manual': 'Manuell',
+    'vehicles.filters.moreFilters': 'Mehr Filter',
+    'vehicles.filters.sortRecommended': 'Sortierung Empfohlen',
+    'vehicles.filters.resetFilters': 'Filter zurücksetzen',
+    
+    // Vehicle Card
+    'vehicles.card.calculateCredit': 'Kreditrate berechnen',
+    'vehicles.card.compareInsurance': 'Versicherungen vergleichen',
+    
     'vehicles.features.quality.title': 'Qualitätsfahrzeuge',
-    'vehicles.features.quality.desc': 'Sorgfältig ausgewählte und geprüfte Fahrzeuge',
+    'vehicles.features.quality.desc': 'Sorgfältig ausgewählt und geprüft',
     'vehicles.features.service.title': 'Persönlicher Service',
     'vehicles.features.service.desc': 'Direkter Kontakt und professionelle Beratung',
     'vehicles.features.contact.title': 'Einfacher Kontakt',
@@ -211,6 +259,54 @@ const translations = {
     'vehicles.inventory.title': 'KURDO Car GmbH - Vehicle Inventory',
     'vehicles.inventory.subtitle': 'View all our available vehicles directly on AutoScout24',
     'vehicles.inventory.button': 'View Our Vehicles on AutoScout24',
+    
+    // Vehicle Inventory Tabs
+    'vehicles.inventory.tabs.passenger': 'Passenger Cars',
+    'vehicles.inventory.tabs.commercial': 'Commercial Vehicles',
+    'vehicles.inventory.tabs.liked': 'Saved Vehicles',
+    
+    // Vehicle Counts
+    'vehicles.inventory.count.passenger': 'Passenger Cars',
+    'vehicles.inventory.count.commercial': 'Commercial Vehicles',
+    'vehicles.inventory.count.liked': 'Saved Vehicles',
+    
+    // Empty States
+    'vehicles.inventory.empty.passenger': 'No vehicles found. Try adjusting the filters.',
+    'vehicles.inventory.empty.commercial': 'No commercial vehicles available',
+    'vehicles.inventory.empty.liked': 'No vehicles saved yet',
+    
+    // Filters
+    'vehicles.filters.brand.placeholder': 'Brand & Model',
+    'vehicles.filters.brand.all': 'All Brands',
+    'vehicles.filters.year.placeholder': 'Year',
+    'vehicles.filters.year.all': 'All Years',
+    'vehicles.filters.mileage.placeholder': 'Mileage',
+    'vehicles.filters.mileage.all': 'All Mileages',
+    'vehicles.filters.price.placeholder': 'Price',
+    'vehicles.filters.price.all': 'All Prices',
+    'vehicles.filters.bodyType.placeholder': 'Body Type',
+    'vehicles.filters.bodyType.all': 'All Body Types',
+    'vehicles.filters.bodyType.sedan': 'Sedan',
+    'vehicles.filters.bodyType.wagon': 'Wagon',
+    'vehicles.filters.bodyType.convertible': 'Convertible',
+    'vehicles.filters.fuel.placeholder': 'Fuel',
+    'vehicles.filters.fuel.all': 'All Fuels',
+    'vehicles.filters.fuel.gasoline': 'Gasoline',
+    'vehicles.filters.fuel.diesel': 'Diesel',
+    'vehicles.filters.fuel.hybrid': 'Hybrid',
+    'vehicles.filters.fuel.electric': 'Electric',
+    'vehicles.filters.transmission.placeholder': 'Transmission',
+    'vehicles.filters.transmission.all': 'All Transmissions',
+    'vehicles.filters.transmission.automatic': 'Automatic',
+    'vehicles.filters.transmission.manual': 'Manual',
+    'vehicles.filters.moreFilters': 'More Filters',
+    'vehicles.filters.sortRecommended': 'Sort: Recommended',
+    'vehicles.filters.resetFilters': 'Reset Filters',
+    
+    // Vehicle Card
+    'vehicles.card.calculateCredit': 'Calculate Credit Rate',
+    'vehicles.card.compareInsurance': 'Compare Insurance',
+    
     'vehicles.features.quality.title': 'Quality Vehicles',
     'vehicles.features.quality.desc': 'Carefully selected and inspected vehicles',
     'vehicles.features.service.title': 'Personal Service',

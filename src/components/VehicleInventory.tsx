@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useVehicleFilter, Vehicle } from '@/contexts/VehicleFilterContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import VehicleFilters from './VehicleFilters';
 import VehicleCard from './VehicleCard';
 
@@ -51,6 +52,7 @@ const sampleVehicles: Vehicle[] = [
 const VehicleInventory: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'passenger' | 'commercial' | 'liked'>('passenger');
   const { filteredVehicles, setVehicles, likedVehicles } = useVehicleFilter();
+  const { t } = useLanguage();
 
   useEffect(() => {
     setVehicles(sampleVehicles);
@@ -95,7 +97,7 @@ const VehicleInventory: React.FC = () => {
         >
           <div className="flex items-center gap-2">
             <span>🚗</span>
-            <span>Personenwagen</span>
+            <span>{t('vehicles.inventory.tabs.passenger')}</span>
           </div>
         </button>
         <button
@@ -108,7 +110,7 @@ const VehicleInventory: React.FC = () => {
         >
           <div className="flex items-center gap-2">
             <span>🚛</span>
-            <span>Nutzfahrzeug</span>
+            <span>{t('vehicles.inventory.tabs.commercial')}</span>
           </div>
         </button>
         <button
@@ -121,7 +123,7 @@ const VehicleInventory: React.FC = () => {
         >
           <div className="flex items-center gap-2">
             <span>❤️</span>
-            <span>Gemerkte Fahrzeuge ({likedVehicles.length})</span>
+            <span>{t('vehicles.inventory.tabs.liked')} ({likedVehicles.length})</span>
           </div>
         </button>
       </div>
@@ -129,7 +131,13 @@ const VehicleInventory: React.FC = () => {
       {/* Vehicle Count */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900">
-          {displayedVehicles.length} {activeTab === 'liked' ? 'Gemerkte Fahrzeuge' : activeTab === 'commercial' ? 'Nutzfahrzeuge' : 'Personenwagen'}
+          {displayedVehicles.length} {
+            activeTab === 'liked' 
+              ? t('vehicles.inventory.count.liked')
+              : activeTab === 'commercial' 
+              ? t('vehicles.inventory.count.commercial')
+              : t('vehicles.inventory.count.passenger')
+          }
         </h2>
       </div>
 
@@ -146,10 +154,10 @@ const VehicleInventory: React.FC = () => {
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">
               {activeTab === 'liked' 
-                ? 'Noch keine Fahrzeuge gemerkt' 
+                ? t('vehicles.inventory.empty.liked')
                 : activeTab === 'commercial'
-                ? 'Keine Nutzfahrzeuge verfügbar'
-                : 'Keine Fahrzeuge gefunden. Versuchen Sie, die Filter anzupassen.'}
+                ? t('vehicles.inventory.empty.commercial')
+                : t('vehicles.inventory.empty.passenger')}
             </p>
           </div>
         )}

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Heart, LayoutGrid } from 'lucide-react';
 import { Vehicle, useVehicleFilter } from '@/contexts/VehicleFilterContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -12,6 +13,7 @@ interface VehicleCardProps {
 
 const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
   const { toggleLike, isLiked } = useVehicleFilter();
+  const { t } = useLanguage();
   const liked = isLiked(vehicle.id);
 
   return (
@@ -89,8 +91,8 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
 
             {/* Links */}
             <div className="flex gap-4 mb-4 text-sm text-blue-600">
-              <button className="hover:underline">Kreditrate berechnen</button>
-              <button className="hover:underline">Versicherungen vergleichen</button>
+              <button className="hover:underline">{t('vehicles.card.calculateCredit')}</button>
+              <button className="hover:underline">{t('vehicles.card.compareInsurance')}</button>
             </div>
 
             {/* Vehicle Specs */}
