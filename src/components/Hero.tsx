@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -17,7 +18,7 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    let timeoutId: number;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     // Random shake animation function following exact specifications
     const startRandomShake = () => {
