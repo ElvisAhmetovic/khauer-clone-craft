@@ -2,10 +2,34 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { ExternalLink, Car, Phone, Mail } from "lucide-react";
+import { Car, Phone, Mail } from "lucide-react";
+import { useEffect } from "react";
 
 const Vehicles = () => {
   const { t } = useLanguage();
+
+  useEffect(() => {
+    // Load the AutoScout24 widget script
+    const script = document.createElement('script');
+    script.src = 'https://widget.autoscout24.com/ch/haendler-angebote.js';
+    script.setAttribute('data-dealer-id', '68160');
+    script.setAttribute('data-language', 'de');
+    script.setAttribute('data-width', '100%');
+    script.setAttribute('data-height', '1000px');
+    script.async = true;
+
+    const widgetContainer = document.getElementById('autoscout-widget');
+    if (widgetContainer) {
+      widgetContainer.appendChild(script);
+    }
+
+    return () => {
+      // Cleanup script on component unmount
+      if (widgetContainer && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -23,10 +47,10 @@ const Vehicles = () => {
         </div>
       </div>
 
-      {/* AutoScout24 Link Section */}
+      {/* AutoScout24 Widget Section */}
       <div className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl mx-auto">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-6xl mx-auto">
             <div className="p-8 bg-black text-white text-center">
               <Car className="w-16 h-16 mx-auto mb-4 text-lime-400" />
               <h2 className="text-3xl font-bold mb-4">
@@ -35,15 +59,22 @@ const Vehicles = () => {
               <p className="text-gray-300 mb-6">
                 {t('vehicles.inventory.subtitle')}
               </p>
-              <a
-                href="https://www.autoscout24.ch/de/s/seller-68160"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-lime-400 hover:bg-lime-500 text-black font-bold py-4 px-8 rounded-lg transition-colors duration-300 text-lg"
+            </div>
+            
+            {/* Widget Container */}
+            <div className="p-4 bg-white">
+              <div 
+                id="autoscout-widget" 
+                className="w-full"
+                style={{
+                  minHeight: '1000px',
+                  border: '1px solid #eee',
+                  borderRadius: '8px',
+                  padding: '10px'
+                }}
               >
-                <ExternalLink className="w-5 h-5" />
-                {t('vehicles.inventory.button')}
-              </a>
+                {/* Widget will be loaded here by the script */}
+              </div>
             </div>
             
             {/* Features Section */}
