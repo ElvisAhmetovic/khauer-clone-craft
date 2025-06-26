@@ -1,20 +1,11 @@
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Car, Phone, Mail } from "lucide-react";
+import { Car, Phone, Mail, ExternalLink } from "lucide-react";
 
 const Vehicles = () => {
   const { t } = useLanguage();
-
-  // Direct HTML injection with the AutoScout24 script
-  const widgetHTML = `
-    <script src="https://widget.autoscout24.com/ch/haendler-angebote.js"
-            data-dealer-id="68160"
-            data-language="de"
-            data-width="100%"
-            data-height="1000px">
-    </script>
-  `;
 
   return (
     <div className="min-h-screen">
@@ -46,12 +37,35 @@ const Vehicles = () => {
               </p>
             </div>
             
-            {/* Direct HTML Script Injection */}
+            {/* AutoScout24 iFrame and External Link */}
             <div className="p-4 bg-white">
-              <div 
-                className="w-full min-h-[1000px] border border-gray-200 rounded-lg p-4"
-                dangerouslySetInnerHTML={{ __html: widgetHTML }}
-              />
+              {/* Try iframe first */}
+              <div className="w-full min-h-[800px] border border-gray-200 rounded-lg overflow-hidden mb-4">
+                <iframe 
+                  src="https://www.autoscout24.ch/de/s/seller-68160"
+                  width="100%" 
+                  height="800"
+                  style={{ border: 'none' }}
+                  title="AutoScout24 Vehicle Inventory"
+                  className="w-full"
+                />
+              </div>
+              
+              {/* Fallback external link */}
+              <div className="text-center p-6 bg-gray-50 rounded-lg">
+                <p className="text-gray-600 mb-4">
+                  {t('vehicles.inventory.subtitle')} - Falls das Widget nicht angezeigt wird:
+                </p>
+                <a
+                  href="https://www.autoscout24.ch/de/s/seller-68160"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  Fahrzeuge auf AutoScout24 anzeigen
+                </a>
+              </div>
             </div>
             
             {/* Features Section */}
