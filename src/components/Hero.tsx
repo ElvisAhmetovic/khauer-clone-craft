@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -18,20 +17,23 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    // Random shake animation function
+    let timeoutId: number;
+
+    // Random shake animation function following exact specifications
     const startRandomShake = () => {
-      // Generate random delay between 6-10 seconds
-      const randomDelay = Math.random() * 4000 + 6000; // 6000-10000ms
+      // Generate random delay between 6-10 seconds (6000-10000ms)
+      const randomDelay = Math.random() * 4000 + 6000;
       
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
+        // Start shake animation
         setIsShaking(true);
         
-        // Remove shake after animation duration (700ms)
+        // Remove shake after 800ms (animation duration)
         setTimeout(() => {
           setIsShaking(false);
-          // Recursively call for next shake
+          // Recursively call for next shake cycle
           startRandomShake();
-        }, 700);
+        }, 800);
       }, randomDelay);
     };
 
@@ -40,7 +42,10 @@ const Hero = () => {
       startRandomShake();
     }, 3000); // Wait 3 seconds before first shake
 
-    return () => clearTimeout(initialTimer);
+    return () => {
+      clearTimeout(initialTimer);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   const openAutoScout24 = () => {
@@ -89,8 +94,8 @@ const Hero = () => {
           }`}>
             <Button 
               size="lg" 
-              className={`bg-lime-400 hover:bg-lime-500 text-black font-bold text-lg px-8 py-4 uppercase tracking-wider transition-all duration-300 ${
-                isShaking ? 'animate-random-shake' : ''
+              className={`animated-shake-button bg-lime-400 hover:bg-lime-500 text-black font-bold text-lg px-8 py-4 uppercase tracking-wider transition-all duration-300 ${
+                isShaking ? 'animate-subtle-shake' : ''
               }`}
               onClick={scrollToContact}
             >

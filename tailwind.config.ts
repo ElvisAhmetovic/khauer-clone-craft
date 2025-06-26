@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -96,26 +95,18 @@ export default {
 						opacity: '1'
 					}
 				},
-				'shake-button': {
+				'subtle-shake': {
 					'0%, 100%': {
 						transform: 'translateX(0)'
 					},
 					'25%': {
 						transform: 'translateX(-3px)'
 					},
-					'75%': {
-						transform: 'translateX(3px)'
-					}
-				},
-				'random-shake': {
-					'0%, 100%': {
+					'50%': {
 						transform: 'translateX(0)'
 					},
-					'10%, 30%, 50%, 70%, 90%': {
-						transform: 'translateX(-2px)'
-					},
-					'20%, 40%, 60%, 80%': {
-						transform: 'translateX(2px)'
+					'75%': {
+						transform: 'translateX(3px)'
 					}
 				}
 			},
@@ -123,8 +114,7 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'slide-in-left': 'slide-in-left 0.5s ease-out',
-				'shake-button': 'shake-button 0.6s ease-in-out',
-				'random-shake': 'random-shake 0.7s ease-in-out'
+				'subtle-shake': 'subtle-shake 0.8s ease-in-out'
 			}
 		}
 	},
