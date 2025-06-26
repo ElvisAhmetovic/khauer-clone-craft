@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'de' | 'en';
@@ -53,7 +54,7 @@ const translations = {
     // Hero
     'hero.title1': 'Premium',
     'hero.title2': 'Auto House',
-    'hero.button': 'Termin vereinbaren',
+    'hero.button': 'Jetzt kontaktieren',
     'hero.subtitle': 'Spezialisiert auf',
     'hero.brands': 'Alle Marken',
 
@@ -239,7 +240,7 @@ const translations = {
     // Hero
     'hero.title1': 'Premium',
     'hero.title2': 'Auto House',
-    'hero.button': 'Book Appointment',
+    'hero.button': 'Contact Now',
     'hero.subtitle': 'Specialized in',
     'hero.brands': 'All Brands',
 
