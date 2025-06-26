@@ -1,0 +1,244 @@
+
+import React, { useState, useEffect } from 'react';
+import { AutoScout24Service } from '@/services/AutoScout24Service';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Car, Phone, MapPin, Fuel, Calendar, Gauge, Settings, RefreshCw, Clock } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
+
+interface Vehicle {
+  id: string;
+  title: string;
+  price: string;
+  year: string;
+  mileage: string;
+  fuel: string;
+  transmission: string;
+  images: string[];
+  description: string;
+  location: string;
+  phone?: string;
+  features: string[];
+}
+
+interface ScrapedData {
+  vehicles: Vehicle[];
+  lastUpdated: string;
+  totalCount: number;
+}
+
+const CarListings: React.FC = () => {
+  const [data, setData] = useState<ScrapedData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    loadVehicles();
+    
+    // Set up automatic updates every 2 hours
+    const interval = setInterval(() => {
+      console.log('Auto-updating vehicle listings...');
+      loadVehicles(true);
+    }, 2 * 60 * 60 * 1000); // 2 hours
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const loadVehicles = async (silent = false) => {
+    try {
+      if (!silent) setLoading(true);
+      const vehicleData = await AutoScout24Service.getVehicles();
+      setData(vehicleData);
+      
+      if (!silent) {
+        toast({
+          title: "Fahrzeuge geladen",
+          description: `${vehicleData.totalCount} Fahrzeuge erfolgreich geladen`,
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      console.error('Error loading vehicles:', error);
+      toast({
+        title: "Fehler",
+        description: "Fehler beim Laden der Fahrzeuge",
+        variant: "destructive",
+        duration: 3000,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForceUpdate = async () => {
+    setUpdating(true);
+    try {
+      const freshData = await AutoScout24Service.forceUpdate();
+      setData(freshData);
+      toast({
+        title: "Aktualisiert",
+        description: "Fahrzeugdaten wurden erfolgreich aktualisiert",
+        duration: 3000,
+      });
+    } catch (error) {
+      toast({
+        title: "Fehler",
+        description: "Fehler beim Aktualisieren der Daten",
+        variant: "destructive",
+        duration: 3000,
+      });
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-16">
+        <div className="text-center">
+          <Car className="w-12 h-12 mx-auto mb-4 text-lime-400 animate-pulse" />
+          <p className="text-gray-600">Lade Fahrzeuge...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data || data.vehicles.length === 0) {
+    return (
+      <div className="text-center py-16">
+        <Car className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+        <h3 className="text-xl font-semibold mb-2">Keine Fahrzeuge verfügbar</h3>
+        <p className="text-gray-600 mb-4">Momentan sind keine Fahrzeuge verfügbar.</p>
+        <Button onClick={handleForceUpdate} disabled={updating}>
+          <RefreshCw className={`w-4 h-4 mr-2 ${updating ? 'animate-spin' : ''}`} />
+          Neu laden
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full">
+      {/* Header with stats and update button */}
+      <div className="flex justify-between items-center mb-6 p-4 bg-gray-50 rounded-lg">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Car className="w-5 h-5 text-lime-600" />
+            <span className="font-semibold">{data.totalCount} Fahrzeuge verfügbar</span>
+          </div>
+          {AutoScout24Service.getLastUpdateTime() && (
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <Clock className="w-4 h-4" />
+              <span>Zuletzt aktualisiert: {AutoScout24Service.getLastUpdateTime()}</span>
+            </div>
+          )}
+        </div>
+        <Button onClick={handleForceUpdate} disabled={updating} variant="outline" size="sm">
+          <RefreshCw className={`w-4 h-4 mr-2 ${updating ? 'animate-spin' : ''}`} />
+          Aktualisieren
+        </Button>
+      </div>
+
+      {/* Vehicle Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {data.vehicles.map((vehicle) => (
+          <Card key={vehicle.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div className="relative">
+              <img
+                src={vehicle.images[0]}
+                alt={vehicle.title}
+                className="w-full h-48 object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = '/placeholder.svg';
+                }}
+              />
+              <div className="absolute top-4 right-4">
+                <Badge className="bg-lime-400 text-black font-bold">
+                  {vehicle.price}
+                </Badge>
+              </div>
+            </div>
+            
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg">{vehicle.title}</CardTitle>
+              <CardDescription className="text-sm text-gray-600">
+                {vehicle.description}
+              </CardDescription>
+            </CardHeader>
+            
+            <CardContent className="space-y-4">
+              {/* Vehicle specs */}
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-gray-500" />
+                  <span>{vehicle.year}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Gauge className="w-4 h-4 text-gray-500" />
+                  <span>{vehicle.mileage}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Fuel className="w-4 h-4 text-gray-500" />
+                  <span>{vehicle.fuel}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Settings className="w-4 h-4 text-gray-500" />
+                  <span>{vehicle.transmission}</span>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <MapPin className="w-4 h-4" />
+                <span>{vehicle.location}</span>
+              </div>
+
+              {/* Features */}
+              {vehicle.features.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-sm font-medium text-gray-700">Ausstattung:</p>
+                  <div className="flex flex-wrap gap-1">
+                    {vehicle.features.slice(0, 3).map((feature, index) => (
+                      <Badge key={index} variant="secondary" className="text-xs">
+                        {feature}
+                      </Badge>
+                    ))}
+                    {vehicle.features.length > 3 && (
+                      <Badge variant="secondary" className="text-xs">
+                        +{vehicle.features.length - 3} weitere
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Contact button */}
+              <div className="pt-2">
+                <Button
+                  className="w-full bg-lime-400 hover:bg-lime-500 text-black font-semibold"
+                  onClick={() => window.open(`tel:${vehicle.phone}`, '_self')}
+                >
+                  <Phone className="w-4 h-4 mr-2" />
+                  Jetzt anrufen
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Footer info */}
+      <div className="mt-8 p-4 bg-gray-50 rounded-lg text-center text-sm text-gray-600">
+        <p>
+          Alle Fahrzeuge werden automatisch alle 2 Stunden aktualisiert. 
+          Bei Fragen zu einem Fahrzeug kontaktieren Sie uns direkt.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default CarListings;

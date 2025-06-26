@@ -1,6 +1,7 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CarListings from "@/components/CarListings";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Car, Phone, Mail, ExternalLink } from "lucide-react";
 
@@ -26,89 +27,65 @@ const Vehicles = () => {
       {/* Vehicle Inventory Section */}
       <div className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl mx-auto">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-7xl mx-auto">
             <div className="p-8 bg-black text-white text-center">
               <Car className="w-16 h-16 mx-auto mb-4 text-lime-400" />
               <h2 className="text-3xl font-bold mb-4">
                 {t('vehicles.inventory.title')}
               </h2>
               <p className="text-gray-300 mb-6">
-                {t('vehicles.inventory.subtitle')}
+                Unsere aktuellen Fahrzeuge - automatisch aktualisiert
               </p>
             </div>
             
-            {/* Main CTA for AutoScout24 */}
-            <div className="p-12 text-center bg-gradient-to-br from-gray-50 to-white">
-              <div className="bg-lime-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Car className="w-10 h-10 text-lime-600" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">
-                Unser komplettes Fahrzeugangebot
-              </h3>
-              <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                Durchstöbern Sie unsere aktuellen Fahrzeuge direkt auf AutoScout24. 
-                Dort finden Sie detaillierte Informationen, Bilder und Preise aller verfügbaren Autos.
+            {/* Car Listings Component */}
+            <div className="p-8">
+              <CarListings />
+            </div>
+            
+            {/* AutoScout24 Backup Link */}
+            <div className="p-6 text-center bg-gray-50 border-t">
+              <p className="text-gray-600 mb-4">
+                Sie können auch direkt auf unserer AutoScout24-Seite stöbern:
               </p>
               <a
                 href="https://www.autoscout24.ch/de/s/seller-68160"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-lime-400 hover:bg-lime-500 text-black font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg"
+                className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 rounded-lg transition-colors duration-300"
               >
-                <ExternalLink className="w-6 h-6" />
-                Fahrzeuge auf AutoScout24 ansehen
+                <ExternalLink className="w-5 h-5" />
+                AutoScout24 besuchen
               </a>
-              <p className="text-sm text-gray-500 mt-4">
-                Öffnet in einem neuen Fenster
-              </p>
-            </div>
-            
-            {/* Features Section */}
-            <div className="p-8 bg-gray-50">
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Car className="w-8 h-8 text-lime-600" />
-                  </div>
-                  <h3 className="font-bold text-lg mb-2">{t('vehicles.features.quality.title')}</h3>
-                  <p className="text-gray-600">{t('vehicles.features.quality.desc')}</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Phone className="w-8 h-8 text-lime-600" />
-                  </div>
-                  <h3 className="font-bold text-lg mb-2">{t('vehicles.features.service.title')}</h3>
-                  <p className="text-gray-600">{t('vehicles.features.service.desc')}</p>
-                </div>
-                <div className="text-center">
-                  <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Mail className="w-8 h-8 text-lime-600" />
-                  </div>
-                  <h3 className="font-bold text-lg mb-2">{t('vehicles.features.contact.title')}</h3>
-                  <p className="text-gray-600">{t('vehicles.features.contact.desc')}</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Instructions Section */}
+      {/* Features Section */}
       <div className="py-12 bg-white">
-        <div className="container mx-auto px-4 text-center max-w-3xl">
-          <h2 className="text-3xl font-bold mb-6">{t('vehicles.instructions.title')}</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="font-bold text-lg mb-3">{t('vehicles.instructions.visit.title')}</h3>
-              <p className="text-gray-600">
-                {t('vehicles.instructions.visit.desc')}
-              </p>
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Car className="w-8 h-8 text-lime-600" />
+              </div>
+              <h3 className="font-bold text-lg mb-2">{t('vehicles.features.quality.title')}</h3>
+              <p className="text-gray-600">{t('vehicles.features.quality.desc')}</p>
             </div>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="font-bold text-lg mb-3">{t('vehicles.instructions.contact.title')}</h3>
-              <p className="text-gray-600">
-                {t('vehicles.instructions.contact.desc')}
-              </p>
+            <div className="text-center">
+              <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Phone className="w-8 h-8 text-lime-600" />
+              </div>
+              <h3 className="font-bold text-lg mb-2">{t('vehicles.features.service.title')}</h3>
+              <p className="text-gray-600">{t('vehicles.features.service.desc')}</p>
+            </div>
+            <div className="text-center">
+              <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-8 h-8 text-lime-600" />
+              </div>
+              <h3 className="font-bold text-lg mb-2">{t('vehicles.features.contact.title')}</h3>
+              <p className="text-gray-600">{t('vehicles.features.contact.desc')}</p>
             </div>
           </div>
         </div>
