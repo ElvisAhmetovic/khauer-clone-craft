@@ -5,7 +5,6 @@ import Services from "@/components/Services";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import EmailPopup from "@/components/EmailPopup";
 
 const Index = () => {
   return (
@@ -16,7 +15,6 @@ const Index = () => {
       <About />
       <Contact />
       <Footer />
-      <EmailPopup />
     </div>
   );
 };

@@ -1,12 +1,69 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Car, ShoppingCart } from "lucide-react";
+import { Shield, Zap, Car, ShoppingCart } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const Services = () => {
   const { t, language } = useLanguage();
+  
+  const { data: services, isLoading, error } = useQuery({
+    queryKey: ['services'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('services')
+        .select('*')
+        .eq('active', true)
+        .order('category', { ascending: true });
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  // Translation mapping for database services
+  const serviceTranslations = {
+    'Motordiagnose': {
+      en: { name: 'Engine Diagnostics', description: 'Computer-assisted vehicle diagnostics' }
+    },
+    'TÜV/AU': {
+      en: { name: 'TÜV/AU', description: 'Main inspection and emissions testing' }
+    },
+    'Bremsenservice': {
+      en: { name: 'Brake Service', description: 'Inspection and maintenance of brake system' }
+    },
+    'Klimaservice': {
+      en: { name: 'Climate Service', description: 'Maintenance and refilling of air conditioning' }
+    },
+    'Ölwechsel': {
+      en: { name: 'Oil Change', description: 'Complete oil change with filter replacement' }
+    },
+    'Inspektion': {
+      en: { name: 'Inspection', description: 'Large inspection according to manufacturer specifications' }
+    },
+    'Zahnriemenwechsel': {
+      en: { name: 'Timing Belt Change', description: 'Replacement of timing belt' }
+    },
+    'Reifenwechsel': {
+      en: { name: 'Tire Change', description: 'Seasonal tire change with storage' }
+    }
+  };
+
+  const getTranslatedService = (service: any) => {
+    if (language === 'en' && serviceTranslations[service.name as keyof typeof serviceTranslations]) {
+      const translation = serviceTranslations[service.name as keyof typeof serviceTranslations].en;
+      return {
+        ...service,
+        name: translation.name,
+        description: translation.description
+      };
+    }
+    return service;
+  };
 
   const customServices = [
     {
@@ -27,39 +84,16 @@ const Services = () => {
     }
   ];
 
-  const autoHouseServices = [
-    {
-      title: language === 'en' ? 'Vehicle Evaluation' : 'Fahrzeugbewertung',
-      description: language === 'en' ? 'Professional assessment of your vehicle\'s market value' : 'Professionelle Bewertung des Marktwerts Ihres Fahrzeugs'
-    },
-    {
-      title: language === 'en' ? 'Quick Purchase' : 'Schneller Ankauf',
-      description: language === 'en' ? 'Fast and fair vehicle purchase process' : 'Schneller und fairer Fahrzeugankauf'
-    },
-    {
-      title: language === 'en' ? 'Quality Sales' : 'Qualitätsverkauf',
-      description: language === 'en' ? 'Carefully selected pre-owned vehicles' : 'Sorgfältig ausgewählte Gebrauchtwagen'
-    },
-    {
-      title: language === 'en' ? 'All Brands' : 'Alle Marken',
-      description: language === 'en' ? 'We work with all vehicle makes and models' : 'Wir arbeiten mit allen Fahrzeugmarken und -modellen'
-    },
-    {
-      title: language === 'en' ? 'Import & Export' : 'Import & Export',
-      description: language === 'en' ? 'International vehicle trading services' : 'Internationaler Fahrzeughandel'
-    },
-    {
-      title: language === 'en' ? 'Transparent Pricing' : 'Transparente Preise',
-      description: language === 'en' ? 'Fair and honest pricing for all transactions' : 'Faire und ehrliche Preise für alle Transaktionen'
-    }
-  ];
-
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  if (error) {
+    console.error('Error loading services:', error);
+  }
 
   return (
     <section id="services" className="py-20 bg-black text-white">
@@ -105,34 +139,56 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Auto House Services */}
+        {/* Traditional Services */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-lime-400 mb-4 uppercase tracking-wide">
-            {language === 'en' ? 'Our Auto House Services' : 'Unsere Auto House Services'}
+            {t('services.title')}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            {language === 'en' ? 'Comprehensive vehicle trading services for all your automotive needs' : 'Umfassende Fahrzeughandelsdienstleistungen für alle Ihre Automobilbedürfnisse'}
+            {t('services.subtitle')}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {autoHouseServices.map((service, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow duration-300 bg-gray-900 border-gray-700">
-              <CardHeader className="text-center">
-                <div className="flex justify-center mb-4">
-                  <Car className="w-12 h-12 text-lime-400" />
-                </div>
-                <CardTitle className="text-xl text-white">
-                  {service.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300 text-center">
-                  {service.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+          {isLoading ? (
+            Array.from({ length: 6 }).map((_, index) => (
+              <Card key={index} className="bg-gray-900 border-gray-700">
+                <CardHeader className="text-center">
+                  <Skeleton className="w-12 h-12 mx-auto mb-4 bg-gray-700" />
+                  <Skeleton className="h-6 w-3/4 mx-auto bg-gray-700" />
+                </CardHeader>
+                <CardContent>
+                  <Skeleton className="h-4 w-full mb-2 bg-gray-700" />
+                  <Skeleton className="h-4 w-2/3 bg-gray-700" />
+                </CardContent>
+              </Card>
+            ))
+          ) : services && services.length > 0 ? (
+            services.map((service) => {
+              const translatedService = getTranslatedService(service);
+              return (
+                <Card key={service.id} className="hover:shadow-lg transition-shadow duration-300 bg-gray-900 border-gray-700">
+                  <CardHeader className="text-center">
+                    <div className="flex justify-center mb-4">
+                      <Shield className="w-12 h-12 text-lime-400" />
+                    </div>
+                    <CardTitle className="text-xl text-white">
+                      {translatedService.name}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-300 text-center">
+                      {translatedService.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })
+          ) : (
+            <div className="col-span-full text-center text-gray-400">
+              <p>{t('services.noServices')}</p>
+            </div>
+          )}
         </div>
       </div>
     </section>

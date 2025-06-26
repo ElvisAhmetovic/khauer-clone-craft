@@ -148,63 +148,6 @@ export type Database = {
         }
         Relationships: []
       }
-      scraped_vehicles: {
-        Row: {
-          description: string | null
-          external_id: string
-          features: string[] | null
-          fuel: string | null
-          id: string
-          images: string[] | null
-          location: string | null
-          mileage: string | null
-          phone: string | null
-          price: string
-          scraped_at: string
-          title: string
-          transmission: string | null
-          updated_at: string
-          url: string | null
-          year: string | null
-        }
-        Insert: {
-          description?: string | null
-          external_id: string
-          features?: string[] | null
-          fuel?: string | null
-          id?: string
-          images?: string[] | null
-          location?: string | null
-          mileage?: string | null
-          phone?: string | null
-          price: string
-          scraped_at?: string
-          title: string
-          transmission?: string | null
-          updated_at?: string
-          url?: string | null
-          year?: string | null
-        }
-        Update: {
-          description?: string | null
-          external_id?: string
-          features?: string[] | null
-          fuel?: string | null
-          id?: string
-          images?: string[] | null
-          location?: string | null
-          mileage?: string | null
-          phone?: string | null
-          price?: string
-          scraped_at?: string
-          title?: string
-          transmission?: string | null
-          updated_at?: string
-          url?: string | null
-          year?: string | null
-        }
-        Relationships: []
-      }
       services: {
         Row: {
           active: boolean | null

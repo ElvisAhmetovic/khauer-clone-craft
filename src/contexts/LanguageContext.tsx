@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type Language = 'de' | 'en';
@@ -26,56 +27,8 @@ const translations = {
     'vehicles.inventory.title': 'KURDO Car GmbH - Fahrzeuginventar',
     'vehicles.inventory.subtitle': 'Sehen Sie alle unsere verfügbaren Fahrzeuge direkt auf AutoScout24',
     'vehicles.inventory.button': 'Unsere Fahrzeuge auf AutoScout24 ansehen',
-    
-    // Vehicle Inventory Tabs
-    'vehicles.inventory.tabs.passenger': 'Personenwagen',
-    'vehicles.inventory.tabs.commercial': 'Nutzfahrzeug',
-    'vehicles.inventory.tabs.liked': 'Gemerkte Fahrzeuge',
-    
-    // Vehicle Counts
-    'vehicles.inventory.count.passenger': 'Personenwagen',
-    'vehicles.inventory.count.commercial': 'Nutzfahrzeuge',
-    'vehicles.inventory.count.liked': 'Gemerkte Fahrzeuge',
-    
-    // Empty States
-    'vehicles.inventory.empty.passenger': 'Keine Fahrzeuge gefunden. Versuchen Sie, die Filter anzupassen.',
-    'vehicles.inventory.empty.commercial': 'Keine Nutzfahrzeuge verfügbar',
-    'vehicles.inventory.empty.liked': 'Noch keine Fahrzeuge gemerkt',
-    
-    // Filters
-    'vehicles.filters.brand.placeholder': 'Marke & Modell',
-    'vehicles.filters.brand.all': 'Alle Marken',
-    'vehicles.filters.year.placeholder': 'Jahr',
-    'vehicles.filters.year.all': 'Alle Jahre',
-    'vehicles.filters.mileage.placeholder': 'Kilometerstand',
-    'vehicles.filters.mileage.all': 'Alle Kilometerstände',
-    'vehicles.filters.price.placeholder': 'Preis',
-    'vehicles.filters.price.all': 'Alle Preise',
-    'vehicles.filters.bodyType.placeholder': 'Aufbauart',
-    'vehicles.filters.bodyType.all': 'Alle Aufbauarten',
-    'vehicles.filters.bodyType.sedan': 'Limousine',
-    'vehicles.filters.bodyType.wagon': 'Kombi',
-    'vehicles.filters.bodyType.convertible': 'Cabrio',
-    'vehicles.filters.fuel.placeholder': 'Treibstoff',
-    'vehicles.filters.fuel.all': 'Alle Treibstoffe',
-    'vehicles.filters.fuel.gasoline': 'Benzin',
-    'vehicles.filters.fuel.diesel': 'Diesel',
-    'vehicles.filters.fuel.hybrid': 'Hybrid',
-    'vehicles.filters.fuel.electric': 'Elektro',
-    'vehicles.filters.transmission.placeholder': 'Getriebe',
-    'vehicles.filters.transmission.all': 'Alle Getriebe',
-    'vehicles.filters.transmission.automatic': 'Automat',
-    'vehicles.filters.transmission.manual': 'Manuell',
-    'vehicles.filters.moreFilters': 'Mehr Filter',
-    'vehicles.filters.sortRecommended': 'Sortierung Empfohlen',
-    'vehicles.filters.resetFilters': 'Filter zurücksetzen',
-    
-    // Vehicle Card
-    'vehicles.card.calculateCredit': 'Kreditrate berechnen',
-    'vehicles.card.compareInsurance': 'Versicherungen vergleichen',
-    
     'vehicles.features.quality.title': 'Qualitätsfahrzeuge',
-    'vehicles.features.quality.desc': 'Sorgfältig ausgewählt und geprüft',
+    'vehicles.features.quality.desc': 'Sorgfältig ausgewählte und geprüfte Fahrzeuge',
     'vehicles.features.service.title': 'Persönlicher Service',
     'vehicles.features.service.desc': 'Direkter Kontakt und professionelle Beratung',
     'vehicles.features.contact.title': 'Einfacher Kontakt',
@@ -99,14 +52,14 @@ const translations = {
 
     // Hero
     'hero.title1': 'Premium',
-    'hero.title2': 'Auto House',
+    'hero.title2': 'Autowerkstatt',
     'hero.button': 'Termin vereinbaren',
     'hero.subtitle': 'Spezialisiert auf',
     'hero.brands': 'Alle Marken',
 
     // Services
     'services.title': 'Unsere Dienstleistungen',
-    'services.subtitle': 'Professionelle Automotive-Services für alle Marken',
+    'services.subtitle': 'Professionelle Autowartung für alle Marken',
     'services.repairs': 'Reparaturen',
     'services.repairs.desc': 'Professionelle Reparaturen aller Art',
     'services.maintenance': 'Wartung',
@@ -126,20 +79,20 @@ const translations = {
     'services.noServices': 'Keine Dienstleistungen verfügbar',
 
     // About
-    'about.badge': 'Premium Auto House',
-    'about.title': 'Ihr vertrauensvolles Auto House',
-    'about.description1': 'KURDO Car GmbH ist Ihr erstklassiges Auto House in Dietikon, Schweiz. Wir spezialisieren uns auf den Kauf, Verkauf und die Bereitstellung umfassender Automotive-Services für alle Fahrzeugmarken.',
-    'about.description2': 'Mit über 20 Jahren Erfahrung in der Automobilbranche bieten wir professionelle Fahrzeugbewertungen, hochwertige Gebrauchtwagen und fachkundige Automotive-Services, um alle Ihre Fahrzeugbedürfnisse zu erfüllen.',
+    'about.badge': 'Über KURDO Car GmbH',
+    'about.title': 'Vertrauen Sie den Experten',
+    'about.description1': 'Bei KURDO Car GmbH sind wir auf die Wartung und Reparatur von Premium- und Luxusfahrzeugen spezialisiert. Unser erfahrenes Team bietet erstklassigen Service für alle Marken.',
+    'about.description2': 'Mit modernster Ausrüstung und jahrelanger Erfahrung sorgen wir dafür, dass Ihr Fahrzeug in bestem Zustand bleibt. Vertrauen Sie auf unsere Expertise.',
     'about.stats.experience': 'Jahre Erfahrung',
     'about.stats.customers': 'Zufriedene Kunden',
-    'about.stats.quality': 'Qualität gewährleistet',
-    'about.stats.response': 'Schnelle Antwort',
-    'about.why.title': 'Warum KURDO Car wählen',
-    'about.why.evaluation': 'Professionelle Fahrzeugbewertung',
-    'about.why.equipment': 'Moderne Diagnosegeräte',
+    'about.stats.master': 'Meisterbetrieb',
+    'about.stats.express': 'Express-Service',
+    'about.why.title': 'Warum KURDO Car GmbH?',
+    'about.why.certified': 'Zertifizierte Meisterwerkstatt',
+    'about.why.diagnostic': 'Modernste Diagnosegeräte',
     'about.why.transparent': 'Transparente Preisgestaltung',
-    'about.why.guarantee': 'Qualitätsgarantie',
-    'about.why.fair': 'Faire Marktpreise',
+    'about.why.guarantee': 'Garantie auf alle Arbeiten',
+    'about.why.fair': 'Faire und ehrliche Beratung',
 
     // Contact
     'contact.title': 'Kontakt',
@@ -231,13 +184,8 @@ const translations = {
     'privacy.section11.text': 'Wenn Sie Fragen, Bedenken oder Anfragen bezüglich dieser Datenschutzerklärung oder unserer Datenverarbeitungspraktiken haben, zögern Sie bitte nicht, uns zu kontaktieren:',
 
     // Footer
-    'footer.company.description': 'Ihr vertrauensvolles Auto House in Dietikon, Schweiz. Wir spezialisieren uns auf Fahrzeugverkauf, -ankauf und umfassende Automotive-Services.',
+    'footer.company.description': 'Ihre Premium-Autowerkstatt in Dietikon für alle Marken - von der Wartung bis zur Reparatur.',
     'footer.services': 'Dienstleistungen',
-    'footer.services.sales': 'Fahrzeugverkauf & -ankauf',
-    'footer.services.evaluation': 'Professionelle Fahrzeugbewertung',
-    'footer.services.assessment': 'Marktpreisbewertung',
-    'footer.services.preowned': 'Hochwertige Gebrauchtwagen',
-    'footer.services.import': 'Fahrzeugimport & -export',
     'footer.links': 'Links',
     'footer.contact': 'Kontakt',
     'footer.legal.imprint': 'Impressum',
@@ -259,54 +207,6 @@ const translations = {
     'vehicles.inventory.title': 'KURDO Car GmbH - Vehicle Inventory',
     'vehicles.inventory.subtitle': 'View all our available vehicles directly on AutoScout24',
     'vehicles.inventory.button': 'View Our Vehicles on AutoScout24',
-    
-    // Vehicle Inventory Tabs
-    'vehicles.inventory.tabs.passenger': 'Passenger Cars',
-    'vehicles.inventory.tabs.commercial': 'Commercial Vehicles',
-    'vehicles.inventory.tabs.liked': 'Saved Vehicles',
-    
-    // Vehicle Counts
-    'vehicles.inventory.count.passenger': 'Passenger Cars',
-    'vehicles.inventory.count.commercial': 'Commercial Vehicles',
-    'vehicles.inventory.count.liked': 'Saved Vehicles',
-    
-    // Empty States
-    'vehicles.inventory.empty.passenger': 'No vehicles found. Try adjusting the filters.',
-    'vehicles.inventory.empty.commercial': 'No commercial vehicles available',
-    'vehicles.inventory.empty.liked': 'No vehicles saved yet',
-    
-    // Filters
-    'vehicles.filters.brand.placeholder': 'Brand & Model',
-    'vehicles.filters.brand.all': 'All Brands',
-    'vehicles.filters.year.placeholder': 'Year',
-    'vehicles.filters.year.all': 'All Years',
-    'vehicles.filters.mileage.placeholder': 'Mileage',
-    'vehicles.filters.mileage.all': 'All Mileages',
-    'vehicles.filters.price.placeholder': 'Price',
-    'vehicles.filters.price.all': 'All Prices',
-    'vehicles.filters.bodyType.placeholder': 'Body Type',
-    'vehicles.filters.bodyType.all': 'All Body Types',
-    'vehicles.filters.bodyType.sedan': 'Sedan',
-    'vehicles.filters.bodyType.wagon': 'Wagon',
-    'vehicles.filters.bodyType.convertible': 'Convertible',
-    'vehicles.filters.fuel.placeholder': 'Fuel',
-    'vehicles.filters.fuel.all': 'All Fuels',
-    'vehicles.filters.fuel.gasoline': 'Gasoline',
-    'vehicles.filters.fuel.diesel': 'Diesel',
-    'vehicles.filters.fuel.hybrid': 'Hybrid',
-    'vehicles.filters.fuel.electric': 'Electric',
-    'vehicles.filters.transmission.placeholder': 'Transmission',
-    'vehicles.filters.transmission.all': 'All Transmissions',
-    'vehicles.filters.transmission.automatic': 'Automatic',
-    'vehicles.filters.transmission.manual': 'Manual',
-    'vehicles.filters.moreFilters': 'More Filters',
-    'vehicles.filters.sortRecommended': 'Sort: Recommended',
-    'vehicles.filters.resetFilters': 'Reset Filters',
-    
-    // Vehicle Card
-    'vehicles.card.calculateCredit': 'Calculate Credit Rate',
-    'vehicles.card.compareInsurance': 'Compare Insurance',
-    
     'vehicles.features.quality.title': 'Quality Vehicles',
     'vehicles.features.quality.desc': 'Carefully selected and inspected vehicles',
     'vehicles.features.service.title': 'Personal Service',
@@ -332,14 +232,14 @@ const translations = {
 
     // Hero
     'hero.title1': 'Premium',
-    'hero.title2': 'Auto House',
+    'hero.title2': 'Auto Service',
     'hero.button': 'Book Appointment',
     'hero.subtitle': 'Specialized in',
     'hero.brands': 'All Brands',
 
     // Services
     'services.title': 'Our Services',
-    'services.subtitle': 'Professional automotive services for all brands',
+    'services.subtitle': 'Professional automotive service for all brands',
     'services.repairs': 'Repairs',
     'services.repairs.desc': 'Professional repairs of all kinds',
     'services.maintenance': 'Maintenance',
@@ -359,20 +259,20 @@ const translations = {
     'services.noServices': 'No services available',
 
     // About
-    'about.badge': 'Premium Auto House',
-    'about.title': 'Your Trusted Auto House',
-    'about.description1': 'KURDO Car GmbH is your premier auto house in Dietikon, Switzerland. We specialize in buying, selling, and providing comprehensive automotive services for all vehicle brands.',
-    'about.description2': 'With over 20 years of experience in the automotive industry, we offer professional vehicle evaluations, quality pre-owned cars, and expert automotive services to meet all your vehicle needs.',
+    'about.badge': 'About KURDO Car GmbH',
+    'about.title': 'Trust the Experts',
+    'about.description1': 'At KURDO Car GmbH, we specialize in the maintenance and repair of premium and luxury vehicles. Our experienced team provides first-class service for all brands.',
+    'about.description2': 'With state-of-the-art equipment and years of experience, we ensure your vehicle stays in top condition. Trust our expertise.',
     'about.stats.experience': 'Years Experience',
     'about.stats.customers': 'Happy Customers',
-    'about.stats.quality': 'Quality Assured',
-    'about.stats.response': 'Fast Response',
-    'about.why.title': 'Why Choose KURDO Car',
-    'about.why.evaluation': 'Professional Vehicle Evaluation',
-    'about.why.equipment': 'Advanced Diagnostic Equipment',
-    'about.why.transparent': 'Transparent Pricing',
-    'about.why.guarantee': 'Quality Guarantee',
-    'about.why.fair': 'Fair Market Prices',
+    'about.stats.master': 'Master Workshop',
+    'about.stats.express': 'Express Service',
+    'about.why.title': 'Why KURDO Car GmbH?',
+    'about.why.certified': 'Certified master workshop',
+    'about.why.diagnostic': 'Latest diagnostic equipment',
+    'about.why.transparent': 'Transparent pricing',
+    'about.why.guarantee': 'Warranty on all work',
+    'about.why.fair': 'Fair and honest advice',
 
     // Contact
     'contact.title': 'Contact',
@@ -464,13 +364,8 @@ const translations = {
     'privacy.section11.text': 'If you have any questions, concerns, or requests regarding this Privacy Policy or our data processing practices, please do not hesitate to contact us:',
 
     // Footer
-    'footer.company.description': 'Your trusted auto house in Dietikon, Switzerland. We specialize in vehicle sales, purchases, and comprehensive automotive services.',
-    'footer.services': 'Our Services',
-    'footer.services.sales': 'Vehicle Sales & Purchase',
-    'footer.services.evaluation': 'Professional Vehicle Evaluation',
-    'footer.services.assessment': 'Market Price Assessment',
-    'footer.services.preowned': 'Quality Pre-owned Vehicles',
-    'footer.services.import': 'Vehicle Import & Export',
+    'footer.company.description': 'Your premium auto service in Dietikon for all brands - from maintenance to repairs.',
+    'footer.services': 'Services',
     'footer.links': 'Links',
     'footer.contact': 'Contact',
     'footer.legal.imprint': 'Imprint',
