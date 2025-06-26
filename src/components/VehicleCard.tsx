@@ -89,12 +89,6 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
               {vehicle.price}
             </div>
 
-            {/* Links */}
-            <div className="flex gap-4 mb-4 text-sm text-blue-600">
-              <button className="hover:underline">{t('vehicles.card.calculateCredit')}</button>
-              <button className="hover:underline">{t('vehicles.card.compareInsurance')}</button>
-            </div>
-
             {/* Vehicle Specs */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-600 mb-4">
               <div className="flex items-center gap-2">
