@@ -4,7 +4,7 @@ import { AutoScout24Service } from '@/services/AutoScout24Service';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Car, Phone, MapPin, Fuel, Calendar, Gauge, Settings, RefreshCw, Clock } from 'lucide-react';
+import { Car, Phone, MapPin, Fuel, Calendar, Gauge, Settings, RefreshCw, Clock, ExternalLink } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 interface Vehicle {
@@ -20,6 +20,7 @@ interface Vehicle {
   location: string;
   phone?: string;
   features: string[];
+  url?: string;
 }
 
 interface ScrapedData {
@@ -40,7 +41,9 @@ const CarListings: React.FC = () => {
     // Set up automatic updates every 2 hours
     const interval = setInterval(() => {
       console.log('Auto-updating vehicle listings...');
-      loadVehicles(true);
+      AutoScout24Service.triggerAutomaticScraping();
+      // Refresh data after scraping
+      setTimeout(() => loadVehicles(true), 10000); // Wait 10 seconds for scraping to complete
     }, 2 * 60 * 60 * 1000); // 2 hours
 
     return () => clearInterval(interval);
@@ -52,7 +55,7 @@ const CarListings: React.FC = () => {
       const vehicleData = await AutoScout24Service.getVehicles();
       setData(vehicleData);
       
-      if (!silent) {
+      if (!silent && vehicleData.totalCount > 0) {
         toast({
           title: "Fahrzeuge geladen",
           description: `${vehicleData.totalCount} Fahrzeuge erfolgreich geladen`,
@@ -79,7 +82,7 @@ const CarListings: React.FC = () => {
       setData(freshData);
       toast({
         title: "Aktualisiert",
-        description: "Fahrzeugdaten wurden erfolgreich aktualisiert",
+        description: `Fahrzeugdaten wurden erfolgreich aktualisiert. ${freshData.totalCount} Fahrzeuge gefunden.`,
         duration: 3000,
       });
     } catch (error) {
@@ -91,6 +94,15 @@ const CarListings: React.FC = () => {
       });
     } finally {
       setUpdating(false);
+    }
+  };
+
+  const formatLastUpdated = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleString('de-CH');
+    } catch {
+      return 'Unbekannt';
     }
   };
 
@@ -110,10 +122,10 @@ const CarListings: React.FC = () => {
       <div className="text-center py-16">
         <Car className="w-16 h-16 mx-auto mb-4 text-gray-400" />
         <h3 className="text-xl font-semibold mb-2">Keine Fahrzeuge verfügbar</h3>
-        <p className="text-gray-600 mb-4">Momentan sind keine Fahrzeuge verfügbar.</p>
+        <p className="text-gray-600 mb-4">Momentan sind keine Fahrzeuge verfügbar. Versuchen Sie, die Daten zu aktualisieren.</p>
         <Button onClick={handleForceUpdate} disabled={updating}>
           <RefreshCw className={`w-4 h-4 mr-2 ${updating ? 'animate-spin' : ''}`} />
-          Neu laden
+          Daten aktualisieren
         </Button>
       </div>
     );
@@ -128,10 +140,10 @@ const CarListings: React.FC = () => {
             <Car className="w-5 h-5 text-lime-600" />
             <span className="font-semibold">{data.totalCount} Fahrzeuge verfügbar</span>
           </div>
-          {AutoScout24Service.getLastUpdateTime() && (
+          {data.lastUpdated && (
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Clock className="w-4 h-4" />
-              <span>Zuletzt aktualisiert: {AutoScout24Service.getLastUpdateTime()}</span>
+              <span>Zuletzt aktualisiert: {formatLastUpdated(data.lastUpdated)}</span>
             </div>
           )}
         </div>
@@ -215,8 +227,8 @@ const CarListings: React.FC = () => {
                 </div>
               )}
 
-              {/* Contact button */}
-              <div className="pt-2">
+              {/* Action buttons */}
+              <div className="pt-2 space-y-2">
                 <Button
                   className="w-full bg-lime-400 hover:bg-lime-500 text-black font-semibold"
                   onClick={() => window.open(`tel:${vehicle.phone}`, '_self')}
@@ -224,6 +236,17 @@ const CarListings: React.FC = () => {
                   <Phone className="w-4 h-4 mr-2" />
                   Jetzt anrufen
                 </Button>
+                
+                {vehicle.url && (
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => window.open(vehicle.url, '_blank')}
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Auf AutoScout24 ansehen
+                  </Button>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -233,7 +256,7 @@ const CarListings: React.FC = () => {
       {/* Footer info */}
       <div className="mt-8 p-4 bg-gray-50 rounded-lg text-center text-sm text-gray-600">
         <p>
-          Alle Fahrzeuge werden automatisch alle 2 Stunden aktualisiert. 
+          Alle Fahrzeuge werden automatisch alle 2 Stunden von AutoScout24 aktualisiert. 
           Bei Fragen zu einem Fahrzeug kontaktieren Sie uns direkt.
         </p>
       </div>
