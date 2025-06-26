@@ -13,18 +13,18 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-bold mb-4 text-lime-400">KURDO Car GmbH</h3>
             <p className="text-gray-300 mb-4">
-              {t('footer.company.description')}
+              Your trusted auto house in Dietikon, Switzerland. We specialize in vehicle sales, purchases, and comprehensive automotive services.
             </p>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-lime-400">{t('footer.services')}</h4>
+            <h4 className="text-lg font-semibold mb-4 text-lime-400">Our Services</h4>
             <ul className="space-y-2 text-gray-300">
-              <li>{t('services.repairs')}</li>
-              <li>{t('services.maintenance')}</li>
-              <li>{t('services.tuv')}</li>
-              <li>{t('services.bodywork')}</li>
-              <li>{t('services.electronics')}</li>
+              <li>Vehicle Sales & Purchase</li>
+              <li>Vehicle Diagnostics</li>
+              <li>Inspection Services</li>
+              <li>Vehicle Maintenance</li>
+              <li>Professional Consultation</li>
             </ul>
           </div>
 

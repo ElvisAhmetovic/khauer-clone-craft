@@ -139,13 +139,13 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Traditional Services */}
+        {/* Professional Services */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-lime-400 mb-4 uppercase tracking-wide">
-            {t('services.title')}
+            Professional Services
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            {t('services.subtitle')}
+            Comprehensive automotive services for all your vehicle needs
           </p>
         </div>
 
@@ -186,7 +186,7 @@ const Services = () => {
             })
           ) : (
             <div className="col-span-full text-center text-gray-400">
-              <p>{t('services.noServices')}</p>
+              <p>No services available at the moment.</p>
             </div>
           )}
         </div>
