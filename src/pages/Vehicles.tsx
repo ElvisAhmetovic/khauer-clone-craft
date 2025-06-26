@@ -2,11 +2,14 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CarListings from "@/components/CarListings";
+import AutoScout24Widget from "@/components/AutoScout24Widget";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Car, Phone, Mail, ExternalLink } from "lucide-react";
+import { useState } from "react";
 
 const Vehicles = () => {
   const { t } = useLanguage();
+  const [activeTab, setActiveTab] = useState<'widget' | 'scraped'>('widget');
 
   return (
     <div className="min-h-screen">
@@ -34,13 +37,60 @@ const Vehicles = () => {
                 {t('vehicles.inventory.title')}
               </h2>
               <p className="text-gray-300 mb-6">
-                Unsere aktuellen Fahrzeuge - automatisch aktualisiert
+                Unsere aktuellen Fahrzeuge - live von AutoScout24
               </p>
+              
+              {/* Tab Navigation */}
+              <div className="flex justify-center gap-4 mt-6">
+                <button
+                  onClick={() => setActiveTab('widget')}
+                  className={`px-6 py-2 rounded-lg font-semibold transition-colors ${
+                    activeTab === 'widget'
+                      ? 'bg-lime-400 text-black'
+                      : 'bg-gray-700 text-white hover:bg-gray-600'
+                  }`}
+                >
+                  AutoScout24 Live
+                </button>
+                <button
+                  onClick={() => setActiveTab('scraped')}
+                  className={`px-6 py-2 rounded-lg font-semibold transition-colors ${
+                    activeTab === 'scraped'
+                      ? 'bg-lime-400 text-black'
+                      : 'bg-gray-700 text-white hover:bg-gray-600'
+                  }`}
+                >
+                  Unsere Übersicht
+                </button>
+              </div>
             </div>
             
-            {/* Car Listings Component */}
+            {/* Content based on active tab */}
             <div className="p-8">
-              <CarListings />
+              {activeTab === 'widget' ? (
+                <div>
+                  <div className="mb-6 text-center">
+                    <p className="text-gray-600 mb-4">
+                      Live-Ansicht unserer Fahrzeuge direkt von AutoScout24
+                    </p>
+                  </div>
+                  <AutoScout24Widget 
+                    dealerId="68160" 
+                    language="de"
+                    width="100%"
+                    height="1000px"
+                  />
+                </div>
+              ) : (
+                <div>
+                  <div className="mb-6 text-center">
+                    <p className="text-gray-600 mb-4">
+                      Unsere Fahrzeuge-Übersicht mit detaillierten Informationen
+                    </p>
+                  </div>
+                  <CarListings />
+                </div>
+              )}
             </div>
             
             {/* AutoScout24 Backup Link */}
