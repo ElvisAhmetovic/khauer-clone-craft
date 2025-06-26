@@ -4,7 +4,7 @@ import { AutoScout24Service } from '@/services/AutoScout24Service';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Car, Phone, MapPin, Fuel, Calendar, Gauge, Settings, RefreshCw, Clock, ExternalLink } from 'lucide-react';
+import { Car, Phone, MapPin, Fuel, Calendar, Gauge, Settings, RefreshCw, Clock, ExternalLink, AlertCircle } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 
 interface Vehicle {
@@ -33,6 +33,7 @@ const CarListings: React.FC = () => {
   const [data, setData] = useState<ScrapedData | null>(null);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const CarListings: React.FC = () => {
       console.log('Auto-updating vehicle listings...');
       AutoScout24Service.triggerAutomaticScraping();
       // Refresh data after scraping
-      setTimeout(() => loadVehicles(true), 10000); // Wait 10 seconds for scraping to complete
+      setTimeout(() => loadVehicles(true), 15000); // Wait 15 seconds for scraping to complete
     }, 2 * 60 * 60 * 1000); // 2 hours
 
     return () => clearInterval(interval);
@@ -51,7 +52,10 @@ const CarListings: React.FC = () => {
 
   const loadVehicles = async (silent = false) => {
     try {
-      if (!silent) setLoading(true);
+      if (!silent) {
+        setLoading(true);
+        setError(null);
+      }
       const vehicleData = await AutoScout24Service.getVehicles();
       setData(vehicleData);
       
@@ -64,6 +68,7 @@ const CarListings: React.FC = () => {
       }
     } catch (error) {
       console.error('Error loading vehicles:', error);
+      setError('Fehler beim Laden der Fahrzeuge');
       toast({
         title: "Fehler",
         description: "Fehler beim Laden der Fahrzeuge",
@@ -77,6 +82,7 @@ const CarListings: React.FC = () => {
 
   const handleForceUpdate = async () => {
     setUpdating(true);
+    setError(null);
     try {
       const freshData = await AutoScout24Service.forceUpdate();
       setData(freshData);
@@ -86,11 +92,13 @@ const CarListings: React.FC = () => {
         duration: 3000,
       });
     } catch (error) {
+      console.error('Force update error:', error);
+      setError('Fehler beim Aktualisieren der Daten');
       toast({
         title: "Fehler",
-        description: "Fehler beim Aktualisieren der Daten",
+        description: "Fehler beim Aktualisieren der Daten. Versuchen Sie es später erneut.",
         variant: "destructive",
-        duration: 3000,
+        duration: 5000,
       });
     } finally {
       setUpdating(false);
@@ -113,6 +121,20 @@ const CarListings: React.FC = () => {
           <Car className="w-12 h-12 mx-auto mb-4 text-lime-400 animate-pulse" />
           <p className="text-gray-600">Lade Fahrzeuge...</p>
         </div>
+      </div>
+    );
+  }
+
+  if (error && (!data || data.vehicles.length === 0)) {
+    return (
+      <div className="text-center py-16">
+        <AlertCircle className="w-16 h-16 mx-auto mb-4 text-red-400" />
+        <h3 className="text-xl font-semibold mb-2 text-red-600">Fehler beim Laden</h3>
+        <p className="text-gray-600 mb-4">{error}</p>
+        <Button onClick={handleForceUpdate} disabled={updating}>
+          <RefreshCw className={`w-4 h-4 mr-2 ${updating ? 'animate-spin' : ''}`} />
+          Erneut versuchen
+        </Button>
       </div>
     );
   }
@@ -153,6 +175,14 @@ const CarListings: React.FC = () => {
         </Button>
       </div>
 
+      {/* Error banner if there's an error but we still have data */}
+      {error && data.vehicles.length > 0 && (
+        <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-yellow-600" />
+          <span className="text-sm text-yellow-800">{error}</span>
+        </div>
+      )}
+
       {/* Vehicle Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.vehicles.map((vehicle) => (
@@ -184,22 +214,30 @@ const CarListings: React.FC = () => {
             <CardContent className="space-y-4">
               {/* Vehicle specs */}
               <div className="grid grid-cols-2 gap-3 text-sm">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-gray-500" />
-                  <span>{vehicle.year}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Gauge className="w-4 h-4 text-gray-500" />
-                  <span>{vehicle.mileage}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Fuel className="w-4 h-4 text-gray-500" />
-                  <span>{vehicle.fuel}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Settings className="w-4 h-4 text-gray-500" />
-                  <span>{vehicle.transmission}</span>
-                </div>
+                {vehicle.year && (
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-gray-500" />
+                    <span>{vehicle.year}</span>
+                  </div>
+                )}
+                {vehicle.mileage && (
+                  <div className="flex items-center gap-2">
+                    <Gauge className="w-4 h-4 text-gray-500" />
+                    <span>{vehicle.mileage}</span>
+                  </div>
+                )}
+                {vehicle.fuel && (
+                  <div className="flex items-center gap-2">
+                    <Fuel className="w-4 h-4 text-gray-500" />
+                    <span>{vehicle.fuel}</span>
+                  </div>
+                )}
+                {vehicle.transmission && (
+                  <div className="flex items-center gap-2">
+                    <Settings className="w-4 h-4 text-gray-500" />
+                    <span>{vehicle.transmission}</span>
+                  </div>
+                )}
               </div>
 
               {/* Location */}

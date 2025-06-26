@@ -38,7 +38,7 @@ export class AutoScout24Service {
 
       if (error) {
         console.error('Error fetching vehicles:', error);
-        throw error;
+        throw new Error(`Database error: ${error.message}`);
       }
 
       // Transform database data to match our interface
@@ -70,12 +70,7 @@ export class AutoScout24Service {
       };
     } catch (error) {
       console.error('Error in getVehicles:', error);
-      // Return empty data on error
-      return {
-        vehicles: [],
-        lastUpdated: new Date().toISOString(),
-        totalCount: 0
-      };
+      throw error;
     }
   }
 
@@ -90,28 +85,39 @@ export class AutoScout24Service {
 
       if (error) {
         console.error('Error calling scrape function:', error);
-        throw error;
+        throw new Error(`Scraping failed: ${error.message}`);
       }
 
       console.log('Scraping completed:', data);
+      
+      // Wait a bit for the data to be processed
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Fetch the updated data from database
       return await this.getVehicles();
     } catch (error) {
       console.error('Error in forceUpdate:', error);
+      // If the scraping fails, still try to return existing data
+      try {
+        const existingData = await this.getVehicles();
+        // If we have existing data, return it but still throw the error
+        if (existingData.vehicles.length > 0) {
+          throw new Error(`Aktualisierung fehlgeschlagen, aber vorhandene Daten werden angezeigt: ${error.message}`);
+        }
+      } catch (getError) {
+        console.error('Error getting existing data:', getError);
+      }
       throw error;
     }
-  }
-
-  static getLastUpdateTime(): string | null {
-    // This will be handled by the component using the lastUpdated from getVehicles
-    return null;
   }
 
   static async triggerAutomaticScraping(): Promise<void> {
     console.log('Triggering automatic scraping...');
     try {
-      await supabase.functions.invoke('scrape-autoscout24');
+      const { error } = await supabase.functions.invoke('scrape-autoscout24');
+      if (error) {
+        console.error('Error in automatic scraping:', error);
+      }
     } catch (error) {
       console.error('Error triggering automatic scraping:', error);
     }
