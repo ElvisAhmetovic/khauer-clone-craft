@@ -4,13 +4,13 @@ import { Users, Award, Calendar, Target } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   const stats = [
     { icon: <Calendar className="w-8 h-8" />, number: "20+", label: t('about.stats.experience') },
     { icon: <Users className="w-8 h-8" />, number: "5000+", label: t('about.stats.customers') },
-    { icon: <Award className="w-8 h-8" />, number: "100%", label: t('about.stats.master') },
-    { icon: <Target className="w-8 h-8" />, number: "24h", label: t('about.stats.express') }
+    { icon: <Award className="w-8 h-8" />, number: "100%", label: t('about.stats.quality') },
+    { icon: <Target className="w-8 h-8" />, number: "24h", label: t('about.stats.response') }
   ];
 
   return (
@@ -52,11 +52,11 @@ const About = () => {
               <ul className="space-y-4">
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
-                  <span className="font-medium">{t('about.why.certified')}</span>
+                  <span className="font-medium">{t('about.why.evaluation')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
-                  <span className="font-medium">{t('about.why.diagnostic')}</span>
+                  <span className="font-medium">{t('about.why.equipment')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
                   <div className="w-2 h-2 bg-black rounded-full mt-2"></div>

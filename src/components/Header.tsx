@@ -14,7 +14,7 @@ const Header = () => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <header className="bg-black shadow-lg">
+    <header className="bg-black shadow-lg sticky top-0 z-50">
       {/* Top contact bar */}
       <div className="bg-gray-900 text-white py-2">
         <div className="container mx-auto px-4">
@@ -44,16 +44,18 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <div className="text-2xl font-bold text-lime-400">
+            <Link to="/" className="text-2xl font-bold text-lime-400 hover:text-lime-300 transition-colors cursor-pointer">
               KURDO Car GmbH
-            </div>
+            </Link>
             <div className="w-16 h-12 flex items-center">
               {logoUrl ? (
-                <img 
-                  src={logoUrl} 
-                  alt="KURDO Car GmbH Logo" 
-                  className="w-full h-full object-contain"
-                />
+                <Link to="/">
+                  <img 
+                    src={logoUrl} 
+                    alt="KURDO Car GmbH Logo" 
+                    className="w-full h-full object-contain cursor-pointer"
+                  />
+                </Link>
               ) : (
                 <LogoProcessor onLogoReady={setLogoUrl} />
               )}

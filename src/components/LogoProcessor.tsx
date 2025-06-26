@@ -9,8 +9,8 @@ const LogoProcessor = ({ onLogoReady }: LogoProcessorProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simply use the original logo without any processing
-    const logoUrl = '/lovable-uploads/93c1bf18-c1ae-4c22-bff0-2ef805a96560.png';
+    // Use the new KURDO Car logo
+    const logoUrl = '/lovable-uploads/82fd3310-1324-4e76-a0ad-92b0c54c4e1d.png';
     onLogoReady(logoUrl);
     setIsLoading(false);
   }, [onLogoReady]);

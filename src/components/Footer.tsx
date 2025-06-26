@@ -20,11 +20,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-lime-400">{t('footer.services')}</h4>
             <ul className="space-y-2 text-gray-300">
-              <li>{t('services.repairs')}</li>
-              <li>{t('services.maintenance')}</li>
-              <li>{t('services.tuv')}</li>
-              <li>{t('services.bodywork')}</li>
-              <li>{t('services.electronics')}</li>
+              <li>{t('footer.services.sales')}</li>
+              <li>{t('footer.services.evaluation')}</li>
+              <li>{t('footer.services.assessment')}</li>
+              <li>{t('footer.services.preowned')}</li>
+              <li>{t('footer.services.import')}</li>
             </ul>
           </div>
 
