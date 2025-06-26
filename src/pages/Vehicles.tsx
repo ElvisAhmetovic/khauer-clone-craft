@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -46,7 +45,7 @@ const Vehicles = () => {
                 href="https://www.autoscout24.ch/de/s/seller-68160"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-4 px-8 rounded-lg transition-colors duration-300 text-lg animate-pulse hover:animate-none"
+                className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-4 px-8 rounded-lg transition-colors duration-300 text-lg animate-breathe hover:animate-none"
               >
                 <ExternalLink className="w-6 h-6" />
                 {t('vehicles.inventory.button')}
