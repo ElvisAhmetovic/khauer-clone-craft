@@ -17,7 +17,7 @@ const VehicleFilters: React.FC = () => {
             <SelectValue placeholder="Marke & Modell" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Alle Marken</SelectItem>
+            <SelectItem value="all">Alle Marken</SelectItem>
             <SelectItem value="ford">Ford</SelectItem>
             <SelectItem value="bmw">BMW</SelectItem>
             <SelectItem value="mercedes">Mercedes</SelectItem>
@@ -30,7 +30,7 @@ const VehicleFilters: React.FC = () => {
             <SelectValue placeholder="Jahr" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Alle Jahre</SelectItem>
+            <SelectItem value="all">Alle Jahre</SelectItem>
             <SelectItem value="2020">2020</SelectItem>
             <SelectItem value="2019">2019</SelectItem>
             <SelectItem value="2018">2018</SelectItem>
@@ -44,7 +44,7 @@ const VehicleFilters: React.FC = () => {
             <SelectValue placeholder="Kilometerstand" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Alle Kilometerstände</SelectItem>
+            <SelectItem value="all">Alle Kilometerstände</SelectItem>
             <SelectItem value="0-50000">0 - 50,000 km</SelectItem>
             <SelectItem value="50000-100000">50,000 - 100,000 km</SelectItem>
             <SelectItem value="100000-150000">100,000 - 150,000 km</SelectItem>
@@ -57,7 +57,7 @@ const VehicleFilters: React.FC = () => {
             <SelectValue placeholder="Preis" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Alle Preise</SelectItem>
+            <SelectItem value="all">Alle Preise</SelectItem>
             <SelectItem value="0-10000">CHF 0 - 10,000</SelectItem>
             <SelectItem value="10000-20000">CHF 10,000 - 20,000</SelectItem>
             <SelectItem value="20000-30000">CHF 20,000 - 30,000</SelectItem>
@@ -70,7 +70,7 @@ const VehicleFilters: React.FC = () => {
             <SelectValue placeholder="Aufbauart" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Alle Aufbauarten</SelectItem>
+            <SelectItem value="all">Alle Aufbauarten</SelectItem>
             <SelectItem value="limousine">Limousine</SelectItem>
             <SelectItem value="kombi">Kombi</SelectItem>
             <SelectItem value="suv">SUV</SelectItem>
@@ -83,7 +83,7 @@ const VehicleFilters: React.FC = () => {
             <SelectValue placeholder="Treibstoff" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Alle Treibstoffe</SelectItem>
+            <SelectItem value="all">Alle Treibstoffe</SelectItem>
             <SelectItem value="benzin">Benzin</SelectItem>
             <SelectItem value="diesel">Diesel</SelectItem>
             <SelectItem value="hybrid">Hybrid</SelectItem>
@@ -99,7 +99,7 @@ const VehicleFilters: React.FC = () => {
             <SelectValue placeholder="Getriebe" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Alle Getriebe</SelectItem>
+            <SelectItem value="all">Alle Getriebe</SelectItem>
             <SelectItem value="automat">Automat</SelectItem>
             <SelectItem value="manuell">Manuell</SelectItem>
           </SelectContent>

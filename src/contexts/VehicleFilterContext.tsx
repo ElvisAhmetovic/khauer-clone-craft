@@ -44,13 +44,13 @@ interface VehicleFilterContextType {
 }
 
 const initialFilters: FilterState = {
-  brand: '',
-  year: '',
-  mileage: '',
-  price: '',
-  bodyType: '',
-  fuel: '',
-  transmission: ''
+  brand: 'all',
+  year: 'all',
+  mileage: 'all',
+  price: 'all',
+  bodyType: 'all',
+  fuel: 'all',
+  transmission: 'all'
 };
 
 const VehicleFilterContext = createContext<VehicleFilterContextType | undefined>(undefined);
@@ -79,19 +79,19 @@ export const VehicleFilterProvider: React.FC<{ children: ReactNode }> = ({ child
   const isLiked = (vehicleId: string) => likedVehicles.includes(vehicleId);
 
   const filteredVehicles = vehicles.filter(vehicle => {
-    if (filters.brand && !vehicle.brand.toLowerCase().includes(filters.brand.toLowerCase())) return false;
-    if (filters.year && vehicle.yearValue.toString() !== filters.year) return false;
-    if (filters.fuel && vehicle.fuel.toLowerCase() !== filters.fuel.toLowerCase()) return false;
-    if (filters.transmission && vehicle.transmission.toLowerCase() !== filters.transmission.toLowerCase()) return false;
-    if (filters.bodyType && vehicle.bodyType.toLowerCase() !== filters.bodyType.toLowerCase()) return false;
+    if (filters.brand !== 'all' && !vehicle.brand.toLowerCase().includes(filters.brand.toLowerCase())) return false;
+    if (filters.year !== 'all' && vehicle.yearValue.toString() !== filters.year) return false;
+    if (filters.fuel !== 'all' && vehicle.fuel.toLowerCase() !== filters.fuel.toLowerCase()) return false;
+    if (filters.transmission !== 'all' && vehicle.transmission.toLowerCase() !== filters.transmission.toLowerCase()) return false;
+    if (filters.bodyType !== 'all' && vehicle.bodyType.toLowerCase() !== filters.bodyType.toLowerCase()) return false;
     
-    if (filters.mileage) {
+    if (filters.mileage !== 'all') {
       const [min, max] = filters.mileage.split('-').map(v => parseInt(v.replace(/\D/g, '')));
       if (max && (vehicle.mileageValue < min || vehicle.mileageValue > max)) return false;
       if (!max && vehicle.mileageValue < min) return false;
     }
     
-    if (filters.price) {
+    if (filters.price !== 'all') {
       const [min, max] = filters.price.split('-').map(v => parseInt(v.replace(/\D/g, '')));
       if (max && (vehicle.priceValue < min || vehicle.priceValue > max)) return false;
       if (!max && vehicle.priceValue < min) return false;
