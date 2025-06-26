@@ -1,32 +1,33 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Car, Phone, Mail } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const Vehicles = () => {
   const { t } = useLanguage();
+  const widgetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Load the AutoScout24 widget script
-    const script = document.createElement('script');
-    script.src = 'https://widget.autoscout24.com/ch/haendler-angebote.js';
-    script.setAttribute('data-dealer-id', '68160');
-    script.setAttribute('data-language', 'de');
-    script.setAttribute('data-width', '100%');
-    script.setAttribute('data-height', '1000px');
-    script.async = true;
-
-    const widgetContainer = document.getElementById('autoscout-widget');
-    if (widgetContainer) {
-      widgetContainer.appendChild(script);
+    // Direct script injection into the widget container
+    if (widgetRef.current) {
+      const script = document.createElement('script');
+      script.src = 'https://widget.autoscout24.com/ch/haendler-angebote.js';
+      script.setAttribute('data-dealer-id', '68160');
+      script.setAttribute('data-language', 'de');
+      script.setAttribute('data-width', '100%');
+      script.setAttribute('data-height', '1000px');
+      script.async = true;
+      
+      // Clear any existing content and inject script directly
+      widgetRef.current.innerHTML = '';
+      widgetRef.current.appendChild(script);
     }
 
     return () => {
-      // Cleanup script on component unmount
-      if (widgetContainer && script.parentNode) {
-        script.parentNode.removeChild(script);
+      // Cleanup on unmount
+      if (widgetRef.current) {
+        widgetRef.current.innerHTML = '';
       }
     };
   }, []);
@@ -61,19 +62,13 @@ const Vehicles = () => {
               </p>
             </div>
             
-            {/* Widget Container */}
+            {/* Direct Widget Injection Container */}
             <div className="p-4 bg-white">
               <div 
-                id="autoscout-widget" 
-                className="w-full"
-                style={{
-                  minHeight: '1000px',
-                  border: '1px solid #eee',
-                  borderRadius: '8px',
-                  padding: '10px'
-                }}
+                ref={widgetRef}
+                className="w-full min-h-[1000px] border border-gray-200 rounded-lg p-4"
               >
-                {/* Widget will be loaded here by the script */}
+                {/* AutoScout24 widget script will be injected here directly */}
               </div>
             </div>
             
