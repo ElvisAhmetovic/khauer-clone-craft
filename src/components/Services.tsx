@@ -15,7 +15,7 @@ const Services = () => {
       description: language === 'en' ? 'Professional vehicle evaluation and quick processing.' : 'Professionelle Fahrzeugbewertung und schnelle Abwicklung.',
       image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png",
       buttonText: language === 'en' ? 'Get Quote' : 'Angebot erhalten',
-      buttonAction: 'contact'
+      buttonAction: 'autoscout24'
     },
     {
       icon: <Car className="w-16 h-16 text-lime-400" />,
@@ -61,6 +61,10 @@ const Services = () => {
     }
   };
 
+  const openAutoScout24 = () => {
+    window.open('https://www.autoscout24.ch/de/s/seller-68160', '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <section id="services" className="py-20 bg-black text-white">
       <div className="container mx-auto px-4">
@@ -86,7 +90,14 @@ const Services = () => {
                 <p className="text-lg leading-relaxed mb-6">
                   {service.description}
                 </p>
-                {service.buttonAction === 'contact' ? (
+                {service.buttonAction === 'autoscout24' ? (
+                  <Button 
+                    onClick={openAutoScout24}
+                    className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit"
+                  >
+                    {service.buttonText}
+                  </Button>
+                ) : service.buttonAction === 'contact' ? (
                   <Button 
                     onClick={scrollToContact}
                     className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit"
