@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -16,14 +15,8 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
+  const openAutoScout24 = () => {
+    window.open('https://www.autoscout24.ch/de/s/seller-68160', '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -62,7 +55,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               className="bg-lime-400 hover:bg-lime-500 text-black font-bold text-lg px-8 py-4 uppercase tracking-wider"
-              onClick={scrollToContact}
+              onClick={openAutoScout24}
             >
               {t('hero.button')}
               <ArrowRight className="ml-2" size={20} />
