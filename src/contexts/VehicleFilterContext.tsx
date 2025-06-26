@@ -40,6 +40,7 @@ interface VehicleFilterContextType {
   toggleLike: (vehicleId: string) => void;
   isLiked: (vehicleId: string) => boolean;
   filteredVehicles: Vehicle[];
+  vehicles: Vehicle[];
   setVehicles: (vehicles: Vehicle[]) => void;
 }
 
@@ -109,6 +110,7 @@ export const VehicleFilterProvider: React.FC<{ children: ReactNode }> = ({ child
       toggleLike,
       isLiked,
       filteredVehicles,
+      vehicles,
       setVehicles
     }}>
       {children}
