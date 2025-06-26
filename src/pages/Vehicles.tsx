@@ -9,7 +9,7 @@ import { useState } from "react";
 
 const Vehicles = () => {
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<'widget' | 'scraped'>('widget');
+  const [activeTab, setActiveTab] = useState<'widget' | 'iframe' | 'scraped'>('widget');
 
   return (
     <div className="min-h-screen">
@@ -41,20 +41,30 @@ const Vehicles = () => {
               </p>
               
               {/* Tab Navigation */}
-              <div className="flex justify-center gap-4 mt-6">
+              <div className="flex justify-center gap-4 mt-6 flex-wrap">
                 <button
                   onClick={() => setActiveTab('widget')}
-                  className={`px-6 py-2 rounded-lg font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                     activeTab === 'widget'
                       ? 'bg-lime-400 text-black'
                       : 'bg-gray-700 text-white hover:bg-gray-600'
                   }`}
                 >
-                  AutoScout24 Live
+                  AutoScout24 Widget
+                </button>
+                <button
+                  onClick={() => setActiveTab('iframe')}
+                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                    activeTab === 'iframe'
+                      ? 'bg-lime-400 text-black'
+                      : 'bg-gray-700 text-white hover:bg-gray-600'
+                  }`}
+                >
+                  AutoScout24 Direkt
                 </button>
                 <button
                   onClick={() => setActiveTab('scraped')}
-                  className={`px-6 py-2 rounded-lg font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                     activeTab === 'scraped'
                       ? 'bg-lime-400 text-black'
                       : 'bg-gray-700 text-white hover:bg-gray-600'
@@ -67,11 +77,11 @@ const Vehicles = () => {
             
             {/* Content based on active tab */}
             <div className="p-8">
-              {activeTab === 'widget' ? (
+              {activeTab === 'widget' && (
                 <div>
                   <div className="mb-6 text-center">
                     <p className="text-gray-600 mb-4">
-                      Live-Ansicht unserer Fahrzeuge direkt von AutoScout24
+                      Live-Ansicht unserer Fahrzeuge über das AutoScout24 Widget
                     </p>
                   </div>
                   <AutoScout24Widget 
@@ -81,7 +91,30 @@ const Vehicles = () => {
                     height="1000px"
                   />
                 </div>
-              ) : (
+              )}
+              
+              {activeTab === 'iframe' && (
+                <div>
+                  <div className="mb-6 text-center">
+                    <p className="text-gray-600 mb-4">
+                      Direkte Einbettung unserer AutoScout24-Seite
+                    </p>
+                  </div>
+                  <div className="w-full" style={{ height: '1000px' }}>
+                    <iframe
+                      src="https://www.autoscout24.ch/de/s/seller-68160"
+                      width="100%"
+                      height="100%"
+                      frameBorder="0"
+                      title="AutoScout24 Fahrzeuge"
+                      className="rounded-lg"
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"
+                    />
+                  </div>
+                </div>
+              )}
+              
+              {activeTab === 'scraped' && (
                 <div>
                   <div className="mb-6 text-center">
                     <p className="text-gray-600 mb-4">
