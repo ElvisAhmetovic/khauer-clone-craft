@@ -185,6 +185,11 @@ const translations = {
     // Footer
     'footer.company.description': 'Ihr vertrauensvolles Auto House in Dietikon, Schweiz. Wir spezialisieren uns auf Fahrzeugverkauf, -ankauf und umfassende Automotive-Services.',
     'footer.services': 'Dienstleistungen',
+    'footer.services.sales': 'Fahrzeugverkauf & -ankauf',
+    'footer.services.evaluation': 'Professionelle Fahrzeugbewertung',
+    'footer.services.assessment': 'Marktpreisbewertung',
+    'footer.services.preowned': 'Hochwertige Gebrauchtwagen',
+    'footer.services.import': 'Fahrzeugimport & -export',
     'footer.links': 'Links',
     'footer.contact': 'Kontakt',
     'footer.legal.imprint': 'Impressum',
@@ -364,7 +369,12 @@ const translations = {
 
     // Footer
     'footer.company.description': 'Your trusted auto house in Dietikon, Switzerland. We specialize in vehicle sales, purchases, and comprehensive automotive services.',
-    'footer.services': 'Services',
+    'footer.services': 'Our Services',
+    'footer.services.sales': 'Vehicle Sales & Purchase',
+    'footer.services.evaluation': 'Professional Vehicle Evaluation',
+    'footer.services.assessment': 'Market Price Assessment',
+    'footer.services.preowned': 'Quality Pre-owned Vehicles',
+    'footer.services.import': 'Vehicle Import & Export',
     'footer.links': 'Links',
     'footer.contact': 'Contact',
     'footer.legal.imprint': 'Imprint',
