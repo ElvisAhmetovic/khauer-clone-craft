@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Heart, LayoutGrid } from 'lucide-react';
 import { Vehicle, useVehicleFilter } from '@/contexts/VehicleFilterContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -14,10 +15,19 @@ interface VehicleCardProps {
 const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
   const { toggleLike, isLiked } = useVehicleFilter();
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const liked = isLiked(vehicle.id);
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Don't navigate if clicking on buttons
+    if ((e.target as HTMLElement).closest('button')) {
+      return;
+    }
+    navigate(`/vehicles/${vehicle.id}`);
+  };
+
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onClick={handleCardClick}>
       <CardContent className="p-0">
         <div className="flex flex-col md:flex-row">
           {/* Vehicle Image */}
@@ -39,7 +49,10 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
                 variant="ghost" 
                 size="sm" 
                 className="bg-white/80 hover:bg-white"
-                onClick={() => toggleLike(vehicle.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleLike(vehicle.id);
+                }}
               >
                 <Heart 
                   className={`w-4 h-4 ${liked ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} 
@@ -60,13 +73,16 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
             <div className="flex justify-between items-start mb-4">
               <h3 className="text-xl font-bold text-gray-900 mb-2">{vehicle.title}</h3>
               <div className="flex items-center gap-2">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={(e) => e.stopPropagation()}>
                   <LayoutGrid className="w-4 h-4" />
                 </Button>
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => toggleLike(vehicle.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleLike(vehicle.id);
+                  }}
                 >
                   <Heart 
                     className={`w-4 h-4 ${liked ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} 
