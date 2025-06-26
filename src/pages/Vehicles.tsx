@@ -1,11 +1,42 @@
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Car, Phone, Mail, ExternalLink } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const Vehicles = () => {
   const { t } = useLanguage();
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    const button = buttonRef.current;
+    if (!button) return;
+
+    const scheduleNextShake = () => {
+      // Random delay between 6 and 10 seconds
+      const randomDelay = Math.random() * 4000 + 6000; // 6000ms to 10000ms
+      
+      setTimeout(() => {
+        // Add shake class
+        button.classList.add('animate-shake-button');
+        
+        // Remove shake class after animation completes
+        setTimeout(() => {
+          button.classList.remove('animate-shake-button');
+          // Schedule next shake
+          scheduleNextShake();
+        }, 600); // Animation duration is 0.6s
+      }, randomDelay);
+    };
+
+    // Start the shake cycle
+    scheduleNextShake();
+
+    // Cleanup function
+    return () => {
+      button.classList.remove('animate-shake-button');
+    };
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -43,6 +74,7 @@ const Vehicles = () => {
                 {t('vehicles.inventory.description')}
               </p>
               <a
+                ref={buttonRef}
                 href="https://www.autoscout24.ch/de/s/seller-68160"
                 target="_blank"
                 rel="noopener noreferrer"
