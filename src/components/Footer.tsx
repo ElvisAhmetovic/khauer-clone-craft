@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-brand-blue">{t('footer.contact')}</h4>
+            <h4 className="text-lg font-semibold mb-4 text-brand-orange ">{t('footer.contact')}</h4>
             <div className="space-y-3 text-gray-300">
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-brand-orange" />
