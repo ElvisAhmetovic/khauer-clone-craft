@@ -59,7 +59,7 @@ const Vehicles = () => {
       <div className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-7xl mx-auto">
-            <div className="p-8 bg-brand-blue text-white text-center">
+            <div className="p-8 bg-black text-white text-center">
               <Car className="w-16 h-16 mx-auto mb-4 text-brand-orange" />
               <h2 className="text-3xl font-bold mb-4">
                 {t('vehicles.inventory.title')}
