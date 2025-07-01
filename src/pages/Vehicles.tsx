@@ -60,7 +60,7 @@ const Vehicles = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-7xl mx-auto">
             <div className="p-8 bg-black text-white text-center">
               <Car className="w-16 h-16 mx-auto mb-4 text-brand-orange" />
-              <h2 className="text-3xl font-bold mb-4 text-brand-orange">
+              <h2 className="text-3xl font-bold mb-4">
                 {t('vehicles.inventory.title')}
               </h2>
               <p className="text-gray-100 mb-6">
