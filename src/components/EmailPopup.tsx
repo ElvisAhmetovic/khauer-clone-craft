@@ -1,17 +1,19 @@
+
 import { useState, useEffect } from "react";
 import { Mail, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
+
 const EmailPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
-  const {
-    language
-  } = useLanguage();
+  const { language } = useLanguage();
+
   useEffect(() => {
     const handleScroll = () => {
       if (isDismissed) return;
+
       const scrollPosition = window.scrollY + window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const threshold = documentHeight - 100; // Show when 100px from bottom
@@ -20,21 +22,32 @@ const EmailPopup = () => {
         setIsVisible(true);
       }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isDismissed]);
+
   const handleDismiss = () => {
     setIsVisible(false);
     setIsDismissed(true);
   };
+
   const handleEmailClick = () => {
     window.location.href = 'mailto:kurdocar@bluewin.ch';
   };
+
   if (!isVisible || isDismissed) return null;
-  return <div className="fixed bottom-6 left-6 z-50 animate-slide-in-left">
-      <Card className="bg-gray-900 border-lime-400 border-2 shadow-xl max-w-sm">
+
+  return (
+    <div className="fixed bottom-6 left-6 z-50 animate-slide-in-left">
+      <Card className="bg-gray-900 border-brand-orange border-2 shadow-xl max-w-sm">
         <CardContent className="p-6 relative">
-          <Button variant="ghost" size="icon" className="absolute top-2 right-2 text-gray-400 hover:text-white" onClick={handleDismiss}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-2 right-2 text-gray-400 hover:text-white"
+            onClick={handleDismiss}
+          >
             <X size={16} />
           </Button>
           
@@ -57,12 +70,17 @@ const EmailPopup = () => {
               <p className="font-medium text-orange-400 ">kurdocar@bluewin.ch</p>
             </div>
             
-            <Button onClick={handleEmailClick} className="w-full bg-orange-400 hover:bg-yellow-500 text-black font-bold">
+            <Button
+              onClick={handleEmailClick}
+              className="w-full bg-orange-400 hover:bg-yellow-500 text-black font-bold"
+            >
               {language === 'en' ? 'Send Email' : 'E-Mail senden'}
             </Button>
           </div>
         </CardContent>
       </Card>
-    </div>;
+    </div>
+  );
 };
+
 export default EmailPopup;
