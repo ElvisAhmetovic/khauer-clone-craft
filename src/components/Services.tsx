@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, ShoppingCart } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -9,7 +10,7 @@ const Services = () => {
 
   const customServices = [
     {
-      icon: <ShoppingCart className="w-16 h-16 text-lime-400" />,
+      icon: <ShoppingCart className="w-16 h-16 text-brand-blue" />,
       title: t('services.purchase.title'),
       description: language === 'en' ? 'Professional vehicle evaluation and quick processing.' : 'Professionelle Fahrzeugbewertung und schnelle Abwicklung.',
       image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png",
@@ -17,7 +18,7 @@ const Services = () => {
       buttonAction: 'contact'
     },
     {
-      icon: <Car className="w-16 h-16 text-lime-400" />,
+      icon: <Car className="w-16 h-16 text-brand-blue" />,
       title: t('services.sales.title'),
       description: language === 'en' ? 'Quality vehicles in excellent condition. All brands, fair prices.' : 'Hochwertige Fahrzeuge in ausgezeichnetem Zustand. Alle Marken, faire Preise.',
       image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png",
@@ -65,7 +66,7 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="py-20 bg-black text-white">
+    <section id="services" className="py-20 bg-gray-900 text-white">
       <div className="container mx-auto px-4">
         {/* Custom Services Section */}
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
@@ -83,7 +84,7 @@ const Services = () => {
                 <div className="mb-6">
                   {service.icon}
                 </div>
-                <h3 className="text-3xl font-bold mb-6 text-lime-400 uppercase tracking-wide">
+                <h3 className="text-3xl font-bold mb-6 text-brand-blue uppercase tracking-wide">
                   {service.title}
                 </h3>
                 <p className="text-lg leading-relaxed mb-6">
@@ -92,20 +93,20 @@ const Services = () => {
                 {service.buttonAction === 'autoscout24' ? (
                   <Button 
                     onClick={openAutoScout24}
-                    className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit animate-shake-button"
+                    className="bg-brand-orange hover:bg-orange-600 text-black font-bold py-3 px-6 w-fit animate-shake-button"
                   >
                     {service.buttonText}
                   </Button>
                 ) : service.buttonAction === 'contact' ? (
                   <Button 
                     onClick={scrollToContact}
-                    className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit"
+                    className="bg-brand-orange hover:bg-orange-600 text-black font-bold py-3 px-6 w-fit"
                   >
                     {service.buttonText}
                   </Button>
                 ) : (
                   <Link to="/vehicles">
-                    <Button className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit">
+                    <Button className="bg-brand-orange hover:bg-orange-600 text-black font-bold py-3 px-6 w-fit">
                       {service.buttonText}
                     </Button>
                   </Link>
@@ -117,7 +118,7 @@ const Services = () => {
 
         {/* Auto House Services */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-lime-400 mb-4 uppercase tracking-wide">
+          <h2 className="text-4xl font-bold text-brand-blue mb-4 uppercase tracking-wide">
             {language === 'en' ? 'Our Auto House Services' : 'Unsere Auto House Services'}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -127,17 +128,17 @@ const Services = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {autoHouseServices.map((service, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow duration-300 bg-gray-900 border-gray-700">
+            <Card key={index} className="hover:shadow-lg transition-shadow duration-300 bg-white border-gray-200">
               <CardHeader className="text-center">
                 <div className="flex justify-center mb-4">
-                  <Car className="w-12 h-12 text-lime-400" />
+                  <Car className="w-12 h-12 text-brand-orange" />
                 </div>
-                <CardTitle className="text-xl text-white">
+                <CardTitle className="text-xl text-brand-blue">
                   {service.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 text-center">
+                <p className="text-gray-600 text-center">
                   {service.description}
                 </p>
               </CardContent>
