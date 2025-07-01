@@ -16,7 +16,7 @@ const Services = () => {
     buttonText: language === 'en' ? 'Get Quote' : 'Angebot erhalten',
     buttonAction: 'contact'
   }, {
-    icon: <Car className="w-16 h-16 text-brand-blue" />,
+    icon: <Car className="w-16 h-16 text-brand-orange " />,
     title: t('services.sales.title'),
     description: language === 'en' ? 'Quality vehicles in excellent condition. All brands, fair prices.' : 'Hochwertige Fahrzeuge in ausgezeichnetem Zustand. Alle Marken, faire Preise.',
     image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png",
