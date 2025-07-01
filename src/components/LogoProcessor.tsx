@@ -10,7 +10,7 @@ const LogoProcessor = ({ onLogoReady }: LogoProcessorProps) => {
 
   useEffect(() => {
     // Use the new KURDO Car logo
-    const logoUrl = '/lovable-uploads/82fd3310-1324-4e76-a0ad-92b0c54c4e1d.png';
+    const logoUrl = '/lovable-uploads/e08f20a3-3161-47dd-8a8a-b2ca5a602040.png';
     onLogoReady(logoUrl);
     setIsLoading(false);
   }, [onLogoReady]);

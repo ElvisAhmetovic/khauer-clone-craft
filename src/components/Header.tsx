@@ -72,10 +72,14 @@ const Header = () => {
             <Link to="/" className="text-2xl font-bold text-orange-400 hover:text-yellow-300 transition-colors cursor-pointer">
               KURDO Car GmbH
             </Link>
-            <div className="w-16 h-12 flex items-center">
+            <div className="w-16 h-16 flex items-center">
               {logoUrl ? (
                 <Link to="/">
-                  <img src={logoUrl} alt="KURDO Car GmbH Logo" className="w-full h-full object-contain cursor-pointer" />
+                  <img 
+                    src={logoUrl} 
+                    alt="KURDO Car GmbH Logo" 
+                    className="w-full h-full object-cover rounded-full cursor-pointer border-2 border-orange-400" 
+                  />
                 </Link>
               ) : (
                 <LogoProcessor onLogoReady={setLogoUrl} />
