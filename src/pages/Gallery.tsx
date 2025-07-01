@@ -204,7 +204,7 @@ const Gallery = () => {
                     </div>
                   </div>
                   <div className="pt-4 border-t border-gray-200">
-                    <div className="text-2xl font-bold text-lime-600 text-center">
+                    <div className="text-2xl font-bold text-orange-600 text-center">
                       {car.price}
                     </div>
                   </div>
