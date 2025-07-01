@@ -57,7 +57,7 @@ const EmailPopup = () => {
               <p className="font-medium text-lime-400">kurdocar@bluewin.ch</p>
             </div>
             
-            <Button onClick={handleEmailClick} className="w-full bg-lime-400 hover:bg-lime-500 text-black font-bold">
+            <Button onClick={handleEmailClick} className="w-full bg-lime-400 hover:bg-orange-500 text-black font-bold">
               {language === 'en' ? 'Send Email' : 'E-Mail senden'}
             </Button>
           </div>
