@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -73,10 +74,6 @@ const Hero = () => {
     };
   }, []);
 
-  const openAutoScout24 = () => {
-    window.open('https://www.autoscout24.ch/de/s/seller-68160', '_blank', 'noopener,noreferrer');
-  };
-
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -139,23 +136,23 @@ const Hero = () => {
               ? 'opacity-100 translate-x-0' 
               : 'opacity-0 -translate-x-12'
           }`}>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide text-white">
               {t('hero.subtitle')}
             </h2>
-            <h3 className="text-2xl md:text-3xl font-bold text-blue-500 mb-8 uppercase tracking-wide">
+            <h3 className="text-2xl md:text-3xl font-bold text-orange-500 mb-8 uppercase tracking-wide">
               {t('hero.brands')}
             </h3>
             <div className="flex flex-wrap gap-4 text-lg">
               <span className="text-orange-500">#ford</span>
-              <span className="text-blue-500">#bmw</span>
+              <span className="text-orange-500">#bmw</span>
               <span className="text-orange-500">#citroen</span>
-              <span className="text-blue-500">#nissan</span>
+              <span className="text-orange-500">#nissan</span>
               <span className="text-orange-500">#mercedes</span>
-              <span className="text-blue-500">#landrover</span>
+              <span className="text-orange-500">#landrover</span>
               <span className="text-orange-500">#bentley</span>
-              <span className="text-blue-500">#porsche</span>
+              <span className="text-orange-500">#porsche</span>
               <span className="text-orange-500">#jaguar</span>
-              <span className="text-blue-500">#vw</span>
+              <span className="text-orange-500">#vw</span>
             </div>
           </div>
         </div>

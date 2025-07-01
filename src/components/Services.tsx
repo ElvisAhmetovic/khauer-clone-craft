@@ -10,20 +10,22 @@ const Services = () => {
 
   const customServices = [
     {
-      icon: <ShoppingCart className="w-16 h-16 text-orange-500" />,
+      icon: <ShoppingCart className="w-16 h-16 text-white" />,
       title: t('services.purchase.title'),
       description: language === 'en' ? 'Professional vehicle evaluation and quick processing.' : 'Professionelle Fahrzeugbewertung und schnelle Abwicklung.',
       image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png",
       buttonText: language === 'en' ? 'Get Quote' : 'Angebot erhalten',
-      buttonAction: 'contact'
+      buttonAction: 'contact',
+      bgColor: 'orange'
     },
     {
-      icon: <Car className="w-16 h-16 text-blue-500" />,
+      icon: <Car className="w-16 h-16 text-white" />,
       title: t('services.sales.title'),
       description: language === 'en' ? 'Quality vehicles in excellent condition. All brands, fair prices.' : 'Hochwertige Fahrzeuge in ausgezeichnetem Zustand. Alle Marken, faire Preise.',
       image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png",
       buttonText: language === 'en' ? 'View Our Cars' : 'Unsere Autos ansehen',
-      buttonAction: 'autoscout24'
+      buttonAction: 'autoscout24',
+      bgColor: 'blue'
     }
   ];
 
@@ -66,7 +68,7 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="py-20 bg-black text-white">
+    <section id="services" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         {/* Custom Services Section */}
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
@@ -78,35 +80,35 @@ const Services = () => {
                   alt={service.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+                <div className={`absolute inset-0 ${service.bgColor === 'orange' ? 'bg-orange-500' : 'bg-blue-500'} bg-opacity-90`}></div>
               </div>
-              <div className="relative z-10 p-8 h-96 flex flex-col justify-center">
+              <div className="relative z-10 p-8 h-96 flex flex-col justify-center text-white">
                 <div className="mb-6">
                   {service.icon}
                 </div>
-                <h3 className="text-3xl font-bold mb-6 text-orange-500 uppercase tracking-wide">
+                <h3 className="text-3xl font-bold mb-6 text-white uppercase tracking-wide">
                   {service.title}
                 </h3>
-                <p className="text-lg leading-relaxed mb-6">
+                <p className="text-lg leading-relaxed mb-6 text-white">
                   {service.description}
                 </p>
                 {service.buttonAction === 'autoscout24' ? (
                   <Button 
                     onClick={openAutoScout24}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 w-fit animate-shake-button"
+                    className="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-6 w-fit"
                   >
                     {service.buttonText}
                   </Button>
                 ) : service.buttonAction === 'contact' ? (
                   <Button 
                     onClick={scrollToContact}
-                    className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 w-fit"
+                    className="bg-white hover:bg-gray-100 text-orange-600 font-bold py-3 px-6 w-fit"
                   >
                     {service.buttonText}
                   </Button>
                 ) : (
                   <Link to="/vehicles">
-                    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 w-fit">
+                    <Button className="bg-white hover:bg-gray-100 text-orange-600 font-bold py-3 px-6 w-fit">
                       {service.buttonText}
                     </Button>
                   </Link>
@@ -121,24 +123,24 @@ const Services = () => {
           <h2 className="text-4xl font-bold text-orange-500 mb-4 uppercase tracking-wide">
             {language === 'en' ? 'Our Auto House Services' : 'Unsere Auto House Services'}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             {language === 'en' ? 'Professional car dealership specializing in buying, selling and trading quality vehicles' : 'Professionelles Autohaus spezialisiert auf Kauf, Verkauf und Handel mit hochwertigen Fahrzeugen'}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {autoHouseServices.map((service, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow duration-300 bg-gray-900 border-gray-700">
+            <Card key={index} className="hover:shadow-lg transition-shadow duration-300 bg-white border-2 border-gray-200">
               <CardHeader className="text-center">
                 <div className="flex justify-center mb-4">
                   <Car className={`w-12 h-12 ${index % 2 === 0 ? 'text-orange-500' : 'text-blue-500'}`} />
                 </div>
-                <CardTitle className="text-xl text-white">
+                <CardTitle className={`text-xl ${index % 2 === 0 ? 'text-orange-500' : 'text-blue-500'}`}>
                   {service.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-300 text-center">
+                <p className="text-gray-700 text-center">
                   {service.description}
                 </p>
               </CardContent>
