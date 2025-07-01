@@ -1,3 +1,4 @@
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -46,7 +47,7 @@ const Vehicles = () => {
       <div className="bg-gradient-to-r from-black to-gray-900 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            {t('vehicles.title').split(' ')[0]} <span className="text-lime-400">{t('vehicles.title').split(' ').slice(1).join(' ')}</span>
+            {t('vehicles.title').split(' ')[0]} <span className="text-orange-500">{t('vehicles.title').split(' ').slice(1).join(' ')}</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
             {t('vehicles.subtitle')}
@@ -59,7 +60,7 @@ const Vehicles = () => {
         <div className="container mx-auto px-4">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-7xl mx-auto">
             <div className="p-8 bg-black text-white text-center">
-              <Car className="w-16 h-16 mx-auto mb-4 text-lime-400" />
+              <Car className="w-16 h-16 mx-auto mb-4 text-orange-500" />
               <h2 className="text-3xl font-bold mb-4">
                 {t('vehicles.inventory.title')}
               </h2>
@@ -78,7 +79,7 @@ const Vehicles = () => {
                 href="https://www.autoscout24.ch/de/s/seller-68160"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-4 px-8 rounded-lg transition-colors duration-300 text-lg"
+                className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg transition-colors duration-300 text-lg"
               >
                 <ExternalLink className="w-6 h-6" />
                 {t('vehicles.inventory.button')}
@@ -93,22 +94,22 @@ const Vehicles = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Car className="w-8 h-8 text-lime-600" />
+              <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Car className="w-8 h-8 text-orange-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">{t('vehicles.features.quality.title')}</h3>
               <p className="text-gray-600">{t('vehicles.features.quality.desc')}</p>
             </div>
             <div className="text-center">
-              <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-8 h-8 text-lime-600" />
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Phone className="w-8 h-8 text-blue-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">{t('vehicles.features.service.title')}</h3>
               <p className="text-gray-600">{t('vehicles.features.service.desc')}</p>
             </div>
             <div className="text-center">
-              <div className="bg-lime-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-lime-600" />
+              <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-8 h-8 text-orange-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">{t('vehicles.features.contact.title')}</h3>
               <p className="text-gray-600">{t('vehicles.features.contact.desc')}</p>
@@ -129,14 +130,14 @@ const Vehicles = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="tel:+41763367799"
-              className="inline-flex items-center gap-2 bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+              className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
             >
               <Phone className="w-5 h-5" />
               {t('vehicles.cta.call')}
             </a>
             <a
               href="mailto:kurdocar@bluewin.ch"
-              className="inline-flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+              className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
             >
               <Mail className="w-5 h-5" />
               {t('vehicles.cta.email')}

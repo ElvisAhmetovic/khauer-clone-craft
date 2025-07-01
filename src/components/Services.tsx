@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, ShoppingCart } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -9,7 +10,7 @@ const Services = () => {
 
   const customServices = [
     {
-      icon: <ShoppingCart className="w-16 h-16 text-lime-400" />,
+      icon: <ShoppingCart className="w-16 h-16 text-orange-500" />,
       title: t('services.purchase.title'),
       description: language === 'en' ? 'Professional vehicle evaluation and quick processing.' : 'Professionelle Fahrzeugbewertung und schnelle Abwicklung.',
       image: "/lovable-uploads/519087b3-97f5-4540-aaf3-4784dda17fd3.png",
@@ -17,7 +18,7 @@ const Services = () => {
       buttonAction: 'contact'
     },
     {
-      icon: <Car className="w-16 h-16 text-lime-400" />,
+      icon: <Car className="w-16 h-16 text-blue-500" />,
       title: t('services.sales.title'),
       description: language === 'en' ? 'Quality vehicles in excellent condition. All brands, fair prices.' : 'Hochwertige Fahrzeuge in ausgezeichnetem Zustand. Alle Marken, faire Preise.',
       image: "/lovable-uploads/dd836921-b71a-44c2-b8f2-504821fc168e.png",
@@ -48,8 +49,8 @@ const Services = () => {
       description: language === 'en' ? 'International vehicle trading services' : 'Internationaler Fahrzeughandel'
     },
     {
-      title: language === 'en' ? 'Trade-In Services' : 'Inzahlungnahme',
-      description: language === 'en' ? 'Trade your current vehicle for a new one with competitive rates' : 'Tauschen Sie Ihr aktuelles Fahrzeug gegen ein neues zu konkurrenzfähigen Konditionen'
+      title: language === 'en' ? 'Vehicle Financing' : 'Fahrzeugfinanzierung',
+      description: language === 'en' ? 'Flexible financing options for your vehicle purchase' : 'Flexible Finanzierungsoptionen für Ihren Fahrzeugkauf'
     }
   ];
 
@@ -83,7 +84,7 @@ const Services = () => {
                 <div className="mb-6">
                   {service.icon}
                 </div>
-                <h3 className="text-3xl font-bold mb-6 text-lime-400 uppercase tracking-wide">
+                <h3 className="text-3xl font-bold mb-6 text-orange-500 uppercase tracking-wide">
                   {service.title}
                 </h3>
                 <p className="text-lg leading-relaxed mb-6">
@@ -92,20 +93,20 @@ const Services = () => {
                 {service.buttonAction === 'autoscout24' ? (
                   <Button 
                     onClick={openAutoScout24}
-                    className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit animate-shake-button"
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 w-fit animate-shake-button"
                   >
                     {service.buttonText}
                   </Button>
                 ) : service.buttonAction === 'contact' ? (
                   <Button 
                     onClick={scrollToContact}
-                    className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit"
+                    className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 w-fit"
                   >
                     {service.buttonText}
                   </Button>
                 ) : (
                   <Link to="/vehicles">
-                    <Button className="bg-lime-400 hover:bg-lime-500 text-black font-bold py-3 px-6 w-fit">
+                    <Button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 w-fit">
                       {service.buttonText}
                     </Button>
                   </Link>
@@ -117,7 +118,7 @@ const Services = () => {
 
         {/* Auto House Services */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-lime-400 mb-4 uppercase tracking-wide">
+          <h2 className="text-4xl font-bold text-orange-500 mb-4 uppercase tracking-wide">
             {language === 'en' ? 'Our Auto House Services' : 'Unsere Auto House Services'}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -130,7 +131,7 @@ const Services = () => {
             <Card key={index} className="hover:shadow-lg transition-shadow duration-300 bg-gray-900 border-gray-700">
               <CardHeader className="text-center">
                 <div className="flex justify-center mb-4">
-                  <Car className="w-12 h-12 text-lime-400" />
+                  <Car className={`w-12 h-12 ${index % 2 === 0 ? 'text-orange-500' : 'text-blue-500'}`} />
                 </div>
                 <CardTitle className="text-xl text-white">
                   {service.title}

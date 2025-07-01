@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -51,6 +52,10 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Custom brand colors */
+    --brand-orange: 25 95% 53%;
+    --brand-blue: 217 91% 60%;
   }
 
   .dark {
@@ -99,5 +104,32 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Brand color utilities */
+@layer utilities {
+  .text-brand-orange {
+    color: hsl(var(--brand-orange));
+  }
+  
+  .bg-brand-orange {
+    background-color: hsl(var(--brand-orange));
+  }
+  
+  .text-brand-blue {
+    color: hsl(var(--brand-blue));
+  }
+  
+  .bg-brand-blue {
+    background-color: hsl(var(--brand-blue));
+  }
+  
+  .border-brand-orange {
+    border-color: hsl(var(--brand-orange));
+  }
+  
+  .border-brand-blue {
+    border-color: hsl(var(--brand-blue));
   }
 }

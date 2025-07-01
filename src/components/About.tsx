@@ -18,7 +18,7 @@ const About = () => {
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <Badge className="mb-4 bg-lime-400 text-black font-bold">{t('about.badge')}</Badge>
+            <Badge className="mb-4 bg-orange-500 text-white font-bold">{t('about.badge')}</Badge>
             <h2 className="text-4xl font-bold text-white mb-6 uppercase tracking-wide">
               {t('about.title')}
             </h2>
@@ -38,7 +38,7 @@ const About = () => {
             <div className="grid grid-cols-2 gap-6">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="flex justify-center text-lime-400 mb-2">
+                  <div className={`flex justify-center mb-2 ${index % 2 === 0 ? 'text-orange-500' : 'text-blue-500'}`}>
                     {stat.icon}
                   </div>
                   <div className="text-3xl font-bold text-white mb-1">
@@ -53,27 +53,27 @@ const About = () => {
           </div>
           
           <div className="relative">
-            <div className="bg-gradient-to-br from-lime-400 to-lime-600 rounded-lg p-8 text-black">
+            <div className="bg-gradient-to-br from-orange-500 to-blue-500 rounded-lg p-8 text-white">
               <h3 className="text-2xl font-bold mb-6 uppercase tracking-wide">{t('about.why.title')}</h3>
               <ul className="space-y-4">
                 <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                   <span className="font-medium">{t('about.why.evaluation')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                   <span className="font-medium">{t('about.why.equipment')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                   <span className="font-medium">{t('about.why.transparent')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                   <span className="font-medium">{t('about.why.guarantee')}</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-black rounded-full mt-2"></div>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2"></div>
                   <span className="font-medium">{t('about.why.fair')}</span>
                 </li>
               </ul>
