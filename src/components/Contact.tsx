@@ -87,14 +87,14 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-brand-blue text-white relative">
+    <section id="contact" className="py-20 bg-gray-900 text-white relative">
       <div className="absolute inset-0">
         <img 
           src="/lovable-uploads/0bbc7a22-0503-4efb-b78d-6c9f66d2fae2.png" 
           alt="Contact Background" 
           className="w-full h-full object-cover opacity-30"
         />
-        <div className="absolute inset-0 bg-brand-blue bg-opacity-70"></div>
+        <div className="absolute inset-0 bg-gray-900 bg-opacity-70"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
