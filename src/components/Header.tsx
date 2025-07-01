@@ -15,9 +15,19 @@ const Header = () => {
 
   // Helper function to get nav link classes
   const getNavLinkClass = (path: string, isAnchor = false) => {
-    const isActive = isAnchor 
-      ? isHomePage 
-      : location.pathname === path || (path === '/gallery' && location.pathname === '/gallery');
+    let isActive = false;
+    
+    if (isAnchor && isHomePage) {
+      // For anchor links on home page, check the hash
+      if (path === '#home' && (location.hash === '' || location.hash === '#home')) {
+        isActive = true;
+      } else if (path !== '#home' && location.hash === path) {
+        isActive = true;
+      }
+    } else if (!isAnchor) {
+      // For regular routes
+      isActive = location.pathname === path || (path === '/gallery' && location.pathname === '/gallery');
+    }
     
     const baseClasses = "font-medium transition-colors px-3 py-2 rounded-md";
     
