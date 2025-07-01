@@ -113,7 +113,7 @@ const Contact = () => {
           <div>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               {contactInfo.map((info, index) => (
-                <Card key={index} className="bg-white bg-opacity-80 border-gray-200 backdrop-blur-sm">
+                <Card key={index} className="bg-white border-gray-200">
                   <CardHeader className="pb-3">
                     <div className="flex items-center space-x-3">
                       {info.icon}
