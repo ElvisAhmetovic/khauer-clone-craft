@@ -42,7 +42,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="text-2xl font-bold text-orange-400 hover:text-lime-300 transition-colors cursor-pointer">
+            <Link to="/" className="text-2xl font-bold text-orange-400 hover:text-yellow-300 transition-colors cursor-pointer">
               KURDO Car GmbH
             </Link>
             <div className="w-16 h-12 flex items-center">
