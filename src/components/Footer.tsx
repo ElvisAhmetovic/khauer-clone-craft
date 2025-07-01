@@ -1,13 +1,11 @@
-
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
-
 const Footer = () => {
-  const { t } = useLanguage();
-
-  return (
-    <footer className="bg-black text-white border-t-4 border-brand-orange">
+  const {
+    t
+  } = useLanguage();
+  return <footer className="bg-black text-white border-t-4 border-brand-orange">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div>
@@ -18,7 +16,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-brand-blue">{t('footer.services')}</h4>
+            <h4 className="text-lg font-semibold mb-4 text-brand-blue text-[#ff8c00]">{t('footer.services')}</h4>
             <ul className="space-y-2 text-gray-300">
               <li>{t('footer.services.sales')}</li>
               <li>{t('footer.services.evaluation')}</li>
@@ -63,8 +61,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
