@@ -147,7 +147,7 @@ const Gallery = () => {
       <div className="bg-gradient-to-r from-black to-gray-900 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            {t('gallery.title').split(' ').slice(0, -1).join(' ')} <span className="text-lime-400">{t('gallery.title').split(' ').slice(-1)[0]}</span>
+            {t('gallery.title').split(' ').slice(0, -1).join(' ')} <span className="text-orange-400">{t('gallery.title').split(' ').slice(-1)[0]}</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
             {t('gallery.subtitle')}
