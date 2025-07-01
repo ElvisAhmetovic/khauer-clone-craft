@@ -57,7 +57,7 @@ const Vehicles = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-7xl mx-auto">
             <div className="p-8 bg-brand-blue text-white text-center">
               <Car className="w-16 h-16 mx-auto mb-4 text-brand-orange" />
-              <h2 className="text-3xl font-bold mb-4 text-brand-orange ">
+              <h2 className="text-3xl font-bold mb-4">
                 {t('vehicles.inventory.title')}
               </h2>
               <p className="text-gray-100 mb-6">
@@ -82,7 +82,7 @@ const Vehicles = () => {
       {/* Features Section */}
       <div className="py-12 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto text bg-brand-blue ">
             <div className="text-center">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Car className="w-8 h-8 text-brand-blue" />
@@ -91,7 +91,7 @@ const Vehicles = () => {
               <p className="text-gray-600">{t('vehicles.features.quality.desc')}</p>
             </div>
             <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Phone className="w-8 h-8 text-brand-orange" />
               </div>
               <h3 className="font-bold text-lg mb-2 text-brand-orange">{t('vehicles.features.service.title')}</h3>
