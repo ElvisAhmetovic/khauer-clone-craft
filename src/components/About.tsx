@@ -14,8 +14,17 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-white text-black">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-20 relative">
+      <div className="absolute inset-0">
+        <img 
+          src="/lovable-uploads/0bbc7a22-0503-4efb-b78d-6c9f66d2fae2.png" 
+          alt="About Background" 
+          className="w-full h-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-white bg-opacity-90"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <Badge className="mb-4 bg-brand-orange text-white font-bold">{t('about.badge')}</Badge>
