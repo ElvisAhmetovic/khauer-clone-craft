@@ -1,18 +1,35 @@
+
 import { Phone, Mail, MapPin, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageToggle from "./LanguageToggle";
 import LogoProcessor from "./LogoProcessor";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  return <header className="bg-black shadow-lg sticky top-0 z-50">
+
+  // Helper function to get nav link classes
+  const getNavLinkClass = (path: string, isAnchor = false) => {
+    const isActive = isAnchor 
+      ? isHomePage 
+      : location.pathname === path || (path === '/gallery' && location.pathname === '/gallery');
+    
+    const baseClasses = "font-medium transition-colors px-3 py-2 rounded-md";
+    
+    if (isActive) {
+      return `${baseClasses} bg-orange-400 text-black hover:bg-orange-500`;
+    }
+    
+    return `${baseClasses} bg-white text-black hover:bg-orange-400 hover:text-black`;
+  };
+
+  return (
+    <header className="bg-black shadow-lg sticky top-0 z-50">
       {/* Top contact bar */}
       <div className="bg-gray-900 text-white py-2">
         <div className="container mx-auto px-4">
@@ -46,53 +63,61 @@ const Header = () => {
               KURDO Car GmbH
             </Link>
             <div className="w-16 h-12 flex items-center">
-              {logoUrl ? <Link to="/">
+              {logoUrl ? (
+                <Link to="/">
                   <img src={logoUrl} alt="KURDO Car GmbH Logo" className="w-full h-full object-contain cursor-pointer" />
-                </Link> : <LogoProcessor onLogoReady={setLogoUrl} />}
+                </Link>
+              ) : (
+                <LogoProcessor onLogoReady={setLogoUrl} />
+              )}
             </div>
           </div>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {isHomePage ? <>
-                <a href="#home" className="text-white hover:text-lime-400 font-medium transition-colors">
+          <nav className="hidden md:flex space-x-2">
+            {isHomePage ? (
+              <>
+                <a href="#home" className={getNavLinkClass('#home', true)}>
                   {t('nav.home')}
                 </a>
-                <a href="#services" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <a href="#services" className={getNavLinkClass('#services', true)}>
                   {t('nav.services')}
                 </a>
-                <a href="#about" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <a href="#about" className={getNavLinkClass('#about', true)}>
                   {t('nav.about')}
                 </a>
-                <a href="#contact" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <a href="#contact" className={getNavLinkClass('#contact', true)}>
                   {t('nav.contact')}
                 </a>
-                <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <Link to="/vehicles" className={getNavLinkClass('/vehicles')}>
                   {t('nav.vehicles')}
                 </Link>
-                <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
+                <Link to="/gallery" className={getNavLinkClass('/gallery')}>
                   {t('nav.gallery')}
                 </Link>
-              </> : <>
-                <Link to="/" className="text-white hover:text-lime-400 font-medium transition-colors">
+              </>
+            ) : (
+              <>
+                <Link to="/" className={getNavLinkClass('/')}>
                   {t('nav.home')}
                 </Link>
-                <Link to="/#services" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <Link to="/#services" className={getNavLinkClass('/#services')}>
                   {t('nav.services')}
                 </Link>
-                <Link to="/#about" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <Link to="/#about" className={getNavLinkClass('/#about')}>
                   {t('nav.about')}
                 </Link>
-                <Link to="/#contact" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <Link to="/#contact" className={getNavLinkClass('/#contact')}>
                   {t('nav.contact')}
                 </Link>
-                <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium transition-colors">
+                <Link to="/vehicles" className={getNavLinkClass('/vehicles')}>
                   {t('nav.vehicles')}
                 </Link>
-                <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
+                <Link to="/gallery" className={getNavLinkClass('/gallery')}>
                   {t('nav.gallery')}
                 </Link>
-              </>}
+              </>
+            )}
           </nav>
 
           {/* Mobile menu button */}
@@ -102,50 +127,58 @@ const Header = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && <nav className="md:hidden mt-4 pb-4 border-t border-gray-700 pt-4">
+        {isMenuOpen && (
+          <nav className="md:hidden mt-4 pb-4 border-t border-gray-700 pt-4">
             <div className="flex flex-col space-y-3">
-              {isHomePage ? <>
-                  <a href="#home" className="text-white hover:text-lime-400 font-medium">
+              {isHomePage ? (
+                <>
+                  <a href="#home" className={getNavLinkClass('#home', true)}>
                     {t('nav.home')}
                   </a>
-                  <a href="#services" className="text-white hover:text-lime-400 font-medium">
+                  <a href="#services" className={getNavLinkClass('#services', true)}>
                     {t('nav.services')}
                   </a>
-                  <a href="#about" className="text-white hover:text-lime-400 font-medium">
+                  <a href="#about" className={getNavLinkClass('#about', true)}>
                     {t('nav.about')}
                   </a>
-                  <a href="#contact" className="text-white hover:text-lime-400 font-medium">
+                  <a href="#contact" className={getNavLinkClass('#contact', true)}>
                     {t('nav.contact')}
                   </a>
-                  <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium">
+                  <Link to="/vehicles" className={getNavLinkClass('/vehicles')}>
                     {t('nav.vehicles')}
                   </Link>
-                  <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium">
+                  <Link to="/gallery" className={getNavLinkClass('/gallery')}>
                     {t('nav.gallery')}
                   </Link>
-                </> : <>
-                  <Link to="/" className="text-white hover:text-lime-400 font-medium">
+                </>
+              ) : (
+                <>
+                  <Link to="/" className={getNavLinkClass('/')}>
                     {t('nav.home')}
                   </Link>
-                  <Link to="/#services" className="text-white hover:text-lime-400 font-medium">
+                  <Link to="/#services" className={getNavLinkClass('/#services')}>
                     {t('nav.services')}
                   </Link>
-                  <Link to="/#about" className="text-white hover:text-lime-400 font-medium">
+                  <Link to="/#about" className={getNavLinkClass('/#about')}>
                     {t('nav.about')}
                   </Link>
-                  <Link to="/#contact" className="text-white hover:text-lime-400 font-medium">
+                  <Link to="/#contact" className={getNavLinkClass('/#contact')}>
                     {t('nav.contact')}
                   </Link>
-                  <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium">
+                  <Link to="/vehicles" className={getNavLinkClass('/vehicles')}>
                     {t('nav.vehicles')}
                   </Link>
-                  <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium">
+                  <Link to="/gallery" className={getNavLinkClass('/gallery')}>
                     {t('nav.gallery')}
                   </Link>
-                </>}
+                </>
+              )}
             </div>
-          </nav>}
+          </nav>
+        )}
       </div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;
