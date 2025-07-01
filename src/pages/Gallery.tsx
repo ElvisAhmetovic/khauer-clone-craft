@@ -223,7 +223,7 @@ const Gallery = () => {
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             {t('gallery.interested.subtitle')}
           </p>
-          <button onClick={handleContactClick} className="inline-block bg-orange-400 hover:bg-lime-500 text-black font-bold py-3 px-8 rounded-lg transition-colors duration-300">
+          <button onClick={handleContactClick} className="inline-block bg-orange-400 hover:bg-orange-500 text-black font-bold py-3 px-8 rounded-lg transition-colors duration-300">
             {t('gallery.contact.button')}
           </button>
         </div>
