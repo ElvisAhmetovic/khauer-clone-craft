@@ -21,7 +21,7 @@ const About = () => {
           alt="About Background" 
           className="w-full h-full object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-white bg-opacity-90"></div>
+        <div className="absolute inset-0 bg-white bg-opacity-60"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
