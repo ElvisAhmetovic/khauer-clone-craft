@@ -74,6 +74,10 @@ const Hero = () => {
     };
   }, []);
 
+  const openAutoScout24 = () => {
+    window.open('https://www.autoscout24.ch/de/s/seller-68160', '_blank', 'noopener,noreferrer');
+  };
+
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -105,7 +109,7 @@ const Hero = () => {
               : 'opacity-0 -translate-x-12'
           }`}>
             {t('hero.title1')}
-            <span className={`block text-orange-500 transition-all duration-1000 ease-out delay-300 ${
+            <span className={`block text-lime-400 transition-all duration-1000 ease-out delay-300 ${
               isLoaded 
                 ? 'opacity-100 translate-x-0' 
                 : 'opacity-0 -translate-x-12'
@@ -121,7 +125,7 @@ const Hero = () => {
           }`}>
             <Button 
               size="lg" 
-              className={`animated-shake-button bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg px-8 py-4 uppercase tracking-wider transition-all duration-300 ${
+              className={`animated-shake-button bg-lime-400 hover:bg-lime-500 text-black font-bold text-lg px-8 py-4 uppercase tracking-wider transition-all duration-300 ${
                 isShaking ? 'animate-subtle-shake' : ''
               }`}
               onClick={scrollToContact}
@@ -136,23 +140,23 @@ const Hero = () => {
               ? 'opacity-100 translate-x-0' 
               : 'opacity-0 -translate-x-12'
           }`}>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide text-white">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 uppercase tracking-wide">
               {t('hero.subtitle')}
             </h2>
-            <h3 className="text-2xl md:text-3xl font-bold text-orange-500 mb-8 uppercase tracking-wide">
+            <h3 className="text-2xl md:text-3xl font-bold text-lime-400 mb-8 uppercase tracking-wide">
               {t('hero.brands')}
             </h3>
             <div className="flex flex-wrap gap-4 text-lg">
-              <span className="text-orange-500">#ford</span>
-              <span className="text-orange-500">#bmw</span>
-              <span className="text-orange-500">#citroen</span>
-              <span className="text-orange-500">#nissan</span>
-              <span className="text-orange-500">#mercedes</span>
-              <span className="text-orange-500">#landrover</span>
-              <span className="text-orange-500">#bentley</span>
-              <span className="text-orange-500">#porsche</span>
-              <span className="text-orange-500">#jaguar</span>
-              <span className="text-orange-500">#vw</span>
+              <span className="text-lime-400">#ford</span>
+              <span className="text-lime-400">#bmw</span>
+              <span className="text-lime-400">#citroen</span>
+              <span className="text-lime-400">#nissan</span>
+              <span className="text-lime-400">#mercedes</span>
+              <span className="text-lime-400">#landrover</span>
+              <span className="text-lime-400">#bentley</span>
+              <span className="text-lime-400">#porsche</span>
+              <span className="text-lime-400">#jaguar</span>
+              <span className="text-lime-400">#vw</span>
             </div>
           </div>
         </div>

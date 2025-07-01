@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -62,32 +61,7 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				// Brand colors matching your logo
-				'brand-orange': 'hsl(var(--brand-orange))',
-				'brand-blue': 'hsl(var(--brand-blue))',
-				// Orange variations
-				'orange-50': '#fff7ed',
-				'orange-100': '#ffedd5',
-				'orange-200': '#fed7aa',
-				'orange-300': '#fdba74',
-				'orange-400': '#fb923c',
-				'orange-500': '#f97316',
-				'orange-600': '#ea580c',
-				'orange-700': '#c2410c',
-				'orange-800': '#9a3412',
-				'orange-900': '#7c2d12',
-				// Blue variations
-				'blue-50': '#eff6ff',
-				'blue-100': '#dbeafe',
-				'blue-200': '#bfdbfe',
-				'blue-300': '#93c5fd',
-				'blue-400': '#60a5fa',
-				'blue-500': '#3b82f6',
-				'blue-600': '#2563eb',
-				'blue-700': '#1d4ed8',
-				'blue-800': '#1e40af',
-				'blue-900': '#1e3a8a',
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
