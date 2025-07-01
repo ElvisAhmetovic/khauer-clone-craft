@@ -89,7 +89,7 @@ const Header = () => {
                 <Link to="/vehicles" className="text-white hover:text-lime-400 font-medium transition-colors">
                   {t('nav.vehicles')}
                 </Link>
-                <Link to="/gallery" className="text-lime-400 hover:text-lime-300 font-medium transition-colors">
+                <Link to="/gallery" className="text-orange-400 hover:text-lime-300 font-medium transition-colors">
                   {t('nav.gallery')}
                 </Link>
               </>}
