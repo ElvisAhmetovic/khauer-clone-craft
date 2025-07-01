@@ -53,30 +53,40 @@ const About = () => {
           </div>
           
           <div className="relative">
-            <div className="bg-gradient-to-br from-brand-blue to-blue-700 rounded-lg p-8 text-white">
-              <h3 className="text-2xl font-bold mb-6 uppercase tracking-wide text-brand-orange">{t('about.why.title')}</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
-                  <span className="font-medium">{t('about.why.evaluation')}</span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
-                  <span className="font-medium">{t('about.why.equipment')}</span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
-                  <span className="font-medium">{t('about.why.transparent')}</span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
-                  <span className="font-medium">{t('about.why.guarantee')}</span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
-                  <span className="font-medium">{t('about.why.fair')}</span>
-                </li>
-              </ul>
+            <div className="bg-gray-900 rounded-lg p-8 text-white relative overflow-hidden">
+              <div className="absolute inset-0">
+                <img 
+                  src="/lovable-uploads/0bbc7a22-0503-4efb-b78d-6c9f66d2fae2.png" 
+                  alt="Background" 
+                  className="w-full h-full object-cover opacity-20"
+                />
+                <div className="absolute inset-0 bg-gray-900 bg-opacity-80"></div>
+              </div>
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold mb-6 uppercase tracking-wide text-brand-orange">{t('about.why.title')}</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
+                    <span className="font-medium">{t('about.why.evaluation')}</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
+                    <span className="font-medium">{t('about.why.equipment')}</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
+                    <span className="font-medium">{t('about.why.transparent')}</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
+                    <span className="font-medium">{t('about.why.guarantee')}</span>
+                  </li>
+                  <li className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-brand-orange rounded-full mt-2"></div>
+                    <span className="font-medium">{t('about.why.fair')}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
