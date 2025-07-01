@@ -54,7 +54,7 @@ const EmailPopup = () => {
           
           <div className="space-y-3">
             <div className="text-gray-300">
-              <p className="font-medium text-lime-400">kurdocar@bluewin.ch</p>
+              <p className="font-medium text-orange-400 ">kurdocar@bluewin.ch</p>
             </div>
             
             <Button onClick={handleEmailClick} className="w-full bg-lime-400 hover:bg-orange-500 text-black font-bold">
