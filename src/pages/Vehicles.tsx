@@ -119,7 +119,7 @@ const Vehicles = () => {
       </div>
 
       {/* Call to Action Section */}
-      <div className="bg-brand-blue text-white py-16">
+      <div className="bg-black text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             {t('vehicles.cta.title')}
