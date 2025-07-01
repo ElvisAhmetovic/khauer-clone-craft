@@ -87,7 +87,7 @@ const Services = () => {
 
         {/* Auto House Services */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-brand-blue mb-4 uppercase tracking-wide">
+          <h2 className="text-4xl font-bold text-brand-orange mb-4 uppercase tracking-wide">
             {language === 'en' ? 'Our Auto House Services' : 'Unsere Auto House Services'}
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
