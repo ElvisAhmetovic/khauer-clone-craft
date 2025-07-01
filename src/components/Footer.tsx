@@ -16,7 +16,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-brand-blue text-[#ff8c00]">{t('footer.services')}</h4>
+            <h4 className="text-lg font-semibold mb-4 text-brand-orange ">{t('footer.services')}</h4>
             <ul className="space-y-2 text-gray-300">
               <li>{t('footer.services.sales')}</li>
               <li>{t('footer.services.evaluation')}</li>
