@@ -2,13 +2,21 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SEO } from "@/components/SEO";
 
 const Privacy = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen">
-      <Header />
+    <>
+      <SEO
+        title="Datenschutzerklärung"
+        description="Datenschutzerklärung von KURDO Car GmbH. Erfahren Sie, wie wir Ihre persönlichen Daten schützen und verarbeiten. Transparenz und Sicherheit stehen bei uns an erster Stelle."
+        canonicalUrl="https://yourdomain.com/privacy"
+        keywords="Datenschutz, Datenschutzerklärung, Privatsphäre, DSGVO, Schweizer Datenschutz"
+      />
+      <div className="min-h-screen">
+        <Header />
       <div className="pt-20 pb-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
@@ -137,9 +145,10 @@ const Privacy = () => {
             </div>
           </div>
         </div>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

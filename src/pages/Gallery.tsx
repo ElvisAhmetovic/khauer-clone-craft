@@ -4,10 +4,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
+import { SEO } from "@/components/SEO";
+
 const Gallery = () => {
-  const {
-    t
-  } = useLanguage();
+  const { t } = useLanguage();
   const [selectedCar, setSelectedCar] = useState<any>(null);
   const navigate = useNavigate();
   const cars = [{
@@ -140,8 +140,52 @@ const Gallery = () => {
       }
     }, 100);
   };
-  return <div className="min-h-screen">
-      <Header />
+  const vehicleSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": cars.map((car, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Car",
+        "name": car.title,
+        "image": `https://yourdomain.com${car.image}`,
+        "offers": {
+          "@type": "Offer",
+          "price": car.price.replace(/[^0-9]/g, ''),
+          "priceCurrency": "CHF"
+        },
+        "mileageFromOdometer": {
+          "@type": "QuantitativeValue",
+          "value": car.mileage.replace(/[^0-9]/g, ''),
+          "unitCode": "KMT"
+        },
+        "vehicleEngine": {
+          "@type": "EngineSpecification",
+          "enginePower": {
+            "@type": "QuantitativeValue",
+            "value": car.power.match(/\d+/)?.[0],
+            "unitCode": "BHP"
+          },
+          "fuelType": car.fuel
+        },
+        "vehicleTransmission": car.transmission,
+        "productionDate": car.year
+      }
+    }))
+  };
+
+  return (
+    <>
+      <SEO
+        title="Fahrzeuggalerie"
+        description="Entdecken Sie unsere aktuelle Fahrzeuggalerie mit Premium-Gebrauchtwagen. Mercedes-Benz, BMW, Porsche, Bentley und mehr. Qualitätsgeprüfte Fahrzeuge zu fairen Preisen."
+        canonicalUrl="https://yourdomain.com/gallery"
+        keywords="Fahrzeuggalerie, Gebrauchtwagen Galerie, Premium Autos, Mercedes gebraucht, BMW gebraucht, Porsche gebraucht"
+        structuredData={vehicleSchema}
+      />
+      <div className="min-h-screen">
+        <Header />
       
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-black to-gray-900 text-white py-20">
@@ -229,7 +273,9 @@ const Gallery = () => {
         </div>
       </div>
 
-      <Footer />
-    </div>;
+        <Footer />
+      </div>
+    </>
+  );
 };
 export default Gallery;

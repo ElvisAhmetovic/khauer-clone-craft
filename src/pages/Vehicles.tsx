@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Car, Phone, Mail, ExternalLink } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { SEO } from "@/components/SEO";
 
 const Vehicles = () => {
   const { t } = useLanguage();
@@ -40,8 +41,15 @@ const Vehicles = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Header />
+    <>
+      <SEO
+        title="Fahrzeugverkauf"
+        description="KURDO Car GmbH - Professioneller Fahrzeugverkauf in Dietikon. Besuchen Sie unsere Ausstellung auf AutoScout24 für Premium-Gebrauchtwagen. Persönliche Beratung und faire Preise."
+        canonicalUrl="https://yourdomain.com/vehicles"
+        keywords="Fahrzeugverkauf, Auto verkaufen, Gebrauchtwagen kaufen, AutoScout24, KURDO Car, Dietikon"
+      />
+      <div className="min-h-screen">
+        <Header />
       
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-black to-gray-900 text-white py-20">
@@ -146,8 +154,9 @@ const Vehicles = () => {
         </div>
       </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 
