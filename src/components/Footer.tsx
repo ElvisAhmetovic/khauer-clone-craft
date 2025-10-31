@@ -61,6 +61,31 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      <div className="border-t border-gray-800 bg-black">
+        <div className="container mx-auto px-4 py-3">
+          <p className="text-center text-sm text-gray-400">
+            Website created by{" "}
+            <a 
+              href="https://abm-team.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-brand-orange font-medium transition-colors"
+            >
+              ABM Team
+            </a>
+            {" "}and{" "}
+            <a 
+              href="https://www.abmedia-team.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-brand-orange font-medium transition-colors"
+            >
+              ABMedia Team
+            </a>
+          </p>
+        </div>
+      </div>
     </footer>;
 };
 export default Footer;
